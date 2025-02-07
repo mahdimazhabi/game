@@ -1,0 +1,80 @@
+/* تنظیمات پس‌زمینه مشکی برای کل صفحه */
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* اطمینان از پوشش کامل ارتفاع صفحه */
+  font-family: "Arial", sans-serif;
+  color: white; /* رنگ متن سفید */
+}
+
+/* استایل برای بخش بازی */
+.guess-container {
+  background-color: #121212; /* پس‌زمینه مشکی */
+  color: #ffffff; /* رنگ متن سفید */
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+/* استایل عنوان بازی */
+.guess-title {
+  color: #ffaa00; /* رنگ طلایی */
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* استایل پیام */
+.guess-message {
+  font-size: 20px;
+  font-weight: bold;
+  color: #00ff88; /* رنگ پیام */
+  margin-bottom: 20px;
+}
+
+/* استایل برای ورودی عدد */
+.guess-input {
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  width: 80%;
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  background-color: #333; /* پس‌زمینه ورودی مشکی */
+  color: white; /* رنگ متن سفید */
+}
+
+/* استایل برای دکمه */
+.guess-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff; /* رنگ دکمه آبی */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  transition: background-color 0.3s ease; /* تغییر رنگ هنگام hover */
+}
+
+/* رنگ دکمه هنگام hover */
+.guess-button:hover {
+  background-color: #0056b3; /* رنگ دکمه هنگام hover */
+}
+
+/* استایل برای مرکز کردن محتوا */
+.guess-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

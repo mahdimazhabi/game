@@ -1,0 +1,76 @@
+/* پس‌زمینه کل صفحه */
+.invite-page {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* استایل صندوق نامه */
+  .mailbox {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin-top: 20px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* استایل عنوان */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ff4500;
+  }
+  
+  /* استایل دکمه */
+  button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #d93f00;
+    transform: scale(1.1);
+  }
+  
+  /* استایل شبکه‌های اجتماعی */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  
+  .social-links a {
+    display: inline-block;
+    border-radius: 50%;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  }
+  
+  .social-links img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  
+  .social-links a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  

@@ -1,0 +1,87 @@
+body {
+  background-color: black;
+}
+
+.container {
+  text-align: center;
+}
+.timer {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.circle {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  transition: transform 0.1s;
+  margin-bottom: 20px; /* For spacing above score */
+}
+.circle > img {
+  width: 100%;
+  height: 100;
+}
+.circle:hover {
+  transform: scale(1.05);
+}
+.circle:active {
+  transform: scale(0.95);
+  animation: shake 0.2s;
+}
+.score {
+  font-size: 20px;
+  position: absolute; /* Positioning score above circle */
+  top: -40px;
+}
+.logo {
+  width: 80px;
+  height: auto;
+  position: absolute;
+}
+.gem {
+  font-size: 100px;
+  position: absolute; /* برای نمایش استیکر درون دایره */
+  pointer-events: none; /* Prevent interaction with the gem */
+  opacity: 0;
+  animation: pop 0.5s forwards;
+}
+@keyframes pop {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.led {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 10px solid rgba(0, 128, 255, 0.5);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px rgba(0, 128, 255, 0.6), 0 0 30px rgba(0, 128, 255, 0.8);
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 128, 255, 0.6), 0 0 30px rgba(0, 128, 255, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 128, 255, 0.6), 0 0 70px rgba(0, 128, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 128, 255, 0.6), 0 0 30px rgba(0, 128, 255, 0.8);
+  }
+}

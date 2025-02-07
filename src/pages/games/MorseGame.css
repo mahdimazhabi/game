@@ -1,0 +1,52 @@
+/* استایل مخصوص صفحه کد مورس */
+.morse-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+/* نمایش پیام رمزگشایی شده */
+.morse-decoded-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
+  direction: rtl;
+}
+
+/* نمایش کد مورس */
+.morse-code {
+  font-size: 20px;
+  font-weight: bold;
+  color: #00ff00;
+  margin-bottom: 20px;
+  direction: ltr;
+}
+
+/* دکمه دایره‌ای برای ثبت کد مورس */
+.morse-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.morse-circle:hover {
+  background-color: #0056b3;
+}
+
+.morse-circle:active {
+  transform: scale(0.9);
+}

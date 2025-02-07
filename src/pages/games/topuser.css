@@ -1,0 +1,156 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  color: #333;
+}
+
+.glowing-text {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-basis: 30%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.sticker {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.scroll-bar {
+  margin-top: 20px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.scroll-bar:before {
+  content: "";
+  display: block;
+  width: 30%;
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+footer {
+  padding: 20px;
+  background-color: #333;
+  text-align: center;
+}
+
+footer .logout {
+  background-color: #f44336;
+}
+
+footer .logout:hover {
+  background-color: #d32f2f;
+}
+
+.referral-link {
+  margin-bottom: 30px;
+}
+
+.referral-link input {
+  margin-right: 10px;
+}
+
+.get-link {
+  background-color: #2196f3;
+}
+
+.get-link:hover {
+  background-color: #1976d2;
+}
+
+.copy-button {
+  background-color: #ff9800;
+}
+
+.copy-button:hover {
+  background-color: #f57c00;
+}
+
+.profile-box {
+  background-color: #2196f3;
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+}
+
+.user-name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-info span {
+  font-size: 1.2em;
+}
+
+header {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
