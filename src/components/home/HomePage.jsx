@@ -38,13 +38,13 @@ export default function Homepage() {
           <Col>
             <Nav className="d-flex flex-row justify-content-center gap-4">
               <Nav.Item>
-                <Nav.Link as={Link} to="/games/morc" className={styles.tabItem}>
+                <Link as={Link} to="/games/morc" className={styles.tabItem}>
                   <img src={tab1} alt="Code Mors" className={styles.tabIcon} />
                   <div className={styles.tabText}>Code Mors</div>
-                </Nav.Link>
+                </Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link
+                <Link
                   as={Link}
                   to="/games/number-guess"
                   className={styles.tabItem}
@@ -55,10 +55,10 @@ export default function Homepage() {
                     className={styles.tabIcon}
                   />
                   <div className={styles.tabText}>Number Guess</div>
-                </Nav.Link>
+                </Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link
+                <Link
                   as={Link}
                   to="/games/kart-context"
                   className={styles.tabItem}
@@ -69,7 +69,7 @@ export default function Homepage() {
                     className={styles.tabIcon}
                   />
                   <div className={styles.tabText}>Kart Context</div>
-                </Nav.Link>
+                </Link>
               </Nav.Item>
             </Nav>
           </Col>
