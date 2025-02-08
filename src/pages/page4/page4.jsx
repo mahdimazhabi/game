@@ -8,8 +8,6 @@ const Page4 = () => {
       margin: 0,
       padding: 0,
       display: "flex",
-      flexDirection: "column",
-      height: "100vh",
     },
     userInfo: {
       textAlign: "center",

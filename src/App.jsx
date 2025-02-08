@@ -10,6 +10,7 @@ import Top from "./pages/bottompage/top";
 import FootballPredictionSystem from "./components/footbal/FootballPredictionSystem";
 import Page4 from "./pages/page4/page4";
 import Footer2 from "./layout/Footer2";
+import Card from "./components/card/Card";
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ const App = () => {
               <Route path="games/morc" element={<MorcGame />} />
               <Route path="games/number-guess" element={<NumberGuess />} />
               <Route path="games/kart-context" element={<KartContext />} />
+              <Route path="/rewards" element={<Card />} />
               <Route path="page4" element={<Page4 />} />
               <Route
                 path="bottompage/football"
