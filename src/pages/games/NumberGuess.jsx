@@ -9,7 +9,34 @@ const GuessNumber = () => {
   );
   const [guessCount, setGuessCount] = useState(0);
 
+  // این تابع برای دریافت داده‌های ذخیره‌شده از localStorage است
+  const getStoredData = () => {
+    const lastGameTime = localStorage.getItem("lastGameTime");
+    const storedGuessCount = localStorage.getItem("guessCount");
+    const currentTime = new Date().getTime();
+
+    if (lastGameTime && storedGuessCount) {
+      // اگر زمان و تعداد تلاش‌ها در localStorage موجود است
+      const timeDiff = currentTime - lastGameTime; // تفاوت زمانی بین حالا و زمان آخرین بازی
+
+      if (timeDiff < 24 * 60 * 60 * 1000) {
+        // اگر زمان کمتر از 24 ساعت باشد، تعداد تلاش‌ها را بارگذاری کن
+        setGuessCount(parseInt(storedGuessCount));
+      } else {
+        // اگر 24 ساعت گذشته باشد، تعداد تلاش‌ها را به صفر تنظیم کن
+        localStorage.setItem("guessCount", "0");
+        setGuessCount(0);
+      }
+    } else {
+      // اگر هیچ داده‌ای در localStorage موجود نبود، تعداد تلاش‌ها را صفر کن
+      localStorage.setItem("guessCount", "0");
+      setGuessCount(0);
+    }
+  };
+
   useEffect(() => {
+    getStoredData(); // در شروع کامپوننت، داده‌ها را بارگذاری می‌کنیم
+
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -49,6 +76,11 @@ const GuessNumber = () => {
   };
 
   const submitGuess = () => {
+    if (guessCount >= 10) {
+      setMessage("You have reached the maximum number of guesses for today.");
+      return;
+    }
+
     if (!isValidInput(inputValue)) {
       if ("vibrate" in navigator) navigator.vibrate(200);
       setMessage(
@@ -57,9 +89,20 @@ const GuessNumber = () => {
       setInputValue("");
     } else {
       setMessage("Your guess has been recorded.");
-      setGuessCount((prev) => prev + 1);
+      setGuessCount((prev) => {
+        const newGuessCount = prev + 1;
+        localStorage.setItem("guessCount", newGuessCount.toString());
+        return newGuessCount;
+      });
       setInputValue("");
     }
+  };
+
+  const resetGame = () => {
+    localStorage.setItem("lastGameTime", new Date().getTime().toString());
+    localStorage.setItem("guessCount", "0");
+    setGuessCount(0);
+    setMessage("Game reset. You can guess again.");
   };
 
   return (
@@ -89,6 +132,9 @@ const GuessNumber = () => {
       <button onClick={submitGuess}>Submit</button>
       <p id="message">{message}</p>
       <p id="guessCounter">Guess Count: {guessCount}</p>
+      {guessCount >= 10 && (
+        <button onClick={resetGame}>Reset Game (24 hours)</button>
+      )}
     </div>
   );
 };

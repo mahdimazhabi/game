@@ -30,3 +30,26 @@
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* ریسپانسیو برای صفحه‌های کوچکتر */
+@media (max-width: 1200px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 ستون برای صفحه‌های کوچکتر */
+  }
+}
+
+@media (max-width: 900px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 ستون برای صفحه‌های کوچکتر */
+  }
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr; /* 1 ستون برای صفحه‌های خیلی کوچک */
+  }
+
+  .card {
+    padding: px; /* کاهش padding برای موبایل */
+  }
+}
