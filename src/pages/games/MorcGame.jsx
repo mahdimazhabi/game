@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./morseGame.css";
+import "./Game.css";
 
 const morseMap = {
   ".-": "A",
