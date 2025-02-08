@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Game.css";
+import "./Mors.css";
 
 const morseMap = {
   ".-": "A",
@@ -93,12 +93,12 @@ const MorcGame = () => {
   const updateTimer = () => {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    document.getElementById("timer").textContent = `${minutes}:${
+    document.getElementById("timer1").textContent = `${minutes}:${
       seconds < 10 ? "0" : ""
     }${seconds}`;
 
     if (timeLeft <= 10) {
-      document.getElementById("timer").style.color = "rgba(255, 0, 0, 1)"; // Red color
+      document.getElementById("timer1").style.color = "rgba(255, 0, 0, 1)"; // Red color
       if (timeLeft % 2 === 0) {
         vibrate(); // Vibrate
       }
@@ -114,7 +114,7 @@ const MorcGame = () => {
   };
 
   const changeTimerColor = () => {
-    const timer = document.getElementById("timer");
+    const timer = document.getElementById("timer1");
     timer.style.color = colors[currentColorIndex];
     setCurrentColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
   };
@@ -131,7 +131,7 @@ const MorcGame = () => {
     explosion.style.display = "block";
     explosion.style.animation = "explosion-animation 1s forwards";
     explosion.offsetHeight; // Trigger reflow to restart animation
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".container1");
     container.style.animation = "shake 0.5s forwards"; // Add shake to container
 
     setTimeout(() => {
@@ -141,9 +141,9 @@ const MorcGame = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div id="timer" className="timer">
+    <div className="container1">
+      <div className="header1">
+        <div id="timer1" className="timer1">
           {`${Math.floor(timeLeft / 60)}:${timeLeft % 60 < 10 ? "0" : ""}${
             timeLeft % 60
           }`}
@@ -158,12 +158,12 @@ const MorcGame = () => {
       </div>
 
       <div
-        className="circle"
+        className="circle1"
         id="telegraph-button"
         onMouseDown={startMorse}
         onMouseUp={endMorse}
       >
-        <img src="morse.png" alt="image" />
+        {/* <img src="morse.png" alt="image" /> */}
       </div>
 
       <div className="explosion" id="explosion"></div>
