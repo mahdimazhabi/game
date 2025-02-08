@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import img from "../../assets/img/photo_2025-02-06_11-36-07.jpg";
+import img from "../../assets/img/InShot_۲۰۲۵۰۲۰۶_۱۳۴۴۳۰۱۸۷.jpg";
 import "./Airdrop.css";
 
 const Airdrop = () => {
