@@ -1,37 +1,38 @@
-body {
-  font-family: "roboto", sans-serif;
-  background-color: #121212;
-  color: #ffffff;
-  margin: 0;
-  height: 100vh;
-  background-image: url("your-background-image-url.jpg"); /* Background image */
-  background-size: cover; /* Full cover */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden; /* Prevent scrolling */
-}
 .container1 {
-  background-color: #1c1c1c;
-  padding: 140px 90px;
+  background-color: rgba(28, 28, 28, 0.8);
+  padding: 80px 70px;
   border-radius: 20px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   text-align: center;
   position: relative;
-  z-index: 1; /* Above explosion */
-  width: 90%; /* Percentage width for mobile */
-  max-width: 400px; /* Maximum width for design */
+  z-index: 1; /* بالا بودن نسبت به انفجار */
+  width: 90%; /* درصد عرض برای موبایل */
+  max-width: 400px; /* حداکثر عرض برای طراحی */
 }
 .header1 {
   position: absolute;
   bottom: 0px;
-  right: 20px; /* Changed from left to right for alignment */
+  right: 20px; /* تغییر از left به right برای جابه‌جایی به سمت چپ */
   color: #fff;
   font-size: 18px;
 }
+.back-button1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.back-button1:hover {
+  background-color: rgba(255, 0, 0, 1);
+}
 .timer1 {
-  font-size: 36px; /* Reduced font size for timer */
+  font-size: 20px; /* کاهش اندازه فونت ساعت */
   color: rgba(255, 255, 0, 0.9);
   padding: 10px 15px;
   border-radius: 5px;
@@ -39,16 +40,14 @@ body {
   margin: 20px 0;
   transition: opacity 1s ease, color 1s ease, box-shadow 1s ease;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  box-shadow: 0 0 10px rgba(75, 192, 192, 1), 0 0 20px rgba(75, 192, 192, 1),
-    0 0 30px rgba(75, 192, 192, 1);
   opacity: 1;
 }
 .circle1 {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background-color: rgba(0, 123, 255, 0.9); /* Transparency */
-  backdrop-filter: blur(10px); /* Glass effect */
+  background-color: rgba(0, 123, 255, 0.9); /* شفافیت */
+  backdrop-filter: blur(10px); /* افکت شیشه‌ای */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +66,7 @@ body {
     145deg,
     #333333,
     #0f0f0f
-  ); /* Gradient for 3D effect */
+  ); /* گرادیان برای حالت سه‌بعدی */
   box-shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #323232;
 }
 
@@ -97,23 +96,9 @@ body {
 .tab:hover {
   background-color: #575757;
 }
-.tab {
-  flex: 1;
-  margin: 0 5px;
-  padding: 15px 0;
-  border-radius: 10px;
-  background-color: rgba(0, 123, 255, 0.8);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-align: center;
-}
-.tab:hover {
-  background-color: rgba(0, 123, 255, 1);
-}
 .explosion {
   display: none;
-  position: fixed; /* Centered on the screen */
+  position: fixed; /* قرار دادن در وسط صفحه */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -122,7 +107,7 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   animation: explosion-animation 1s forwards;
-  z-index: 0; /* Below the container */
+  z-index: 0; /* زیر بودن نسبت به کانتینر */
 }
 @keyframes explosion-animation {
   0% {
