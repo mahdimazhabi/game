@@ -58,8 +58,7 @@ const MorcGame = () => {
       let letter = morseMap[morseCode];
       decodedMessage += letter;
       morseCode = "";
-      document.getElementById("decoded-message").textContent =
-        "> " + decodedMessage;
+      document.getElementById("decoded-message").textContent = decodedMessage;
       showExplosion();
     } else {
       morseCode = "";

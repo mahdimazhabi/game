@@ -11,8 +11,8 @@
 }
 .header1 {
   position: absolute;
-  bottom: 0px;
-  right: 20px; /* تغییر از left به right برای جابه‌جایی به سمت چپ */
+  top: 46px;
+  right: 5px; /* تغییر از left به right برای جابه‌جایی به سمت چپ */
   color: #fff;
   font-size: 18px;
 }
