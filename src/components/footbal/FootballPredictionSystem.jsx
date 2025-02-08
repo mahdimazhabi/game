@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./FootballPredictionSystem.css";
-import { useNavigate } from "react-router-dom";
+
 
 const FootballPredictionSystem = () => {
   const [selectedVote, setSelectedVote] = useState(null);
@@ -8,11 +8,9 @@ const FootballPredictionSystem = () => {
   const [countdown, setCountdown] = useState("00:00:00");
   const [isVoteSubmitted, setIsVoteSubmitted] = useState(false);
   const [showResults, setShowResults] = useState(false);
-  const navigate = useNavigate();
+
   const matchTime = new Date("2023-12-01T20:00:00Z").getTime();
-  const goBack = () => {
-    navigate(-1); // با این خط به صفحه قبلی می‌رود
-  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -77,9 +75,9 @@ const FootballPredictionSystem = () => {
     <div className="background-image">
       <div className="container">
         <div className="header">
-          <a className="button-30" role="button" href="#" onClick={goBack}>
+          {/* <a className="button-30" role="button" href="#" onClick={goBack}>
             {"<"}
-          </a>
+          </a> */}
         </div>
         <div className="match-info">
           <h1>Match Prediction</h1>

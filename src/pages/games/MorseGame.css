@@ -1,52 +1,154 @@
-/* استایل مخصوص صفحه کد مورس */
 .morse-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #000;
-  font-family: Arial, sans-serif;
+  background-color: #1c1c1c;
+  padding: 200px;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   text-align: center;
-  color: white;
+  position: relative;
+  z-index: 1; /* Above explosion */
 }
 
-/* نمایش پیام رمزگشایی شده */
-.morse-decoded-message {
-  font-size: 24px;
-  font-weight: bold;
+.morse-header {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Changed from left to right for alignment */
   color: #fff;
-  margin-bottom: 20px;
-  direction: rtl;
+  font-size: 18px;
 }
 
-/* نمایش کد مورس */
-.morse-code {
-  font-size: 20px;
-  font-weight: bold;
-  color: #00ff00;
-  margin-bottom: 20px;
-  direction: ltr;
+.morse-timer {
+  font-size: 36px; /* Reduced font size for timer */
+  color: rgba(255, 255, 0, 0.9);
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 123, 255, 0.3);
+  margin: 20px 0;
+  transition: opacity 1s ease, color 1s ease, box-shadow 1s ease;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 10px rgba(75, 192, 192, 1), 0 0 20px rgba(75, 192, 192, 1),
+    0 0 30px rgba(75, 192, 192, 1);
+  opacity: 1;
 }
 
-/* دکمه دایره‌ای برای ثبت کد مورس */
 .morse-circle {
-  width: 100px;
-  height: 100px;
-  background-color: #007bff;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  background-color: rgba(0, 123, 255, 0.9); /* Transparency */
+  backdrop-filter: blur(10px); /* Glass effect */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  margin: 20px auto;
   cursor: pointer;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
+  transition: transform 0.2s;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
 }
 
-.morse-circle:hover {
-  background-color: #0056b3;
+.morse-circle img {
+  width: 70%;
+  height: 70%;
 }
 
 .morse-circle:active {
   transform: scale(0.9);
+  background: linear-gradient(
+    145deg,
+    #333333,
+    #0f0f0f
+  ); /* Gradient for 3D effect */
+  box-shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #323232;
+}
+
+.morse-message,
+.morse-decoded {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #95a410;
+}
+
+.tab-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.tab-item {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #3c3c3c;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.tab-item:hover {
+  background-color: #575757;
+}
+
+.tab-item-active {
+  flex: 1;
+  margin: 0 5px;
+  padding: 15px 0;
+  border-radius: 10px;
+  background-color: rgba(0, 123, 255, 0.8);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.tab-item-active:hover {
+  background-color: rgba(0, 123, 255, 1);
+}
+
+.explosion-effect {
+  display: none;
+  position: fixed; /* Centered on the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: explosion-animation 1s forwards;
+  z-index: 0; /* Below the container */
+}
+
+@keyframes explosion-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-5px, 0);
+  }
+  50% {
+    transform: translate(5px, 0);
+  }
+  75% {
+    transform: translate(-5px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }

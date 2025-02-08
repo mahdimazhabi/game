@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import img from "../../assets/img/InShot_۲۰۲۵۰۲۰۶_۱۳۴۴۳۰۱۸۷.jpg";
+import img from "../../assets/img/IMG_20250208_182414_366-removebg-preview.png";
 import "./Airdrop.css";
 
 const Airdrop = () => {
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(120 * 60);
 
@@ -32,7 +32,7 @@ const Airdrop = () => {
 
   const handleClick = () => {
     if (timeLeft > 0) {
-      setScore((prevScore) => prevScore + 1);
+      // setScore((prevScore) => prevScore + 1);
       setClickCount((prevClickCount) => prevClickCount + 1);
 
       const circle = document.getElementById("clickableCircle");
@@ -78,9 +78,9 @@ const Airdrop = () => {
         <div className="circle" id="clickableCircle" onClick={handleClick}>
           <img src={img} alt="Logo" className="logo" />
         </div>
-        <span className="score" id="score">
+        {/* <span className="score" id="score">
           امتیاز: {score}
-        </span>
+        </span> */}
       </div>
       <div id="gemContainer"></div>
     </section>

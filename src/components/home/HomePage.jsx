@@ -10,7 +10,6 @@ import football from "./image/football.jpg";
 import CoinTransfer from "./image/coien_transfer.jpg";
 import topuser from "./image/topuser.jpg";
 import social from "./image/social.jpg";
-import page4 from "../../pages/page4/page4";
 
 import api from "../../api";
 import Airdrop from "../Airdrop/Airdrop";
