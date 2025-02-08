@@ -8,7 +8,7 @@ import social from "../components/home/image/social.jpg";
 const Footer2 = () => {
   return (
     <div className={styles.bottomTabBar}>
-      <Link to="bottompage/lottery" className={styles.bottomTabItem}>
+      <Link to="/" className={styles.bottomTabItem}>
         <img src={lottery} alt="Lottery" />
         <span>Lottery</span>
       </Link>
