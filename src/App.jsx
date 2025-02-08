@@ -8,6 +8,7 @@ import Cointransfer from "./pages/bottompage/cointransfer";
 import Social from "./pages/bottompage/Social";
 import Top from "./pages/bottompage/top";
 import FootballPredictionSystem from "./components/footbal/FootballPredictionSystem";
+import Page4 from "./pages/page4/page4";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/games/morc" element={<MorcGame />} />
         <Route path="/games/number-guess" element={<NumberGuess />} />
         <Route path="/games/kart-context" element={<KartContext />} />
+        <Route path="/page4" element={<Page4 />} />
         <Route
           path="/bottompage/football"
           element={<FootballPredictionSystem />}
