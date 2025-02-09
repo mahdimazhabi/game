@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./FootballPredictionSystem.css";
-
-
+import { Link } from "react-router-dom";
 const FootballPredictionSystem = () => {
   const [selectedVote, setSelectedVote] = useState(null);
   const [votes, setVotes] = useState({ home: 0, draw: 0, away: 0 });
@@ -73,6 +72,17 @@ const FootballPredictionSystem = () => {
 
   return (
     <div className="background-image">
+      <div className="tab2">
+        <Link to="/page1" className="tab-x tab-1">
+          Tab 1
+        </Link>
+        <Link to="/page2" className="tab-x tab-2">
+          Tab 2
+        </Link>
+        <Link to="/page3" className="tab-x tab-3">
+          Tab 3
+        </Link>
+      </div>
       <div className="container">
         <div className="header">
           {/* <a className="button-30" role="button" href="#" onClick={goBack}>

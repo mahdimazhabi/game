@@ -11,6 +11,12 @@ import FootballPredictionSystem from "./components/footbal/FootballPredictionSys
 import Page4 from "./pages/page4/page4";
 import Footer2 from "./layout/Footer2";
 import Card from "./components/card/Card";
+import FootballTeamFormation from "./components/footbal/FootballTeamFormation";
+import Tab2 from "./components/tab2/Tab2";
+import Champions from "./components/tab2/Champions";
+import Conference from "./components/tab2/Conference";
+import Europa from "./components/tab2/Europa";
+import Tab3 from "./components/tab3/Tab3";
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,10 +30,16 @@ const App = () => {
               <Route path="games/kart-context" element={<KartContext />} />
               <Route path="/rewards" element={<Card />} />
               <Route path="page4" element={<Page4 />} />
+              <Route path="/champions" element={<Champions />} />
+              <Route path="/conference" element={<Conference />} />
+              <Route path="/europa" element={<Europa />} />
               <Route
                 path="bottompage/football"
                 element={<FootballPredictionSystem />}
               />
+              <Route path="/page2" element={<Tab2 />} />
+              <Route path="/page3" element={<Tab3 />} />
+              <Route path="/page1" element={<FootballTeamFormation />} />
               <Route
                 path="bottompage/cointransfer"
                 element={<Cointransfer />}

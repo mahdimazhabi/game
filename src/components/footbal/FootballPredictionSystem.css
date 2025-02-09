@@ -18,6 +18,7 @@ body {
   border-radius: 15px;
   text-align: center;
   position: relative;
+  padding-bottom: 200px;
 }
 
 .header {
@@ -159,12 +160,13 @@ body {
 
 .background-image {
   height: 100vh;
+
   width: 100%;
   background-image: url("./bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   filter: blur(0px);
@@ -228,4 +230,43 @@ body {
   .result-bar {
     width: 100%;
   }
+}
+.tab2 {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10rem 0;
+}
+
+.tab-1 {
+  background-color: white; /* رنگ قرمز */
+  border-radius: 10px;
+  padding: 10rem;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+}
+
+.tab-2 {
+  background-color: white; /* رنگ آبی */
+  border-radius: 10px;
+  padding: 10rem;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+}
+
+.tab-3 {
+  background-color: white; /* رنگ سبز */
+  border-radius: 10px;
+  padding: 10rem;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+}
+
+.tab-1:hover,
+.tab-2:hover,
+.tab-3:hover {
+  box-shadow: 0px 0px 20px 5px rgba(138, 43, 226, 0.7); /* باکس شادو بنفش */
 }

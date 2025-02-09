@@ -1,0 +1,163 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Dark background */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white; /* White text for contrast */
+}
+.field {
+  position: relative;
+  width: 500px;
+  height: 700px;
+  background-color: rgba(37, 162, 28, 0.704); /* Dark green */
+  border: 5px solid rgb(255, 215, 0); /* Gold border */
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* Glass effect */
+  box-shadow: 0 0 20px rgb(255, 215, 0); /* Gold shadow */
+}
+.goal-area,
+.center-circle {
+  position: absolute;
+  border: 2px solid rgb(255, 215, 0); /* Gold */
+}
+.goal-area {
+  bottom: 0;
+  left: calc(50% - 50px);
+  width: 100px; /* Width of goal area */
+  height: 20px; /* Height of goal area */
+}
+.center-circle {
+  width: 100px; /* Diameter of center circle */
+  height: 100px; /* Diameter of center circle */
+  border-radius: 50%; /* Circle */
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+.advertise {
+  position: absolute;
+  background-color: rgba(255, 255, 0, 0.7); /* Yellow with transparency */
+  text-align: center;
+  line-height: 50px;
+  font-weight: bold;
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Transparent border */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Prevent overflow */
+  white-space: nowrap; /* Prevent text wrapping */
+  color: black; /* Black text for advertisements */
+}
+.top-ad,
+.bottom-ad {
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+}
+.top-ad {
+  top: 0;
+}
+.bottom-ad {
+  bottom: 0;
+}
+.top-ad span,
+.bottom-ad span {
+  display: inline-block;
+  animation: scroll-left 10s linear infinite;
+}
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* Left and Right Advertisements */
+.left-ad,
+.right-ad {
+  width: 50px; /* Width for vertical ads */
+  height: 700px; /* Height equal to the field */
+  top: 0;
+  writing-mode: vertical-rl; /* Vertical text */
+  overflow: hidden;
+}
+.left-ad {
+  left: 0;
+}
+.right-ad {
+  right: 0;
+}
+.left-ad span,
+.right-ad span {
+  display: inline-block;
+  animation: scroll-up 10s linear infinite; /* Vertical scrolling */
+}
+@keyframes scroll-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.player {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  color: white; /* White text for player names */
+  cursor: pointer;
+  border: 2px solid rgba(255, 215, 0, 0.27); /* Gold border */
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.188);
+  animation: movePlayer 1s ease-in-out infinite; /* Pulsing effect */
+}
+@keyframes movePlayer {
+  0%,
+  100% {
+    transform: translateY(0); /* Initial state */
+  }
+  50% {
+    transform: translateY(-10px); /* Move up */
+  }
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.star {
+  font-size: 30px;
+  cursor: pointer;
+  color: gray;
+}
+.share {
+  position: absolute;
+  left: 20px;
+  bottom: 20px; /* Space from bottom */
+}
+.share-icons {
+  display: flex;
+  justify-content: start;
+  margin-top: 5px;
+}
+.share-icons a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #fff; /* White icons */
+  font-size: 24px;
+}
+.control-panel {
+  position: absolute;
+  top: 20px; /* Space from top */
+  left: 20px; /* Space from left */
+  z-index: 10; /* Above other elements */
+  padding-bottom: 40rem;
+}
+.panle {
+  padding-bottom: 20rem;
+}
