@@ -23,7 +23,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 23%;
+  width: 50%;
 }
 .match {
   border: 1px solid #ffd700; /* طلایی */

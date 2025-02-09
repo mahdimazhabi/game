@@ -6,7 +6,6 @@ body {
 .container3 {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
   background-color: #111;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
   border-radius: 10px;
@@ -25,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 23%;
+  width: 50%;
 }
 .match {
   border: 1px solid #444;
