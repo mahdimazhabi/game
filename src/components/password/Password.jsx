@@ -3,7 +3,6 @@ import "./Password.css";
 import { useNavigate } from "react-router-dom";
 
 const Password = () => {
-  const correctPassword = "12345678"; // رمز درست برای تست
   const [enteredPassword, setEnteredPassword] = useState("");
   const [isPasswordSet, setIsPasswordSet] = useState(false); // برای بررسی اینکه پسورد ست شده یا نه
   const navigate = useNavigate(); // برای هدایت به صفحه‌ی دیگر
@@ -27,17 +26,26 @@ const Password = () => {
   };
 
   const checkPassword = () => {
-    if (enteredPassword === correctPassword) {
-      // ذخیره پسورد در localStorage
+    const savedPassword = localStorage.getItem("savedPassword");
+
+    if (!savedPassword) {
+      // اگر پسورد ذخیره نشده باشد، آن را در localStorage ذخیره کرده و از کاربر می‌خواهیم که رمز را وارد کند
       localStorage.setItem("savedPassword", enteredPassword);
-      // هدایت به صفحه انتقال سکه و پاک کردن آدرس قبلی
+      alert("رمز شما با موفقیت ذخیره شد!");
+      setEnteredPassword(""); // پاک کردن ورودی
+      setIsPasswordSet(true); // پسورد ست شده
       navigate("/cointransfer", { replace: true });
     } else {
-      alert("رمز نادرست است!");
-      if (navigator.vibrate) {
-        navigator.vibrate(200); // ویبره در صورت پشتیبانی
+      // اگر پسورد ذخیره شده باشد، آن را با پسورد وارد شده مقایسه می‌کنیم
+      if (enteredPassword === savedPassword) {
+        navigate("/cointransfer", { replace: true }); // هدایت به صفحه انتقال سکه
+      } else {
+        alert("رمز نادرست است!");
+        if (navigator.vibrate) {
+          navigator.vibrate(200); // ویبره در صورت پشتیبانی
+        }
+        setEnteredPassword(""); // پاک کردن ورودی
       }
-      setEnteredPassword(""); // پاک کردن ورودی
     }
   };
 
