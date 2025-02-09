@@ -122,10 +122,7 @@ const Page4 = () => {
 
   return (
     <div style={styles.body}>
-      <div style={styles.userInfo}>
-        <h1 style={styles.userInfoHeading}>نام کاربری</h1>
-        <p style={styles.userInfoParagraph}>توضیحات کاربر</p>
-      </div>
+      <div style={styles.userInfo}></div>
 
       <div style={styles.page4Content}>
         <div style={styles.page4ContentDiv}>Grundbetrag</div>

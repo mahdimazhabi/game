@@ -1,31 +1,35 @@
 import { useState } from "react";
+import tel from "../../assets/img/download.png";
+import to from "../../assets/img/download (1).png";
+import yo from "../../assets/img/download (2).png";
+import tik from "../../assets/img/download.jfif";
 
 const InvitePage = () => {
   const socialMedia = [
     {
       name: "Instagram",
       link: "https://www.instagram.com/sisil_org",
-      logo: "/instagram-logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg",
     },
     {
       name: "Telegram",
       link: "https://t.me/sisil_org",
-      logo: "/telegram-logo.png",
+      logo: tel,
     },
     {
       name: "Twitter",
       link: "https://twitter.com/sisil_org",
-      logo: "/twitter-logo.png",
+      logo: to,
     },
     {
       name: "YouTube",
       link: "https://www.youtube.com/@sisil_org",
-      logo: "/youtube-logo.png",
+      logo: yo,
     },
     {
       name: "TikTok",
       link: "https://www.tiktok.com/@sisil_org",
-      logo: "/tiktok-logo.png",
+      logo: tik,
     },
   ];
 
