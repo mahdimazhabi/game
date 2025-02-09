@@ -160,7 +160,8 @@ body {
 
 .background-image {
   height: 100vh;
-
+  padding-bottom: 500px;
+  margin-bottom: 800px;
   width: 100%;
   background-image: url("./bg.jpeg");
   background-size: cover;
@@ -235,34 +236,45 @@ body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 10rem 0;
+  padding: 5rem 0;
+  flex-wrap: wrap;
 }
 
-.tab-1 {
-  background-color: white; /* رنگ قرمز */
-  border-radius: 10px;
-  padding: 10rem;
-  text-align: center;
-  color: #000000;
-  cursor: pointer;
-}
-
-.tab-2 {
-  background-color: white; /* رنگ آبی */
-  border-radius: 10px;
-  padding: 10rem;
-  text-align: center;
-  color: #000000;
-  cursor: pointer;
-}
-
+.tab-1,
+.tab-2,
 .tab-3 {
-  background-color: white; /* رنگ سبز */
+  background-color: white;
   border-radius: 10px;
-  padding: 10rem;
+  padding: 5rem;
   text-align: center;
   color: #000000;
   cursor: pointer;
+  flex: 1 1 200px; /* حداقل عرض 200px و تطبیق‌پذیری */
+  max-width: 300px; /* حداکثر عرض */
+}
+
+/* برای صفحه‌های کوچک‌تر از 768px (تبلت و موبایل) */
+@media (max-width: 768px) {
+  .tab2 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-1,
+  .tab-2,
+  .tab-3 {
+    width: 90%;
+    padding: 3rem;
+  }
+}
+
+/* برای صفحه‌های خیلی کوچک‌تر از 480px */
+@media (max-width: 480px) {
+  .tab-1,
+  .tab-2,
+  .tab-3 {
+    padding: 2rem;
+  }
 }
 
 .tab-1:hover,
