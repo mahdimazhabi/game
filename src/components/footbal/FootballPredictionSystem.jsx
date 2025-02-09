@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import "./FootballPredictionSystem.css";
 import { Link } from "react-router-dom";
+
 const FootballPredictionSystem = () => {
-  const [selectedVote, setSelectedVote] = useState(null);
+  const [selectedVote, setSelectedVote] = useState(
+    localStorage.getItem("userVote") || null
+  );
   const [votes, setVotes] = useState({ home: 0, draw: 0, away: 0 });
   const [countdown, setCountdown] = useState("00:00:00");
-  const [isVoteSubmitted, setIsVoteSubmitted] = useState(false);
+  const [isVoteSubmitted, setIsVoteSubmitted] = useState(
+    !!localStorage.getItem("userVote")
+  );
   const [showResults, setShowResults] = useState(false);
 
   const matchTime = new Date("2023-12-01T20:00:00Z").getTime();
@@ -33,20 +38,22 @@ const FootballPredictionSystem = () => {
       }
     }, 1000);
 
-    return () => clearInterval(interval); // Clean up on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const selectVote = (vote) => {
-    setSelectedVote(vote);
-    setIsVoteSubmitted(false);
+    if (!isVoteSubmitted) {
+      setSelectedVote(vote);
+    }
   };
 
   const submitVote = () => {
-    if (selectedVote) {
+    if (selectedVote && !isVoteSubmitted) {
       setVotes((prevVotes) => ({
         ...prevVotes,
         [selectedVote]: prevVotes[selectedVote] + 1,
       }));
+      localStorage.setItem("userVote", selectedVote);
       setIsVoteSubmitted(true);
       setShowResults(true);
     }
@@ -84,11 +91,6 @@ const FootballPredictionSystem = () => {
         </Link>
       </div>
       <div className="container">
-        <div className="header">
-          {/* <a className="button-30" role="button" href="#" onClick={goBack}>
-            {"<"}
-          </a> */}
-        </div>
         <div className="match-info">
           <h1>Match Prediction</h1>
           <p id="teamNames">Home Team vs Away Team</p>
@@ -104,6 +106,7 @@ const FootballPredictionSystem = () => {
             className={`button-33 ${selectedVote === "home" ? "selected" : ""}`}
             role="button"
             onClick={() => selectVote("home")}
+            disabled={isVoteSubmitted}
           >
             برد میزبان
           </button>
@@ -111,6 +114,7 @@ const FootballPredictionSystem = () => {
             className={`button-33 ${selectedVote === "draw" ? "selected" : ""}`}
             role="button"
             onClick={() => selectVote("draw")}
+            disabled={isVoteSubmitted}
           >
             مساوی
           </button>
@@ -118,6 +122,7 @@ const FootballPredictionSystem = () => {
             className={`button-33 ${selectedVote === "away" ? "selected" : ""}`}
             role="button"
             onClick={() => selectVote("away")}
+            disabled={isVoteSubmitted}
           >
             برد مهمان
           </button>
@@ -127,7 +132,7 @@ const FootballPredictionSystem = () => {
             className="button-30"
             role="button"
             onClick={submitVote}
-            disabled={!selectedVote}
+            disabled={!selectedVote || isVoteSubmitted}
           >
             Submit Vote
           </button>

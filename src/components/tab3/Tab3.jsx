@@ -152,28 +152,28 @@ const Tab3 = () => {
     setFinalTeams(winners);
   };
 
-  const submitPrediction = async (winner) => {
-    const username = "user1"; // Replace with actual username
-    const predictions = groupStandings;
+  // const submitPrediction = async (winner) => {
+  //   const username = "user1"; // Replace with actual username
+  //   const predictions = groupStandings;
 
-    try {
-      const response = await fetch("/api/survey/submitPrediction", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ Username: username, Predictions: predictions }),
-      });
+  //   try {
+  //     const response = await fetch("/api/survey/submitPrediction", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ Username: username, Predictions: predictions }),
+  //     });
 
-      if (response.ok) {
-        setIsPredictionSubmitted(true);
-      } else {
-        alert("Failed to submit prediction.");
-      }
-    } catch (error) {
-      console.error("Error submitting prediction:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       setIsPredictionSubmitted(true);
+  //     } else {
+  //       alert("Failed to submit prediction.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting prediction:", error);
+  //   }
+  // };
 
   return (
     <div className="container5">
@@ -280,16 +280,10 @@ const Tab3 = () => {
       <div id="final" className={finalTeams.length > 0 ? "" : "hidden"}>
         <h2>Final</h2>
         <div id="final-match">
-          <div className="team" onClick={() => submitPrediction(finalTeams[0])}>
-            {finalTeams[0]}
-          </div>
-          <div className="team" onClick={() => submitPrediction(finalTeams[1])}>
-            {finalTeams[1]}
-          </div>
+          <div className="team">{finalTeams[0]}</div>
+          <div className="team">{finalTeams[1]}</div>
         </div>
-        <button onClick={() => submitPrediction(finalTeams[0])}>
-          Submit Prediction
-        </button>
+        <button>Submit Prediction</button>
       </div>
 
       {/* Prediction Submitted */}
