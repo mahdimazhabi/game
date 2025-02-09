@@ -237,7 +237,7 @@ body {
   justify-content: center;
   gap: 10px;
   padding: 5rem 0;
-  flex-wrap: wrap;
+
 }
 
 .tab-1,
@@ -256,7 +256,7 @@ body {
 /* برای صفحه‌های کوچک‌تر از 768px (تبلت و موبایل) */
 @media (max-width: 768px) {
   .tab2 {
-    flex-direction: column;
+  
     align-items: center;
   }
 

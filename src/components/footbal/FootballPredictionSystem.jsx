@@ -105,21 +105,21 @@ const FootballPredictionSystem = () => {
             role="button"
             onClick={() => selectVote("home")}
           >
-            Home Win
+            برد میزبان
           </button>
           <button
             className={`button-33 ${selectedVote === "draw" ? "selected" : ""}`}
             role="button"
             onClick={() => selectVote("draw")}
           >
-            Draw
+            مساوی
           </button>
           <button
             className={`button-33 ${selectedVote === "away" ? "selected" : ""}`}
             role="button"
             onClick={() => selectVote("away")}
           >
-            Away Win
+            برد مهمان
           </button>
         </div>
         <div className="vote-section">
