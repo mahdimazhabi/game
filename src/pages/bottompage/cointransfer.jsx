@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
-import './CoinTransfer.css';
+import { useState } from "react";
+import "./CoinTransfer.css";
+import Password from "../../components/password/Password";
 
 const CoinTransfer = () => {
-  const [transferType, setTransferType] = useState('user');
-  const [coinType, setCoinType] = useState('Diamond');
-  const [amount, setAmount] = useState('');
-  const [receiverId, setReceiverId] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
-  const [result, setResult] = useState('');
+  const [transferType, setTransferType] = useState("user");
+  const [coinType, setCoinType] = useState("Diamond");
+  const [amount, setAmount] = useState("");
+  const [receiverId, setReceiverId] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
+  const [result, setResult] = useState("");
 
   const handleTransferTypeChange = (e) => {
     setTransferType(e.target.value);
   };
 
   const handleCoinTransfer = () => {
-    if (transferType === 'user' && receiverId && amount) {
-      setResult(`سکه ${coinType} با مقدار ${amount} به کاربر ${receiverId} منتقل شد.`);
-    } else if (transferType === 'admin' && walletAddress && amount) {
-      setResult(`سکه ${coinType} با مقدار ${amount} به آدرس کیف پول ${walletAddress} منتقل شد.`);
+    if (transferType === "user" && receiverId && amount) {
+      setResult(
+        `سکه ${coinType} با مقدار ${amount} به کاربر ${receiverId} منتقل شد.`
+      );
+    } else if (transferType === "admin" && walletAddress && amount) {
+      setResult(
+        `سکه ${coinType} با مقدار ${amount} به آدرس کیف پول ${walletAddress} منتقل شد.`
+      );
     } else {
-      alert('لطفاً تمام فیلدها را به درستی پر کنید.');
+      alert("لطفاً تمام فیلدها را به درستی پر کنید.");
     }
   };
 
@@ -37,7 +42,7 @@ const CoinTransfer = () => {
           <option value="admin">انتقال به مدیر</option>
         </select>
 
-        {transferType === 'user' && (
+        {transferType === "user" && (
           <div id="userFields">
             <label htmlFor="receiverId">آیدی گیرنده</label>
             <input
@@ -52,7 +57,7 @@ const CoinTransfer = () => {
           </div>
         )}
 
-        {transferType === 'admin' && (
+        {transferType === "admin" && (
           <div id="adminFields">
             <label htmlFor="walletAddress">آدرس کیف پول گیرنده</label>
             <input
@@ -95,11 +100,7 @@ const CoinTransfer = () => {
         </button>
       </form>
 
-      {result && (
-        <div className="result">
-          {result}
-        </div>
-      )}
+      {result && <div className="result">{result}</div>}
     </div>
   );
 };

@@ -16,7 +16,7 @@ const Footer2 = () => {
         <img src={football} alt="Football" />
         <span>Football</span>
       </Link>
-      <Link to="bottompage/cointransfer" className={styles.bottomTabItem}>
+      <Link to="bottompage/password" className={styles.bottomTabItem}>
         <img src={CoinTransfer} alt="Coin Transfer" />
         <span>Coin Transfer</span>
       </Link>
