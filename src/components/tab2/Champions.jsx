@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./champions.css";
+import "./Champions.css";
 
 const Champions = () => {
   const [results, setResults] = useState({
