@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Page4 = () => {
   // استایل‌ها به صورت یک شیء جاوااسکریپتی
   const styles = {
@@ -125,12 +127,24 @@ const Page4 = () => {
       <div style={styles.userInfo}></div>
 
       <div style={styles.page4Content}>
-        <div style={styles.page4ContentDiv}>Grundbetrag</div>
-        <div style={styles.page4ContentDiv}>Erste Hilfe</div>
-        <div style={styles.page4ContentDiv}>Sehtest</div>
-        <div style={styles.page4ContentDiv}>Online Zugang</div>
-        <div style={styles.page4ContentDiv}>Theoriestunden</div>
-        <div style={styles.page4ContentDiv}>ADAC Mitgliedschaft</div>
+        <Link to="/DiceGame" style={styles.page4ContentDiv}>
+          Grundbetrag
+        </Link>
+        <Link to="/Crowd" style={styles.page4ContentDiv}>
+          Erste Hilfe
+        </Link>
+        <Link to="/sehtest" style={styles.page4ContentDiv}>
+          Sehtest
+        </Link>
+        <Link to="/online-zugang" style={styles.page4ContentDiv}>
+          Online Zugang
+        </Link>
+        <Link to="/theoriestunden" style={styles.page4ContentDiv}>
+          Theoriestunden
+        </Link>
+        <Link to="/adac-mitgliedschaft" style={styles.page4ContentDiv}>
+          ADAC Mitgliedschaft
+        </Link>
       </div>
     </div>
   );

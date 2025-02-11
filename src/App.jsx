@@ -18,6 +18,8 @@ import Conference from "./components/tab2/Conference";
 import Europa from "./components/tab2/Europa";
 import Tab3 from "./components/tab3/Tab3";
 import Password from "./components/password/Password";
+import DiceGame from "./components/gameCoin/DiceGame";
+import Crowd from "./components/Crowd/Crowd";
 const App = () => {
   return (
     <BrowserRouter>
@@ -38,6 +40,8 @@ const App = () => {
                 path="bottompage/football"
                 element={<FootballPredictionSystem />}
               />
+              <Route path="DiceGame" element={<DiceGame />} />
+              <Route path="Crowd" element={<Crowd />} />
               <Route path="/cointransfer" element={<Cointransfer />} />
               <Route path="/page2" element={<Tab2 />} />
               <Route path="/page3" element={<Tab3 />} />
