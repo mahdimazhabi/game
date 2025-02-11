@@ -4,7 +4,25 @@ const UserPage = () => {
   return (
     <div className="App">
       {/* User Info Section */}
+      <div className="user-info1">
+        <div className="profile-box1">
+          <span className="user-name">Username</span>
+        </div>
+        <span>Total Points: 1200</span>
+      </div>
 
+      {/* Referral Link Section */}
+      <div className="referral-link">
+        <h2>Get Referral Link</h2>
+        <button className="get-link">Get Link</button>
+        <input
+          type="text"
+          placeholder="Referral Link"
+          value="your-referral-link.com"
+          readOnly
+        />
+        <button className="copy-button">Copy</button>
+      </div>
       {/* Main Content Section */}
       <div className="">
         {/* Referral Box */}
@@ -54,25 +72,6 @@ const UserPage = () => {
           </ul>
           <div className="scroll-bar">[Scroll Bar]</div>
         </div>
-      </div>
-      <div className="user-info1">
-        <div className="profile-box1">
-          <span className="user-name">Username</span>
-        </div>
-        <span>Total Points: 1200</span>
-      </div>
-
-      {/* Referral Link Section */}
-      <div className="referral-link">
-        <h2>Get Referral Link</h2>
-        <button className="get-link">Get Link</button>
-        <input
-          type="text"
-          placeholder="Referral Link"
-          value="your-referral-link.com"
-          readOnly
-        />
-        <button className="copy-button">Copy</button>
       </div>
     </div>
   );

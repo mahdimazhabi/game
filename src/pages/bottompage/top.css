@@ -10,9 +10,9 @@ h2 {
 
 /* Main container for all elements */
 .App {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20rem;
 }
 
 /* Profile and Referral Section Styling */
