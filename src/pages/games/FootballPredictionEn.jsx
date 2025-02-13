@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import './FootballPrediction.css';
-
+import testLogo from './../../assets/img/download.png';
 const FootballPredictionEn = () => {
     const [matches, ] = useState([
-        {id: 1, time: '17:55', logo: 'logo_url_1.png', guest: 'Saudi Arabia', host: 'Yemen'},
-        {id: 2, time: '21:00', logo: 'logo_url_2.png', guest: 'Iraq', host: 'Bahrain'}
+        {id: 1, time: '17:55', logo: testLogo, guest: 'Saudi Arabia', host: 'Yemen'},
+        {id: 2, time: '21:00', logo: testLogo, guest: 'Iraq', host: 'Bahrain'}
     ]);
 
     const [selectedResults, setSelectedResults] = useState(matches.map(() => []));
@@ -54,7 +54,7 @@ const FootballPredictionEn = () => {
         <div dir="rtl" lang="en" className="match-table-container">
             <button className="back-button" onClick={goBack}>{">"}</button>
             <h1 className='page-title'>Football Matches Table</h1>
-            <table id="large-table">
+            <table>
                 <thead>
                 <tr>
                     <th>Time</th>
@@ -95,55 +95,7 @@ const FootballPredictionEn = () => {
                 ))}
                 </tbody>
             </table>
-            <table id="small-table">
-                {
-                    matches.map((match, index) => (
-                        <tbody key={match.id}>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <div className="small-logo-container">
-                                    <img src={match.logo} alt={`${match.host} league`} className="logo"/>
-                                </div>
-                                <div className={'small-table-header-text'}>
-                                    {match.host} vs {match.guest} <br/> {match.time}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <p>
-                                    Host: {match.host}
-                                </p>
-                                <p>
-                                    Guest: {match.guest}
-                                </p>
-                            </td>
-                        </tr>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <div className="checkboxes">
-                                    {['Win', 'Draw', 'Lose'].map((result) => (
-                                        <div key={result} className="checkbox-item">
-                                            <label htmlFor={result} className={'checkbox-label'}>
-                                                {result}
-                                            </label>
-                                            <input
-                                                className={'checkbox-input'}
-                                                id={result}
-                                                type="checkbox"
-                                                checked={selectedResults[index].includes(result)}
-                                                onChange={() => handleCheckboxChange(index, result)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    ))
-                }
-            </table>
-            <button onClick={handleSubmit}>Submit Results</button>
+            <button className={'button-submit'} onClick={handleSubmit}>Submit Results</button>
         </div>
     );
 };

@@ -54,7 +54,7 @@ const FootballPrediction = () => {
         <div dir="rtl" lang="fa" className="match-table-container">
             <button className="back-button" onClick={goBack}>{">"}</button>
             <h1 className={'page-title'}>جدول مسابقات فوتبال</h1>
-            <table id="large-table">
+            <table>
                 <thead>
                 <tr>
                     <th>ساعت</th>
@@ -95,55 +95,7 @@ const FootballPrediction = () => {
                 ))}
                 </tbody>
             </table>
-            <table id="small-table">
-                {
-                    matches.map((match, index) => (
-                        <tbody key={match.id}>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <div className="small-logo-container">
-                                    <img src={match.logo} alt={`لیگ ${match.host}`} className="logo"/>
-                                </div>
-                                <div className={'small-table-header-text'}>
-                                    {match.host} vs {match.guest} <br/> {match.time}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <p>
-                                    میزبان: {match.host}
-                                </p>
-                                <p>
-                                    مهمان: {match.guest}
-                                </p>
-                            </td>
-                        </tr>
-                        <tr className={errors[index] ? 'error' : ''}>
-                            <td>
-                                <div className="checkboxes">
-                                    {['برد', 'مساوی', 'باخت'].map((result) => (
-                                        <div key={result} className="checkbox-item">
-                                        <label htmlFor={result} className={'checkbox-label'}>
-                                                {result}
-                                            </label>
-                                            <input
-                                                className={'checkbox-input'}
-                                                id={result}
-                                                type="checkbox"
-                                                checked={selectedResults[index].includes(result)}
-                                                onChange={() => handleCheckboxChange(index, result)}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    ))
-                }
-            </table>
-            <button onClick={handleSubmit}>ثبت نتایج</button>
+            <button className={'button-submit'} onClick={handleSubmit}>ثبت نتایج</button>
         </div>
     );
 };
