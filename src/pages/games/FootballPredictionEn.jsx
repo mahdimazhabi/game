@@ -69,7 +69,7 @@ const FootballPredictionEn = () => {
                     <tr key={match.id} className={errors[index] ? 'error' : ''}>
                         <td data-label="Time">{match.time}</td>
                         <td data-label="League Logo">
-                            <img src={match.logo} alt={`${match.host} league`} className="logo"/>
+                            <img src={match.logo} alt={`${match.host} league`} className="league-logo"/>
                         </td>
                         <td data-label="Guest">{match.guest}</td>
                         <td data-label="Results">

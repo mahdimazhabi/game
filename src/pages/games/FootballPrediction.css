@@ -77,7 +77,7 @@ button:hover {
     50% { background-color: rgba(255, 0, 0, 0.5); }
     100% { background-color: rgba(255, 0, 0, 0.1); }
 }
-.logo {
+.league-logo {
     width: auto;
     height: 40px;
     position: relative;
