@@ -20,6 +20,8 @@ import Tab3 from "./components/tab3/Tab3";
 import Password from "./components/password/Password";
 import DiceGame from "./components/gameCoin/DiceGame";
 import Crowd from "./components/Crowd/Crowd";
+import FootballPrediction from "./pages/games/FootballPrediction.jsx";
+import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 const App = () => {
   return (
     <BrowserRouter>
@@ -49,6 +51,9 @@ const App = () => {
               <Route path="bottompage/password" element={<Password />} />
               <Route path="bottompage/Social" element={<Social />} />
               <Route path="bottompage/top" element={<Top />} />
+
+              <Route path={"football-prediction-game/fa"} element={<FootballPrediction />}/>
+              <Route path={"football-prediction-game/en"} element={<FootballPredictionEn />}/>
             </Route>
           </Routes>
         </div>
