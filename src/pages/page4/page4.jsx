@@ -139,7 +139,7 @@ const Page4 = () => {
         <Link to="/football-prediction-game/en" style={styles.page4ContentDiv}>
           Online Zugang
         </Link>
-        <Link to="/theoriestunden" style={styles.page4ContentDiv}>
+        <Link to="/FirebaseConfiguration" style={styles.page4ContentDiv}>
           Theoriestunden
         </Link>
         <Link to="/adac-mitgliedschaft" style={styles.page4ContentDiv}>
