@@ -136,7 +136,7 @@ const Page4 = () => {
         <Link to="/sehtest" style={styles.page4ContentDiv}>
           Sehtest
         </Link>
-        <Link to="/online-zugang" style={styles.page4ContentDiv}>
+        <Link to="/football-prediction-game/en" style={styles.page4ContentDiv}>
           Online Zugang
         </Link>
         <Link to="/theoriestunden" style={styles.page4ContentDiv}>
