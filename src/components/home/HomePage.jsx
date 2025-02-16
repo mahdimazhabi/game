@@ -5,11 +5,6 @@ import styles from "./Homepage.module.css"; // استایل‌های سفارش�
 import tab1 from "./image/tab1.jpg";
 import tab2 from "./image/tab2.jpg";
 import tab3 from "./image/tab3.jpg";
-import lottery from "./image/lottery.jpg";
-import football from "./image/football.jpg";
-import CoinTransfer from "./image/coien_transfer.jpg";
-import topuser from "./image/topuser.jpg";
-import social from "./image/social.jpg";
 
 import api from "../../api";
 import Airdrop from "../Airdrop/Airdrop";
@@ -38,7 +33,7 @@ export default function Homepage() {
       <Container className="mt-4">
         <Row className="justify-content-center">
           <Col>
-            <Nav className="d-flex flex-row justify-content-center gap-4">
+            <Nav className=" flex-row justify-content-center gap-4">
               <Nav.Item>
                 <Link as={Link} to="/games/morc" className={styles.tabItem}>
                   <img src={tab1} alt="Code Mors" className={styles.tabIcon} />
@@ -84,32 +79,6 @@ export default function Homepage() {
       </div>
 
       {/* 🔹 Bottom Tab bar with Links */}
-      <div className={styles.bottomTabBar}>
-        <Link to="bottompage/lottery" className={styles.bottomTabItem}>
-          <img src={lottery} alt="Lottery" />
-          <span>Lottery</span>
-        </Link>
-        <Link to="bottompage/football" className={styles.bottomTabItem}>
-          <img src={football} alt="Football" />
-          <span>Football</span>
-        </Link>
-        <Link to="bottompage/cointransfer" className={styles.bottomTabItem}>
-          <img src={CoinTransfer} alt="Coin Transfer" />
-          <span>Coin Transfer</span>
-        </Link>
-        <Link to="/page4" className={styles.bottomTabItem}>
-          <img src="image/bottom-logo4.png" alt="Page 4" />
-          <span>Page 4</span>
-        </Link>
-        <Link to="bottompage/top" className={styles.bottomTabItem}>
-          <img src={topuser} alt="Top User" />
-          <span>Top User</span>
-        </Link>
-        <Link to="bottompage/social" className={styles.bottomTabItem}>
-          <img src={social} alt="Social Media" />
-          <span>Social Media</span>
-        </Link>
-      </div>
     </div>
   );
 }

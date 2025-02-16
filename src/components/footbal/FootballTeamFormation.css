@@ -141,7 +141,7 @@ body {
 .share {
   position: absolute;
   left: 20px;
-  bottom: 20px;
+  bottom: 110px;
 }
 .share-icons {
   display: flex;

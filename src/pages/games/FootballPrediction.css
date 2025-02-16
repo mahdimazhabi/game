@@ -161,7 +161,7 @@ tr > td:nth-of-type(2) {
 }
 @media (max-width: 550px) {
   button {
-    width: 40vw;
+    width: 100%;
   }
   td,
   tr,

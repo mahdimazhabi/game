@@ -37,7 +37,7 @@ const FirebaseConfiguration = () => {
   const triggerExplosion = () => {
     // قفل کردن انفجار
     const explosionDiv = document.createElement("div");
-    explosionDiv.classList.add("explosion");
+    explosionDiv.classList.add("explosion1");
     document.body.appendChild(explosionDiv);
 
     // حذف انفجار بعد از زمان مشخص

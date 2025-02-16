@@ -21,14 +21,15 @@ body {
 .back-button:hover {
   background-color: #ff4500;
 }
-.container {
-  /* max-width: 800px; */
+.container9 {
+  max-width: 700px;
   width: 100%;
   margin: 50px auto;
   padding: 70px;
-  background-color: #1f1f1f;
+  /* background-color: #1f1f1f; */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  margin-bottom: 20rem;
 }
 
 h1 {

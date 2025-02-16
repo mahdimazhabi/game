@@ -130,7 +130,7 @@ const DiceGame = () => {
   }, [bluePlayerIndex, yellowPlayerIndex, isBlueTurn, diceRoll]); // Add diceRoll to the dependency array
 
   return (
-    <div className="container">
+    <div className="container9">
       <button className="back-button" onClick={() => window.history.back()}>
         &gt;
       </button>

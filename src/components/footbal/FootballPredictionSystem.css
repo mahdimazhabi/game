@@ -57,6 +57,10 @@ body {
 
 .vote-section {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
 .button-30,

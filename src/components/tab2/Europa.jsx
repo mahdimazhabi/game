@@ -1,152 +1,39 @@
 import { useState } from "react";
 import "./Europa.css";
-const Europa = () => {
-  function calculateResults() {
-    const results = [];
-    const winners = []; // آرایه‌ای برای ذخیره تیم‌های صعود کننده
-    let allSelected = true;
 
-    for (let i = 1; i <= 8; i++) {
-      const raft = document.getElementById(`match${i}-raft`).value;
-      const bargasht = document.getElementById(`match${i}-bargasht`).value;
-      const winner = document.getElementById(`match${i}-winner`).value; // تیم صعود کننده دستی
-
-      if (!raft || !bargasht || !winner) {
-        allSelected = false;
-        alert(`لطفا تمام انتخاب‌های مربوط به مسابقه ${i} را تکمیل کنید.`);
-        return;
-      }
-
-      const team1 = `تیم ${String.fromCharCode(64 + i * 2 - 1)}`; // تیم A, C, E, ...
-      const team2 = `تیم ${String.fromCharCode(64 + i * 2)}`; // تیم B, D, F, ...
-
-      // محاسبه امتیازات
-      let team1Score = 0;
-      let team2Score = 0;
-
-      // مرحله رفت
-      if (raft === "برنده تیم 1") team1Score += 3;
-      else if (raft === "برنده تیم 2") team2Score += 3;
-      else if (raft === "مساوی") {
-        team1Score += 1;
-        team2Score += 1;
-      }
-
-      // مرحله برگشت
-      if (bargasht === "برنده تیم 1") team1Score += 3;
-      else if (bargasht === "برنده تیم 2") team2Score += 3;
-      else if (bargasht === "مساوی") {
-        team1Score += 1;
-        team2Score += 1;
-      }
-
-      // تعیین تیم صعود کننده
-      results.push({
-        match: `${team1} vs ${team2}`,
-        raft: raft,
-        bargasht: bargasht,
-        team1Score: team1Score,
-        team2Score: team2Score,
-        winner: winner, // استفاده از تیم صعود کننده دستی
-      });
-
-      // ذخیره صعود کننده
-      winners.push(winner);
-    }
-
-    if (!allSelected) {
-      alert("لطفا تمام انتخاب‌ها را تکمیل کنید.");
-      return;
-    }
-
-    // نمایش نتایج
-    const resultDiv = document.getElementById("result");
-    let resultText = "<h2>نتایج نهایی:</h2>";
-    results.forEach((result) => {
-      resultText += `
-                <p>
-                    ${result.match}:
-                    <br>رفت: ${result.raft}
-                    <br>برگشت: ${result.bargasht}
-                    <br>امتیاز ${result.match.split(" vs ")[0]}: ${
-        result.team1Score
-      }
-                    <br>امتیاز ${result.match.split(" vs ")[1]}: ${
-        result.team2Score
-      }
-                    <br>تیم صعود کننده: ${result.winner}
-                </p>
-            `;
-    });
-    resultDiv.innerHTML = resultText;
-
-    // محاسبه صعود کننده نهایی
-    const finalWinner = calculateFinalResults(winners);
-    const finalWinnerDiv = document.getElementById("final-winner");
-    finalWinnerDiv.innerHTML = `<strong>تیم صعود کننده نهایی: ${finalWinner}</strong>`;
-  }
-
-  function calculateFinalResults(winners) {
-    const semiFinalWinners = [];
-
-    // اولین نیمه‌نهایی
-    semiFinalWinners.push(determineWinner(winners[0], winners[1])); // برنده مسابقه 1
-    semiFinalWinners.push(determineWinner(winners[2], winners[3])); // برنده مسابقه 2
-    semiFinalWinners.push(determineWinner(winners[4], winners[5])); // برنده مسابقه 3
-    semiFinalWinners.push(determineWinner(winners[6], winners[7])); // برنده مسابقه 4
-
-    // تعیین برنده فینال
-    const finalWinner = determineWinner(
-      semiFinalWinners[0],
-      semiFinalWinners[1]
-    );
-    return finalWinner;
-  }
-
-  function determineWinner(team1, team2) {
-    if (team1 === team2) {
-      return "مساوی (نیاز به قرعه‌کشی)";
-    }
-    // فرض بر این است که تیم اول برنده می‌شود
-    return team1;
-  }
+const Champions = () => {
   const [results, setResults] = useState({
-    match1Raft: "",
-    match1Bargasht: "",
-    match1Winner: "",
-    match2Raft: "",
-    match2Bargasht: "",
-    match2Winner: "",
-    match3Raft: "",
-    match3Bargasht: "",
-    match3Winner: "",
-    match4Raft: "",
-    match4Bargasht: "",
-    match4Winner: "",
-    match5Raft: "",
-    match5Bargasht: "",
-    match5Winner: "",
-    match6Raft: "",
-    match6Bargasht: "",
-    match6Winner: "",
-    match7Raft: "",
-    match7Bargasht: "",
-    match7Winner: "",
-    match8Raft: "",
-    match8Bargasht: "",
-    match8Winner: "",
+    match1: "",
+    match2: "",
+    match3: "",
+    match4: "",
+    match5: "",
+    match6: "",
+    match7: "",
+    match8: "",
   });
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setResults((prevResults) => ({
-      ...prevResults,
-      [id]: value,
-    }));
+  const [finalWinner, setFinalWinner] = useState("");
+
+  const calculateResults = () => {
+    const winners = {
+      match1: document.getElementById("match1-winner").value,
+      match2: document.getElementById("match2-winner").value,
+      match3: document.getElementById("match3-winner").value,
+      match4: document.getElementById("match4-winner").value,
+      match5: document.getElementById("match5-winner").value,
+      match6: document.getElementById("match6-winner").value,
+      match7: document.getElementById("match7-winner").value,
+      match8: document.getElementById("match8-winner").value,
+    };
+
+    setResults(winners);
+    const final = winners.match1; // You can add your logic for final winner selection
+    setFinalWinner(final);
   };
 
   return (
-    <div className="container">
+    <div className="container3">
       <h1>جدول درختی مسابقات فوتبال - رفت و برگشت</h1>
       <a href="index.html" className="back-btn">
         بازگشت به صفحه اصلی
@@ -154,55 +41,30 @@ const Europa = () => {
       <div className="bracket">
         {/* Round 1 */}
         <div className="round">
-          {["match1", "match2", "match3", "match4"].map((match, index) => (
+          {["A", "B", "C", "D", "E", "F", "G", "H"].map((team, index) => (
             <div className="match" key={index}>
-              <label>
-                {match === "match1"
-                  ? "AS Roma vs FC Porto"
-                  : match === "match2"
-                  ? "Bayer Leverkusen vs Olympiacos"
-                  : match === "match3"
-                  ? "West Ham United vs Fenerbahçe"
-                  : "Real Betis vs Galatasaray"}
-              </label>
-              <select
-                id={`${match}-raft`}
-                required
-                value={results[`${match}Raft`]}
-                onChange={handleChange}
-              >
+              <label>{`تیم ${team} vs تیم ${String.fromCharCode(
+                65 + index + 1
+              )}`}</label>
+              <select id={`match${index + 1}-raft`} required>
                 <option value="">انتخاب کنید</option>
                 <option value="برنده تیم 1">برنده تیم 1</option>
                 <option value="مساوی">مساوی</option>
                 <option value="برنده تیم 2">برنده تیم 2</option>
               </select>
-              <select
-                id={`${match}-bargasht`}
-                required
-                value={results[`${match}Bargasht`]}
-                onChange={handleChange}
-              >
+              <select id={`match${index + 1}-bargasht`} required>
                 <option value="">انتخاب کنید</option>
                 <option value="برنده تیم 1">برنده تیم 1</option>
                 <option value="مساوی">مساوی</option>
                 <option value="برنده تیم 2">برنده تیم 2</option>
               </select>
               <label>تیم صعود کننده:</label>
-              <select
-                id={`${match}-winner`}
-                required
-                value={results[`${match}Winner`]}
-                onChange={handleChange}
-              >
+              <select id={`match${index + 1}-winner`} required>
                 <option value="">انتخاب کنید</option>
-                <option value="AS Roma">AS Roma</option>
-                <option value="FC Porto">FC Porto</option>
-                <option value="Bayer Leverkusen">Bayer Leverkusen</option>
-                <option value="Olympiacos">Olympiacos</option>
-                <option value="West Ham United">West Ham United</option>
-                <option value="Fenerbahçe">Fenerbahçe</option>
-                <option value="Real Betis">Real Betis</option>
-                <option value="Galatasaray">Galatasaray</option>
+                <option value={`تیم ${team}`}>{`تیم ${team}`}</option>
+                <option
+                  value={`تیم ${String.fromCharCode(65 + index + 1)}`}
+                >{`تیم ${String.fromCharCode(65 + index + 1)}`}</option>
               </select>
             </div>
           ))}
@@ -210,66 +72,52 @@ const Europa = () => {
 
         {/* Round 2 */}
         <div className="round">
-          {["match5", "match6", "match7", "match8"].map((match, index) => (
+          {["I", "J", "K", "L", "M", "N", "O", "P"].map((team, index) => (
             <div className="match" key={index}>
-              <label>
-                {match === "match5"
-                  ? "Sparta Prague vs Lille"
-                  : match === "match6"
-                  ? "Ajax vs Genk"
-                  : match === "match7"
-                  ? "Anderlecht vs Dinamo Zagreb"
-                  : "Sporting Braga vs Union Berlin"}
-              </label>
-              <select
-                id={`${match}-raft`}
-                required
-                value={results[`${match}Raft`]}
-                onChange={handleChange}
-              >
+              <label>{`تیم ${team} vs تیم ${String.fromCharCode(
+                73 + index + 1
+              )}`}</label>
+              <select id={`match${index + 5}-raft`} required>
                 <option value="">انتخاب کنید</option>
                 <option value="برنده تیم 1">برنده تیم 1</option>
                 <option value="مساوی">مساوی</option>
                 <option value="برنده تیم 2">برنده تیم 2</option>
               </select>
-              <select
-                id={`${match}-bargasht`}
-                required
-                value={results[`${match}Bargasht`]}
-                onChange={handleChange}
-              >
+              <select id={`match${index + 5}-bargasht`} required>
                 <option value="">انتخاب کنید</option>
                 <option value="برنده تیم 1">برنده تیم 1</option>
                 <option value="مساوی">مساوی</option>
                 <option value="برنده تیم 2">برنده تیم 2</option>
               </select>
               <label>تیم صعود کننده:</label>
-              <select
-                id={`${match}-winner`}
-                required
-                value={results[`${match}Winner`]}
-                onChange={handleChange}
-              >
+              <select id={`match${index + 5}-winner`} required>
                 <option value="">انتخاب کنید</option>
-                <option value="Sparta Prague">Sparta Prague</option>
-                <option value="Lille">Lille</option>
-                <option value="Ajax">Ajax</option>
-                <option value="Genk">Genk</option>
-                <option value="Anderlecht">Anderlecht</option>
-                <option value="Dinamo Zagreb">Dinamo Zagreb</option>
-                <option value="Sporting Braga">Sporting Braga</option>
-                <option value="Union Berlin">Union Berlin</option>
+                <option value={`تیم ${team}`}>{`تیم ${team}`}</option>
+                <option
+                  value={`تیم ${String.fromCharCode(73 + index + 1)}`}
+                >{`تیم ${String.fromCharCode(73 + index + 1)}`}</option>
               </select>
             </div>
           ))}
         </div>
       </div>
+
       <button onClick={calculateResults}>محاسبه نتایج و تیم صعود کننده</button>
-      <div id="result"></div>
+      <div id="result">
+        <h2>نتایج:</h2>
+        <ul>
+          {Object.entries(results).map(([match, winner]) => (
+            <li key={match}>
+              {match}: {winner}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <h2>صعود کننده نهایی</h2>
-      <div id="final-winner"></div>
+      <div id="final-winner">{finalWinner}</div>
     </div>
   );
 };
 
-export default Europa;
+export default Champions;

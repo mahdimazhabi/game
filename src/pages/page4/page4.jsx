@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Page4 = () => {
-  // استایل‌ها به صورت یک شیء جاوااسکریپتی
   const styles = {
     body: {
       backgroundColor: "black",
@@ -10,18 +9,13 @@ const Page4 = () => {
       margin: 0,
       padding: 0,
       display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      minHeight: "100vh",
     },
     userInfo: {
       textAlign: "center",
       padding: "20px",
-    },
-    userInfoHeading: {
-      margin: 0,
-      fontSize: "24px",
-    },
-    userInfoParagraph: {
-      margin: "5px 0 0",
-      fontSize: "16px",
     },
     profileSection: {
       textAlign: "center",
@@ -48,20 +42,12 @@ const Page4 = () => {
     },
     topTabItem: {
       display: "flex",
-      flexDirection: "column",
       alignItems: "center",
       cursor: "pointer",
       fontSize: "18px",
       padding: "10px",
       borderRadius: "10px",
       boxShadow: "0 0 15px #00ff00",
-    },
-    topTabImg: {
-      width: "40px",
-      height: "40px",
-      marginBottom: "5px",
-      borderRadius: "50%",
-      boxShadow: "0 0 10px #00ff00",
     },
     bottomTabBar: {
       display: "flex",
@@ -74,7 +60,6 @@ const Page4 = () => {
     },
     bottomTabItem: {
       display: "flex",
-      flexDirection: "column",
       alignItems: "center",
       cursor: "pointer",
       transition: "transform 0.3s ease",
@@ -82,43 +67,41 @@ const Page4 = () => {
     bottomTabItemHover: {
       transform: "translateY(-10px)",
     },
-    bottomTabImg: {
-      width: "30px",
-      height: "30px",
-      marginBottom: "5px",
-      borderRadius: "50%",
-      boxShadow: "0 0 10px #00ff00",
-    },
     page4Content: {
       display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
+      flexDirection: "column", // در موبایل لینک‌ها به‌صورت عمودی
+      alignItems: "center",
       padding: "20px",
+      width: "100%", // پر کردن عرض صفحه
+      gap: "10px",
     },
     page4ContentDiv: {
-      minWidth: "40%",
-      height: "auto",
+      width: "90%", // در موبایل تمام عرض را می‌گیرد
+      maxWidth: "400px", // حداکثر عرض در دسکتاپ
       padding: "15px",
-      margin: "10px",
       borderRadius: "10px",
       boxShadow: "0 0 15px #00ff00",
       textAlign: "center",
+      backgroundColor: "#222",
+      color: "white",
+      textDecoration: "none",
+      fontSize: "18px",
+      fontWeight: "bold",
+      transition: "background 0.3s ease",
     },
-    page5Content: {
-      textAlign: "center",
-      padding: "20px",
-      fontSize: "24px",
-      boxShadow: "0 0 15px #00ff00",
-      borderRadius: "10px",
-      margin: "20px",
-      animation: "glow 2s infinite alternate",
+    page4ContentDivHover: {
+      backgroundColor: "#00ff00",
+      color: "black",
     },
-    page5ContentParagraph: {
-      margin: 0,
-    },
-    glowAnimation: {
-      animation: "glow 2s infinite alternate",
+    "@media (min-width: 768px)": {
+      page4Content: {
+        flexDirection: "row", // در دسکتاپ لینک‌ها به‌صورت افقی نمایش داده شوند
+        flexWrap: "wrap",
+        justifyContent: "center",
+      },
+      page4ContentDiv: {
+        width: "40%", // در دسکتاپ دو ستونه نمایش داده شود
+      },
     },
   };
 
