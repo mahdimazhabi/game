@@ -11,15 +11,16 @@ body {
 }
 .field {
   position: relative;
-  width: 90vw;
+  width: 80vw;
   max-width: 500px;
-  height: 90vh;
+  height: 40vh;
   max-height: 700px;
   background-color: rgba(37, 162, 28, 0.704);
   border: 5px solid rgb(255, 215, 0);
   overflow: hidden;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgb(255, 215, 0);
+  margin-top: 15rem;
 }
 .goal-area,
 .center-circle {

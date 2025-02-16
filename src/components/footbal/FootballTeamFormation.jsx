@@ -184,7 +184,7 @@ const FootballTeamFormation = () => {
       </div>
 
       <div className="share">
-        <button onClick={share}>Share</button>
+        {/* <button onClick={share}>Share</button> */}
         <div className="share-icons">
           <a
             href="https://t.me/share/url?url=https://yourwebsite.com&text=Share%20Link%20for%20Story"

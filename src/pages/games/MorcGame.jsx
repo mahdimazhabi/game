@@ -1,4 +1,5 @@
 import "./Mors.css";
+import { IoMdClose } from "react-icons/io";
 
 const MorcGame = () => {
   function goBack() {
@@ -140,7 +141,7 @@ const MorcGame = () => {
   return (
     <div className="container1">
       <button className="back-button1" onClick={goBack}>
-        &lt;
+        <IoMdClose />
       </button>
       <div className="header1">
         <div id="timer1" className="timer1">
