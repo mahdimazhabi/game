@@ -120,75 +120,76 @@ const Crowd = () => {
           </button>
         </div>
       </div>
-      <table className="race-table">
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Round 1</th>
-            <th>Round 2</th>
-            <th>Round 3</th>
-            <th>Round 4</th>
-            <th>Round 5</th>
-            <th>Round 6</th>
-            <th>Round 7</th>
-            <th>Round 8</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 1, 1)}
-            >
-              Horse 1
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 2, 1)}
-            >
-              Horse 2
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 3, 1)}
-            >
-              Horse 3
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 4, 1)}
-            >
-              Horse 4
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 5, 1)}
-            >
-              Horse 5
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 6, 1)}
-            >
-              Horse 6
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 7, 1)}
-            >
-              Horse 7
-            </td>
-            <td
-              className="horse-cell"
-              onClick={(e) => toggleSelection(e.target, 8, 1)}
-            >
-              Horse 8
-            </td>
-          </tr>
-          {/* You can add more rows as needed */}
-        </tbody>
-      </table>
+      <div className="table-container">
+        <table className="race-table">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Round 1</th>
+              <th>Round 2</th>
+              <th>Round 3</th>
+              <th>Round 4</th>
+              <th>Round 5</th>
+              <th>Round 6</th>
+              <th>Round 7</th>
+              <th>Round 8</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 1, 1)}
+              >
+                Horse 1
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 2, 1)}
+              >
+                Horse 2
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 3, 1)}
+              >
+                Horse 3
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 4, 1)}
+              >
+                Horse 4
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 5, 1)}
+              >
+                Horse 5
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 6, 1)}
+              >
+                Horse 6
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 7, 1)}
+              >
+                Horse 7
+              </td>
+              <td
+                className="horse-cell"
+                onClick={(e) => toggleSelection(e.target, 8, 1)}
+              >
+                Horse 8
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div className="submit-section">
         <button className="submit-button" onClick={submitPrediction}>
           Submit

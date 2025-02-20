@@ -64,6 +64,12 @@ body {
   transition: opacity 0.3s ease-out, visibility 0s 0.3s;
 }
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .race-table {
   width: 100%;
   border-collapse: collapse;
