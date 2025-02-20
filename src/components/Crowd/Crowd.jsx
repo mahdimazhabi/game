@@ -80,7 +80,10 @@ const Crowd = () => {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={goBack}></button>
+      {" "}
+      <button className="back" onClick={goBack}>
+        X
+      </button>
       <div className="header">
         <div className="options-bar">
           <button
@@ -117,7 +120,6 @@ const Crowd = () => {
           </button>
         </div>
       </div>
-
       <table className="race-table">
         <thead>
           <tr>
@@ -187,7 +189,6 @@ const Crowd = () => {
           {/* You can add more rows as needed */}
         </tbody>
       </table>
-
       <div className="submit-section">
         <button className="submit-button" onClick={submitPrediction}>
           Submit

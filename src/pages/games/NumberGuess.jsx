@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { IoMdClose } from "react-icons/io";
 import "./GuessNumber.css";
 
 const GuessNumber = () => {
@@ -107,17 +108,21 @@ const GuessNumber = () => {
 
   return (
     <div className="container">
-      <div className="header">
+      <div>
         <button
+          className="back-button1"
           onClick={() => (window.location.href = "/")}
-          className="button-30"
         >
-          {"<"}
+          <IoMdClose />
         </button>
-        <div className="button-30" id="timer">
-          <span>{formatTime(timeLeft)}</span>
+
+        <div className="header1">
+          <div id="timer1" className="timer1">
+            <span>{formatTime(timeLeft)}</span>
+          </div>
         </div>
       </div>
+
       <h1>Number Guessing Game</h1>
 
       <div id="number-display">Entered Number: {inputValue}</div>

@@ -7,6 +7,10 @@
   width: 100%;
   max-width: 600px;
 }
+h1 {
+  margin-top: 7rem !important;
+}
+
 #number-display {
   font-size: 2rem;
   color: #110a62;

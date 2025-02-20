@@ -39,7 +39,7 @@ body {
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  flex-wrap: wrap;
 }
 
 .option-button {
@@ -50,7 +50,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  flex: 1 1 45%; /* Ensure the buttons take up some space but wrap as needed */
+  flex: 1 1 45%;
   margin: 5px;
 }
 
@@ -68,6 +68,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  white-space: nowrap;
 }
 
 .race-table th,
@@ -115,7 +116,7 @@ body {
   align-items: center;
   margin-top: 20px;
   gap: 10px;
-  flex-wrap: wrap; /* Allow buttons to stack on smaller screens */
+  flex-wrap: wrap;
 }
 
 .submit-button,
@@ -139,7 +140,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* For screens smaller than 768px */
   .container {
     width: 100%;
   }
@@ -147,15 +147,17 @@ body {
   .options-bar {
     flex-direction: column;
     gap: 15px;
+    width: 100%;
   }
 
   .option-button {
-    width: 100%;
+    width: 98%;
   }
 
   .race-table th,
   .race-table td {
     padding: 8px;
+    white-space: wrap;
   }
 
   .submit-section {
@@ -165,7 +167,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  /* For screens smaller than 480px */
   .back-button {
     top: 10px;
     left: 10px;
