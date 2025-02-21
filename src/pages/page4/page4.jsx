@@ -126,7 +126,7 @@ const Page4 = () => {
         <Link to="/FirebaseConfiguration" style={styles.page4ContentDiv}>
           Theoriestunden
         </Link>
-        <Link to="/adac-mitgliedschaft" style={styles.page4ContentDiv}>
+        <Link to="DiceCardGame" style={styles.page4ContentDiv}>
           ADAC Mitgliedschaft
         </Link>
       </div>

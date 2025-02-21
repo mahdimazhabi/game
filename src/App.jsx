@@ -23,6 +23,7 @@ import Crowd from "./components/Crowd/Crowd";
 import FootballPrediction from "./pages/games/FootballPrediction.jsx";
 import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 import FirebaseConfiguration from "./pages/FirebaseConfiguration/FirebaseConfiguration.jsx";
+import DiceCardGame from "./components/caedgame/DiceCardGame.jsx";
 const App = () => {
   return (
     <BrowserRouter>
@@ -56,6 +57,7 @@ const App = () => {
                 path="FirebaseConfiguration"
                 element={<FirebaseConfiguration />}
               />
+              <Route path="/page4/DiceCardGame" element={<DiceCardGame />} />
               <Route
                 path={"football-prediction-game/fa"}
                 element={<FootballPrediction />}
