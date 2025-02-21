@@ -26,7 +26,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className="container12">
       <p className="text-start mt-4 ">
         <CiUser size={24} />
         mahdi mazhabi
@@ -36,7 +36,10 @@ export default function Homepage() {
       <Container className="mt-4">
         <Row className="justify-content-center">
           <Col>
-            <Nav className=" flex-row justify-content-center gap-4">
+            <Nav
+              className=" flex-row justify-content-center gap-4"
+              style={{ marginTop: "8rem" }}
+            >
               <Nav.Item>
                 <Link as={Link} to="/games/morc" className={styles.tabItem}>
                   <img src={tab1} alt="Code Mors" className={styles.tabIcon} />
