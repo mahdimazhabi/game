@@ -1,51 +1,69 @@
 import "./top.css"; // فایل استایل جداگانه
+import { useEffect, useState } from "react";
+import api from "../../api";
 
 const UserPage = () => {
+  const [user, setUser] = useState({});
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await api.post("/Users/GetById", { userId: 4 });
+
+        if (response.data?.users?.length) {
+          setUser(response.data.users[0]); // Assuming the response contains a `users` array
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const copyToClipboard = () => {
+    if (user.referralLink) {
+      navigator.clipboard.writeText(user.referralLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset message after 2 seconds
+    }
+  };
+
   return (
     <div className="App">
       {/* User Info Section */}
-      <div className="user-info1">
-        <div className="profile-box1">
-          <span className="user-name">Username</span>
+      <header>
+        <div className="user-info1">
+          <div className="profile-box">
+            <span className="user-name">{user.username || "Loading..."}</span>
+          </div>
+          <span>Total Points(Level): {user.level || 0}</span>
         </div>
-        <span>Total Points: 1200</span>
-      </div>
+      </header>
 
       {/* Referral Link Section */}
       <div className="referral-link">
         <h2>Get Referral Link</h2>
-        <button className="get-link">Get Link</button>
-        <input
-          type="text"
-          placeholder="Referral Link"
-          value="your-referral-link.com"
-          readOnly
-        />
-        <button className="copy-button">Copy</button>
+        <input type="text" value={user.referralLink || ""} readOnly />
+        <button className="copy-button" onClick={copyToClipboard}>
+          {copied ? "Copied!" : "Copy"}
+        </button>
       </div>
       {/* Main Content Section */}
-      <div className="">
+      <div className="container">
         {/* Referral Box */}
 
         {/* Football Box */}
         <div className="box" id="football-box">
           <h2 className="glowing-text">Top 5 Football League Users</h2>
           <ul>
-            <li className="glowing-text">
-              <img src="userA.png" alt="User A" /> User A: 150 points
-            </li>
-            <li className="glowing-text">
-              <img src="userB.png" alt="User B" /> User B: 140 points
-            </li>
-            <li className="glowing-text">
-              <img src="userC.png" alt="User C" /> User C: 130 points
-            </li>
-            <li className="glowing-text">
-              <img src="userD.png" alt="User D" /> User D: 120 points
-            </li>
-            <li className="glowing-text">
-              <img src="userE.png" alt="User E" /> User E: 110 points
-            </li>
+            {["A", "B", "C", "D", "E"].map((user, index) => (
+              <li key={index} className="glowing-text">
+                <img src={`user${user}.png`} alt={`User ${user}`} />
+                User {user}: {150 - index * 10} points
+              </li>
+            ))}
           </ul>
           <div className="scroll-bar">[Scroll Bar]</div>
         </div>
@@ -54,21 +72,12 @@ const UserPage = () => {
         <div className="box" id="horses-box">
           <h2 className="glowing-text">Top 5 Horse Racing League Users</h2>
           <ul>
-            <li className="glowing-text">
-              <img src="userI.png" alt="User I" /> User I: 200 points
-            </li>
-            <li className="glowing-text">
-              <img src="userII.png" alt="User II" /> User II: 190 points
-            </li>
-            <li className="glowing-text">
-              <img src="userIII.png" alt="User III" /> User III: 180 points
-            </li>
-            <li className="glowing-text">
-              <img src="userIV.png" alt="User IV" /> User IV: 170 points
-            </li>
-            <li className="glowing-text">
-              <img src="userV.png" alt="User V" /> User V: 160 points
-            </li>
+            {["I", "II", "III", "IV", "V"].map((user, index) => (
+              <li key={index} className="glowing-text">
+                <img src={`user${user}.png`} alt={`User ${user}`} />
+                User {user}: {200 - index * 10} points
+              </li>
+            ))}
           </ul>
           <div className="scroll-bar">[Scroll Bar]</div>
         </div>

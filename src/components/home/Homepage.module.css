@@ -107,3 +107,17 @@
 .d-flex {
   display: flex;
 }
+.loadingPlaceholder {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #ccc; /* Light gray border */
+  background-color: #f0f0f0; /* Light background */
+  color: #666; /* Text color */
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}

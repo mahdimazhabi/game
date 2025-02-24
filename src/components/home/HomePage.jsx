@@ -5,13 +5,15 @@ import styles from "./Homepage.module.css"; // استایل‌های سفارش�
 import tab1 from "./image/tab1.jpg";
 import tab2 from "./image/tab2.jpg";
 import tab3 from "./image/tab3.jpg";
-import { CiUser } from "react-icons/ci";
 import api from "../../api";
 import Airdrop from "../Airdrop/Airdrop";
 import { useEffect, useState } from "react";
 
 export default function Homepage() {
   const [products, setProducts] = useState([]);
+
+  const [user, setUser] = useState(null);
+  const userId = 4;
 
   useEffect(() => {
     api
@@ -25,11 +27,35 @@ export default function Homepage() {
       });
   }, []);
 
+  useEffect(() => {
+    const fetchUserById = async () => {
+      try {
+        const response = await api.post("/Users/GetById", {
+          userId: userId,
+        });
+
+        if (response.status === 200) {
+          setUser(response.data.users[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUserById();
+  }, []);
+
   return (
     <div className="container12">
       <p className="text-start mt-4 ">
-        <CiUser size={24} />
-        mahdi mazhabi
+        <div className="d-flex align-items-center">
+          {user?.profilePicture ? (
+            <img src={user.profilePicture} alt={user.username} />
+          ) : (
+            <div className={styles.loadingPlaceholder}>ProPic</div>
+          )}
+          <span className="ms-2">{user?.username || "Fetching..."}</span>
+        </div>
       </p>
 
       {/* 🔹 Tab section */}
