@@ -1,32 +1,99 @@
-import "./top.css"; // فایل استایل جداگانه
+import "./top.css"; // Separate CSS file
 import { useEffect, useState } from "react";
 import api from "../../api";
 
 const UserPage = () => {
   const [user, setUser] = useState({});
   const [copied, setCopied] = useState(false);
+  const [topUsers, setTopUsers] = useState([]);
+  const [levelCoinCountId, setLevelCoinCountId] = useState(null);
+  const [levelCoinData, setLevelCoinData] = useState(null);
+  const userId = 4; // Hardcoded userId for now
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await api.post("/Users/GetById", { userId: 4 });
+        const response = await api.post("/Users/GetById", { userId });
 
         if (response.data?.users?.length) {
-          setUser(response.data.users[0]); // Assuming the response contains a `users` array
+          setUser(response.data.users[0]);
         }
       } catch (error) {
         console.error("Error fetching user:", error);
       }
     };
 
+    const fetchLevelCoinCountId = async () => {
+      try {
+        const response = await api.post("/LevelCoinCounts/GetAll");
+        if (response.data?.levelCoinCounts) {
+          const userLevelCoin = response.data.levelCoinCounts.find(
+            (item) => item.userId === userId
+          );
+          if (userLevelCoin) {
+            setLevelCoinCountId(userLevelCoin.levelCoinCountId);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching level coin count ID:", error);
+      }
+    };
+
+    const fetchTopUsers = async () => {
+      try {
+        const response = await api.post("/LevelCoinCounts/GetAll");
+        if (response.data?.levelCoinCounts) {
+          const userPoints = response.data.levelCoinCounts.reduce(
+            (acc, item) => {
+              if (item.userId !== 0) {
+                acc[item.userId] = (acc[item.userId] || 0) + item.count;
+              }
+              return acc;
+            },
+            {}
+          );
+
+          const sortedUsers = Object.entries(userPoints)
+            .map(([id, points]) => ({ userId: Number(id), points }))
+            .sort((a, b) => b.points - a.points)
+            .slice(0, 5);
+
+          setTopUsers(sortedUsers);
+        }
+      } catch (error) {
+        console.error("Error fetching top users:", error);
+      }
+    };
+
     fetchUser();
+    fetchLevelCoinCountId();
+    fetchTopUsers();
   }, []);
+
+  useEffect(() => {
+    if (levelCoinCountId) {
+      const fetchLevelCoinData = async () => {
+        try {
+          const response = await api.post("/LevelCoinCounts/GetById", {
+            levelCoinCountId,
+          });
+          if (response.data) {
+            setLevelCoinData(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching level coin data:", error);
+        }
+      };
+
+      fetchLevelCoinData();
+    }
+  }, [levelCoinCountId]);
 
   const copyToClipboard = () => {
     if (user.referralLink) {
       navigator.clipboard.writeText(user.referralLink);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset message after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -38,7 +105,20 @@ const UserPage = () => {
           <div className="profile-box">
             <span className="user-name">{user.username || "Loading..."}</span>
           </div>
-          <span>Total Points(Level): {user.level || 0}</span>
+          <span>
+            {levelCoinData ? (
+              <ul>
+                {Array.isArray(levelCoinData.levelCoinCounts) &&
+                  levelCoinData.levelCoinCounts.map((item, index) => (
+                    <li key={index} className="glowing-text">
+                      Total Points: {item.count}
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <li>Loading...</li>
+            )}
+          </span>
         </div>
       </header>
 
@@ -50,34 +130,26 @@ const UserPage = () => {
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
+
       {/* Main Content Section */}
       <div className="container">
-        {/* Referral Box */}
-
         {/* Football Box */}
         <div className="box" id="football-box">
-          <h2 className="glowing-text">Top 5 Football League Users</h2>
+          <h2 className="glowing-text">Top 5 Users</h2>
           <ul>
-            {["A", "B", "C", "D", "E"].map((user, index) => (
-              <li key={index} className="glowing-text">
-                <img src={`user${user}.png`} alt={`User ${user}`} />
-                User {user}: {150 - index * 10} points
-              </li>
-            ))}
-          </ul>
-          <div className="scroll-bar">[Scroll Bar]</div>
-        </div>
-
-        {/* Horse Racing Box */}
-        <div className="box" id="horses-box">
-          <h2 className="glowing-text">Top 5 Horse Racing League Users</h2>
-          <ul>
-            {["I", "II", "III", "IV", "V"].map((user, index) => (
-              <li key={index} className="glowing-text">
-                <img src={`user${user}.png`} alt={`User ${user}`} />
-                User {user}: {200 - index * 10} points
-              </li>
-            ))}
+            {topUsers.length > 0 ? (
+              topUsers.map((user, index) => (
+                <li key={index} className="glowing-text">
+                  <img
+                    src={`user${user.userId}.png`}
+                    alt={`User ${user.userId}`}
+                  />
+                  User {user.userId}: {user.points} points
+                </li>
+              ))
+            ) : (
+              <li>Loading...</li>
+            )}
           </ul>
           <div className="scroll-bar">[Scroll Bar]</div>
         </div>
