@@ -109,7 +109,6 @@ const Page4 = () => {
   return (
     <div style={styles.body}>
       <div style={styles.userInfo}></div>
-
       <div style={styles.page4Content}>
         <Link to="/DiceGame" style={styles.page4ContentDiv}>
           Grundbetrag
@@ -128,6 +127,9 @@ const Page4 = () => {
         </Link>
         <Link to="DiceCardGame" style={styles.page4ContentDiv}>
           ADAC Mitgliedschaft
+        </Link>
+        <Link to="/McqQuiz" style={styles.page4ContentDiv}>
+          MCQ Quiz
         </Link>
       </div>
     </div>

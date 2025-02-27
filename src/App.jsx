@@ -24,6 +24,7 @@ import FootballPrediction from "./pages/games/FootballPrediction.jsx";
 import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 import FirebaseConfiguration from "./pages/FirebaseConfiguration/FirebaseConfiguration.jsx";
 import DiceCardGame from "./components/caedgame/DiceCardGame.jsx";
+import McqQuiz from "./components/McqQuiz/McqQuiz.jsx";
 const App = () => {
   return (
     <BrowserRouter>
@@ -56,7 +57,8 @@ const App = () => {
               <Route
                 path="FirebaseConfiguration"
                 element={<FirebaseConfiguration />}
-              />
+              />{" "}
+              <Route path="McqQuiz" element={<McqQuiz />} />
               <Route path="/page4/DiceCardGame" element={<DiceCardGame />} />
               <Route
                 path={"football-prediction-game/fa"}

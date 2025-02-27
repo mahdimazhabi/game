@@ -1,0 +1,95 @@
+.quiz-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.quiz-card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  text-align: center;
+}
+
+.quiz-question {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+  padding: 0 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.users-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.user {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.timer {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff4444;
+}
+
+.online {
+  color: black;
+}
+
+.options-container {
+  margin-bottom: 1.5rem;
+}
+
+.option-item {
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  background: #f0f0f0;
+}
+
+.option-item:hover {
+  background: #a1a1a1;
+}
+
+.form-check-label {
+  cursor: pointer;
+  color: #000;
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.result-text {
+  text-align: center;
+  font-weight: 500;
+  margin-top: 1rem;
+}
