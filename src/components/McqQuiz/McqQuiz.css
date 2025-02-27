@@ -93,3 +93,9 @@
   font-weight: 500;
   margin-top: 1rem;
 }
+@media (max-width: 720px) {
+  .quiz-container {
+    width: 80%;
+    margin: auto;
+  }
+}
