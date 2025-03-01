@@ -3,6 +3,7 @@ import axios from "axios";
 import "./McqQuiz.css";
 
 const API_URL = "http://217.154.71.28/api/RequestQuestionAnswers/Add";
+const START_GAME_URL = "http://217.154.71.28/api/UserQuestionAnswers/Add";
 
 const McqQuiz = () => {
   const [userId, setUserId] = useState(null);
@@ -42,8 +43,28 @@ const McqQuiz = () => {
     }
   };
 
+  const startGame = async (userOneId, userTwoId) => {
+    try {
+      const response = await axios.post(START_GAME_URL, {
+        userQuestionAnswerId: 1,
+        questionAnswerId: 0,
+        correctOne: true,
+        correctTwo: true,
+        userOneId: userOneId,
+        userTwoId: userTwoId,
+        start: 1,
+        date: new Date().toISOString().split("T")[0],
+        time: new Date().toTimeString().split(" ")[0],
+      });
+
+      console.log("Game Started:", response.data);
+    } catch (error) {
+      console.error("Error starting game:", error);
+    }
+  };
+
   const startLongPolling = async (id, requestId) => {
-    if (isMatched || isPollingComplete) return; // Stop polling if matched or polling complete
+    if (isMatched || isPollingComplete) return;
     setIsPolling(true);
 
     try {
@@ -67,13 +88,15 @@ const McqQuiz = () => {
         setRoomId(data.requestQuestionAnswerId);
         setIsMatched(true);
         setIsPollingComplete(true);
+
+        await startGame(id, opponent);
       } else {
-        console.log("No match found, retrying...");
-        startLongPolling(id, requestId);
+        console.log("No match found, retrying in 3 secs ...");
+        setTimeout(() => startLongPolling(id, requestId), 3000);
       }
     } catch (error) {
       console.error("Long polling error:", error);
-      setTimeout(() => startLongPolling(id, requestId), 5000);
+      setTimeout(() => startLongPolling(id, requestId), 6000);
     }
   };
 
