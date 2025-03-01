@@ -1,101 +1,94 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import "./McqQuiz.css";
 
+const API_URL = "http://217.154.71.28/api/RequestQuestionAnswers/Add";
+
 const McqQuiz = () => {
-  const questions = [
-    {
-      text: "بزرگ‌ترین سیاره منظومه شمسی کدام است؟",
-      options: ["زمین", "مریخ", "مشتری", "زحل"],
-      answer: "مشتری",
-    },
-    {
-      text: "پایتخت ایران کدام است؟",
-      options: ["تهران", "اصفهان", "مشهد", "شیراز"],
-      answer: "تهران",
-    },
-  ];
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [result, setResult] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(7);
-
-  const currentQuestion = questions[currentQuestionIndex];
+  const [userId, setUserId] = useState(null);
+  const [opponentId, setOpponentId] = useState(null);
+  const [roomId, setRoomId] = useState(null);
+  const [isMatched, setIsMatched] = useState(false);
+  const [registrationId, setRegistrationId] = useState(null);
+  const [isPolling, setIsPolling] = useState(false);
 
   useEffect(() => {
-    if (timeLeft <= 0) {
-      goToNextQuestion();
-      return;
+    let storedUserId = sessionStorage.getItem("userId");
+    if (!storedUserId) {
+      storedUserId = Math.floor(Math.random() * 1000000).toString();
+      sessionStorage.setItem("userId", storedUserId);
     }
+    const numericUserId = Number(storedUserId);
+    setUserId(numericUserId);
+    registerUser(numericUserId);
+  }, []);
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
+  const registerUser = async (id) => {
+    try {
+      const response = await axios.post(API_URL, {
+        userId: id,
+        isOnline: 1,
+        date: new Date().toISOString(),
+      });
 
-    return () => clearInterval(timer);
-  });
-
-  const handleOptionClick = (option) => {
-    if (result) return;
-
-    setSelectedOption(option);
-    setResult(
-      option === currentQuestion.answer ? "🎉 برنده شدید" : "😞 بازنده شدید"
-    );
+      console.log("Registered User:", response.data);
+      if (response.data && response.data.data) {
+        setRegistrationId(response.data.data.requestQuestionAnswerId);
+        startLongPolling(id, response.data.data.requestQuestionAnswerId);
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
   };
 
-  const goToNextQuestion = () => {
-    setTimeout(() => {
-      setCurrentQuestionIndex((prev) =>
-        prev + 1 < questions.length ? prev + 1 : 0
-      );
-      resetQuizState();
-    }, 1500);
-  };
+  const startLongPolling = async (id, requestId) => {
+    if (isMatched || isPolling) return;
+    setIsPolling(true);
 
-  const resetQuizState = () => {
-    setSelectedOption(null);
-    setResult(null);
-    setTimeLeft(7);
+    try {
+      const response = await axios.post(API_URL, {
+        userId: id,
+        isOnline: 1,
+        date: new Date().toISOString(),
+        requestQuestionAnswerId: requestId,
+      });
+
+      console.log("Long Poll Response:", response.data);
+
+      if (
+        response.data.isSuccess &&
+        response.data.data.status === "Now You can Play"
+      ) {
+        const data = response.data.data;
+        const opponent =
+          data.userIdOne === id ? data.userIdTwo : data.userIdOne;
+        setOpponentId(opponent);
+        setRoomId(data.requestQuestionAnswerId);
+        setIsMatched(true);
+      } else {
+        console.log("No match found, retrying...");
+        startLongPolling(id, requestId); // Retry immediately
+      }
+    } catch (error) {
+      console.error("Long polling error:", error);
+      setTimeout(() => startLongPolling(id, requestId), 5000); // Retry after 5s
+    }
   };
 
   return (
     <div className="quiz-container">
       <div className="quiz-card">
         <div className="users-container">
-          <div className="user">user1</div>
-          <div className="user">user2</div>
+          <div className="user">User: {userId}</div>
+          <div className="user">
+            Opponent: {opponentId ? opponentId : "Waiting..."}
+          </div>
         </div>
-        <h2 className="quiz-question">{currentQuestion.text}</h2>
-        <div className="options-container">
-          {currentQuestion.options.map((option, index) => (
-            <div
-              key={index}
-              className={`form-check option-item ${
-                result && selectedOption === option
-                  ? option === currentQuestion.answer
-                    ? "correct"
-                    : "incorrect"
-                  : ""
-              }`}
-              onClick={() => handleOptionClick(option)}
-              style={{ pointerEvents: result ? "none" : "auto" }}
-            >
-              <label className="form-check-label">{option}</label>
-            </div>
-          ))}
-        </div>
-        {result && (
-          <p
-            className={`result-text ${
-              result === "🎉 برنده شدید" ? "text-success" : "text-danger"
-            }`}
-          >
-            {result}
-          </p>
+        {isMatched ? (
+          <h2>Game is ready to start! Room ID: {roomId}</h2>
+        ) : (
+          <h2>Waiting for another player...</h2>
         )}
-        <p className="timer"> {timeLeft}s</p>
-        <div className="online">وضعیت آنلاین: آنلاین</div>
       </div>
     </div>
   );
