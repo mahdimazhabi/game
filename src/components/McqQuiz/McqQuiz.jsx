@@ -11,6 +11,7 @@ const McqQuiz = () => {
   const [isMatched, setIsMatched] = useState(false);
   const [registrationId, setRegistrationId] = useState(null);
   const [isPolling, setIsPolling] = useState(false);
+  const [isPollingComplete, setIsPollingComplete] = useState(false);
 
   useEffect(() => {
     let storedUserId = sessionStorage.getItem("userId");
@@ -42,7 +43,7 @@ const McqQuiz = () => {
   };
 
   const startLongPolling = async (id, requestId) => {
-    if (isMatched || isPolling) return;
+    if (isMatched || isPollingComplete) return; // Stop polling if matched or polling complete
     setIsPolling(true);
 
     try {
@@ -65,13 +66,14 @@ const McqQuiz = () => {
         setOpponentId(opponent);
         setRoomId(data.requestQuestionAnswerId);
         setIsMatched(true);
+        setIsPollingComplete(true);
       } else {
         console.log("No match found, retrying...");
-        startLongPolling(id, requestId); // Retry immediately
+        startLongPolling(id, requestId);
       }
     } catch (error) {
       console.error("Long polling error:", error);
-      setTimeout(() => startLongPolling(id, requestId), 5000); // Retry after 5s
+      setTimeout(() => startLongPolling(id, requestId), 5000);
     }
   };
 
