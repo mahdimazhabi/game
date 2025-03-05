@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import img from "../../assets/img/IMG_20250208_182414_366-removebg-preview.png";
 import "./Airdrop.css";
-
 const TOTAL_TIME = 120 * 60; // 2 ساعت به ثانیه
+import useAirDropApi from "../../api/AirDropApi/useAirDropApi";
 
 const Airdrop = () => {
   const [clickCount, setClickCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  const { edit } = useAirDropApi();
+
+  useEffect(() => {
+    edit(clickCount);
+  }, [clickCount, edit]);
 
   useEffect(() => {
     // دریافت زمان شروع از localStorage

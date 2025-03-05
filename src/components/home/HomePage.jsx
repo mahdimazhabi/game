@@ -9,10 +9,19 @@ import { CiUser } from "react-icons/ci";
 import api from "../../api";
 import Airdrop from "../Airdrop/Airdrop";
 import { useEffect, useState } from "react";
+import useUserApi from "../../api/UserApi/useUserApi";
 
 export default function Homepage() {
   const [products, setProducts] = useState([]);
-
+  const [data, setdata] = useState([]);
+  const { getDataUserById } = useUserApi();
+  useEffect(() => {
+    const featch = async () => {
+      const response = await getDataUserById(8);
+      setdata(response);
+    };
+    featch();
+  }, []);
   useEffect(() => {
     api
       .get("products")
@@ -25,11 +34,16 @@ export default function Homepage() {
       });
   }, []);
 
+  console.log(data);
+
   return (
     <div className="container12">
-      <p className="text-start mt-4 ">
+      <p className="text-start mt-4  ">
         <CiUser size={24} />
-        mahdi mazhabi
+        usernems:
+        {data[0]?.username}
+        level
+        <span className="mt-2">{data[0]?.level}</span>
       </p>
 
       {/* 🔹 Tab section */}
