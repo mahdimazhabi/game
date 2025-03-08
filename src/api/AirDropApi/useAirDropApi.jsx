@@ -16,7 +16,7 @@ const useAirDropApi = () => {
           },
         }
       );
-      console.log("Response:", response.data);
+   
       return response.data;
     } catch (error) {
       console.error("Error while editing AirDrop:", error.response?.data);

@@ -6,32 +6,22 @@ import tab1 from "./image/tab1.jpg";
 import tab2 from "./image/tab2.jpg";
 import tab3 from "./image/tab3.jpg";
 import { CiUser } from "react-icons/ci";
-import api from "../../api";
+
 import Airdrop from "../Airdrop/Airdrop";
 import { useEffect, useState } from "react";
 import useUserApi from "../../api/UserApi/useUserApi";
+import useUserId from "../../hook/useUserId ";
 
 export default function Homepage() {
-  const [products, setProducts] = useState([]);
   const [data, setdata] = useState([]);
   const { getDataUserById } = useUserApi();
+  const userId = useUserId();
   useEffect(() => {
     const featch = async () => {
-      const response = await getDataUserById(8);
+      const response = await getDataUserById(userId);
       setdata(response);
     };
     featch();
-  }, []);
-  useEffect(() => {
-    api
-      .get("products")
-      .then((res) => {
-        setProducts(res.data); // Store the API response data in state
-        console.log(res.data); // Log the response data to console
-      })
-      .catch((err) => {
-        console.log(err.message); // Log any error
-      });
   }, []);
 
   console.log(data);
