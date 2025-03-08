@@ -18,8 +18,10 @@ export default function Homepage() {
   const userId = useUserId();
   useEffect(() => {
     const featch = async () => {
-      const response = await getDataUserById(userId);
-      setdata(response);
+      if (userId) {
+        const response = await getDataUserById(userId);
+        setdata(response);
+      }
     };
     featch();
   }, []);
