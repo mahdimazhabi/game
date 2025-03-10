@@ -97,7 +97,7 @@ const Airdrop = () => {
     <section>
       <div className="container">
         <div className="timer">{formatTime(timeLeft)}</div>
-        <h1>ایردراپ</h1>
+        <h1>AirDrop</h1>
         <div className="circle" id="clickableCircle" onClick={handleClick}>
           <img src={img} alt="Logo" className="logo" />
         </div>

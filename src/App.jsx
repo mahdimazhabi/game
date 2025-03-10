@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Homepage from "./components/home/HomePage";
@@ -25,7 +26,24 @@ import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 import FirebaseConfiguration from "./pages/FirebaseConfiguration/FirebaseConfiguration.jsx";
 import DiceCardGame from "./components/caedgame/DiceCardGame.jsx";
 import McqQuiz from "./components/McqQuiz/McqQuiz.jsx";
+
 const App = () => {
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const { WebApp } = window.Telegram;
+
+      WebApp.ready();
+
+      WebApp.MainButton.setText("Back to bot!")
+        .show()
+        .onClick(() => {
+          const data = JSON.stringify({});
+          WebApp.sendData(data);
+          WebApp.close();
+        });
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
