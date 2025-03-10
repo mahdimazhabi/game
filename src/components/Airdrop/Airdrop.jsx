@@ -11,7 +11,7 @@ const Airdrop = () => {
 
   useEffect(() => {
     edit(clickCount);
-  }, [clickCount, edit]);
+  }, [clickCount]);
 
   useEffect(() => {
     // دریافت زمان شروع از localStorage

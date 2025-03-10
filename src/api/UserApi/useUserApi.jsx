@@ -1,29 +1,31 @@
 import axios from "axios";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://asp-backend-proxy.chbk.app/api"; // مقدار پیش‌فرض
+
 const useUserApi = () => {
   const getDataUserById = async (id) => {
     try {
       const response = await axios.post(
-        "http://217.154.71.28/api/Users/GetById",
-        {
-          userId: id,
-        },
+        `${API_URL}/Users/GetById`,
+        { userId: id },
         {
           headers: {
-            headers: {
-              "Content-Type": "application/json",
-            },
+            "Content-Type": "application/json",
           },
         }
       );
-      localStorage.setItem("iduser", id);
-      if (response) {
+
+      if (response?.data?.users) {
+        localStorage.setItem("iduser", id);
+        console.log(response);
         return response.data.users;
       }
-    } catch {
-      console.log("error");
+    } catch (error) {
+      console.error("Error fetching user data:", error);
     }
   };
+
   return { getDataUserById };
 };
 

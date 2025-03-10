@@ -16,15 +16,20 @@ export default function Homepage() {
   const [data, setdata] = useState([]);
   const { getDataUserById } = useUserApi();
   const userId = useUserId();
+  console.log(userId);
+
   useEffect(() => {
-    const featch = async () => {
-      if (userId) {
-        const response = await getDataUserById(userId);
+    const fetchData = async () => {
+      try {
+        const response = await getDataUserById(22);
         setdata(response);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
     };
-    featch();
-  }, []);
+
+    fetchData();
+  }, [userId]); // اضافه کردن userId به لیست وابستگی‌ها
 
   console.log(data);
 
@@ -42,10 +47,7 @@ export default function Homepage() {
       <Container className="mt-4">
         <Row className="justify-content-center">
           <Col>
-            <Nav
-              className=" flex-row justify-content-center gap-4"
-              style={{ marginTop: "8rem" }}
-            >
+            <Nav className=" flex-row justify-content-center gap-4">
               <Nav.Item>
                 <Link as={Link} to="/games/morc" className={styles.tabItem}>
                   <img src={tab1} alt="Code Mors" className={styles.tabIcon} />
