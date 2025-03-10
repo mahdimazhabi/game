@@ -3,14 +3,18 @@ import img from "../../assets/img/IMG_20250208_182414_366-removebg-preview.png";
 import "./Airdrop.css";
 const TOTAL_TIME = 120 * 60; // 2 ساعت به ثانیه
 import useAirDropApi from "../../api/AirDropApi/useAirDropApi";
-
+import useUserApi from "../../api/UserApi/useUserApi";
 const Airdrop = () => {
   const [clickCount, setClickCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
-  const { edit } = useAirDropApi();
+  const { edit, getdatabyid } = useAirDropApi();
+  const userId = useUserApi();
+  const response = getdatabyid(userId);
+
+  console.log(response);
 
   useEffect(() => {
-    edit(clickCount);
+    edit(clickCount, response);
   }, [clickCount]);
 
   useEffect(() => {
@@ -97,7 +101,7 @@ const Airdrop = () => {
     <section>
       <div className="container">
         <div className="timer">{formatTime(timeLeft)}</div>
-        <h1>ایردراپ</h1>
+        <h1>AirDrop</h1>
         <div className="circle" id="clickableCircle" onClick={handleClick}>
           <img src={img} alt="Logo" className="logo" />
         </div>

@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const useAirDropApi = () => {
-  const edit = async (points) => {
+  const edit = async (points, id) => {
     try {
       const response = await axios.put(
         `http://217.154.71.28/api/AirDrops/Edit`,
         {
-          airDropId: 22,
+          airDropId: id,
           points: points,
         },
         {
@@ -34,7 +34,7 @@ const useAirDropApi = () => {
         }
       );
       if (response) {
-        return response.data;
+        return response.data.airDrops;
       }
     } catch {
       console.error("Error while editing AirDrop:");

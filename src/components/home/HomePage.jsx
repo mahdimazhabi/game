@@ -16,12 +16,11 @@ export default function Homepage() {
   const [data, setdata] = useState([]);
   const { getDataUserById } = useUserApi();
   const userId = useUserId();
-  console.log(userId);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getDataUserById(22);
+        const response = await getDataUserById(userId);
         setdata(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
