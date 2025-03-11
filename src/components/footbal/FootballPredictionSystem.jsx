@@ -81,13 +81,13 @@ const FootballPredictionSystem = () => {
     <div className="background-image">
       <div className="tab2">
         <Link to="/page1" className="tab-x tab-1">
-          Tab 1
+          Team Formation Builder
         </Link>
         <Link to="/page2" className="tab-x tab-2">
-          Tab 2
+          Select League
         </Link>
         <Link to="/page3" className="tab-x tab-3">
-          Tab 3
+          World Cup Predictor
         </Link>
       </div>
       <div className="container">
@@ -108,7 +108,7 @@ const FootballPredictionSystem = () => {
             onClick={() => selectVote("home")}
             disabled={isVoteSubmitted}
           >
-            برد میزبان
+            Host Win
           </button>
           <button
             className={`button-33 ${selectedVote === "draw" ? "selected" : ""}`}
@@ -116,7 +116,7 @@ const FootballPredictionSystem = () => {
             onClick={() => selectVote("draw")}
             disabled={isVoteSubmitted}
           >
-            مساوی
+            Draw
           </button>
           <button
             className={`button-33 ${selectedVote === "away" ? "selected" : ""}`}
@@ -124,7 +124,7 @@ const FootballPredictionSystem = () => {
             onClick={() => selectVote("away")}
             disabled={isVoteSubmitted}
           >
-            برد مهمان
+            Guest Win
           </button>
         </div>
         <div className="vote-section">

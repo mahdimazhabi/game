@@ -43,7 +43,7 @@ const InvitePage = () => {
       textAlign: "center",
       backgroundColor: "#000",
       color: "#fff",
-      height: "100vh",
+      height: "60vh",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -55,9 +55,11 @@ const InvitePage = () => {
     },
     socialLinks: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "20px",
+      flexWrap: "wrap", // Enable wrapping
+      justifyContent: "center", // Center content
+      alignItems: "center", // Center items vertically
+      gap: "20px", // Add spacing between items
+      maxWidth: "300px", // Optional: Set max width for proper alignment
     },
     link: {
       display: "flex",

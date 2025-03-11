@@ -8,6 +8,7 @@ const Airdrop = () => {
   const [clickCount, setClickCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const { edit } = useAirDropApi();
+  const [airdropEnded, setAirdropEnded] = useState(false);
 
   useEffect(() => {
     edit(clickCount);
@@ -34,7 +35,7 @@ const Airdrop = () => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          alert("زمان ایردراپ تمام شده است!");
+          setAirdropEnded(true);
           return 0;
         }
         const newTime = prevTime - 1;
@@ -67,7 +68,7 @@ const Airdrop = () => {
         createGem();
       }
     } else {
-      alert("زمان ایردراپ تمام شده است!");
+      setAirdropEnded(true);
     }
   };
 
@@ -97,6 +98,9 @@ const Airdrop = () => {
     <section>
       <div className="container">
         <div className="timer">{formatTime(timeLeft)}</div>
+        {airdropEnded && (
+          <div className="alert-box ">The airdrop time has ended!</div>
+        )}
         <h1>AirDrop</h1>
         <div className="circle" id="clickableCircle" onClick={handleClick}>
           <img src={img} alt="Logo" className="logo" />

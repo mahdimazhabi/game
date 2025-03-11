@@ -81,43 +81,53 @@ const Crowd = () => {
   return (
     <div className="container">
       {" "}
-      <button className="back-button4" onClick={goBack}>
-        X
-      </button>
       <div className="header">
-        <div className="options-bar">
-          <button
-            className={`option-button ${
-              currentOption === "chance" ? "selected" : ""
-            }`}
-            onClick={() => selectOption("chance")}
-          >
-            More Chance
-          </button>
-          <button
-            className={`option-button ${
-              currentOption === "firstSecond" ? "selected" : ""
-            }`}
-            onClick={() => selectOption("firstSecond")}
-          >
-            First Two
-          </button>
-          <button
-            className={`option-button ${
-              currentOption === "fourByFour" ? "selected" : ""
-            }`}
-            onClick={() => selectOption("fourByFour")}
-          >
-            Four Out of Four
-          </button>
-          <button
-            className={`option-button ${
-              currentOption === "sixWinner" ? "selected" : ""
-            }`}
-            onClick={() => selectOption("sixWinner")}
-          >
-            Six Winners
-          </button>
+        <button className="back-button" onClick={goBack}>
+          X
+        </button>
+        <div className="container text-center">
+          <div className="row gx-2">
+            <div className="col-3">
+              <button
+                className={`btn btn-warning btn-custom ${
+                  currentOption === "chance" ? "btn-active" : ""
+                }`}
+                onClick={() => selectOption("chance")}
+              >
+                More Chance
+              </button>
+            </div>
+            <div className="col-3">
+              <button
+                className={`btn btn-warning btn-custom ${
+                  currentOption === "firstSecond" ? "btn-active" : ""
+                }`}
+                onClick={() => selectOption("firstSecond")}
+              >
+                First Two
+              </button>
+            </div>
+            <div className="col-3">
+              <button
+                className={`btn btn-warning btn-custom ${
+                  currentOption === "fourByFour" ? "btn-active" : ""
+                }`}
+                onClick={() => selectOption("fourByFour")}
+              >
+                4 Out of 4
+              </button>
+            </div>
+            <div className="col-3">
+              <button
+                className={`btn btn-warning btn-custom ${
+                  currentOption === "sixWinner" ? "btn-active" : ""
+                }`}
+                onClick={() => selectOption("sixWinner")}
+              >
+                Six Winners
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className="table-wrapper">
