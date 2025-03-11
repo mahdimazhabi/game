@@ -152,7 +152,7 @@ const UserPage = () => {
                   />
                   <div className="user-details">
                     <span className="user-name">User {user.userId}</span>
-                    <span className="user-points">{user.points} points</span>
+                    <span className="user-points">{user.points}-points</span>
                   </div>
                 </div>
               </li>
