@@ -74,7 +74,7 @@ const Page4 = () => {
       padding: "20px",
       width: "100%", // پر کردن عرض صفحه
       gap: "10px",
-      marginTop: "10rem",
+      marginTop: "1rem",
     },
     page4ContentDiv: {
       width: "90%", // در موبایل تمام عرض را می‌گیرد

@@ -1,16 +1,18 @@
 import "./top.css"; // Separate CSS file
 import { useEffect, useState } from "react";
 import api from "../../api";
-
+import useUserId from "../../hook/useUserId ";
 const UserPage = () => {
   const [user, setUser] = useState({});
   const [copied, setCopied] = useState(false);
-  const [topUsers, setTopUsers] = useState([]);
   const [levelCoinCountId, setLevelCoinCountId] = useState(null);
   const [levelCoinData, setLevelCoinData] = useState(null);
-  const userId = 4; // Hardcoded userId for now
+  const [topUsers, setTopUsers] = useState([]);
+  const userId = useUserId();
 
   useEffect(() => {
+    if (!userId) return;
+
     const fetchUser = async () => {
       try {
         const response = await api.post("/Users/GetById", { userId });
@@ -39,6 +41,31 @@ const UserPage = () => {
       }
     };
 
+    fetchUser();
+    fetchLevelCoinCountId();
+  }, [userId]);
+
+  useEffect(() => {
+    if (levelCoinCountId) {
+      const fetchLevelCoinData = async () => {
+        try {
+          const response = await api.post("/LevelCoinCounts/GetById", {
+            levelCoinCountId,
+          });
+          if (response.data) {
+            setLevelCoinData(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching level coin data:", error);
+        }
+      };
+
+      fetchLevelCoinData();
+    }
+  }, [levelCoinCountId]);
+
+  // Fetching top users independently of userId
+  useEffect(() => {
     const fetchTopUsers = async () => {
       try {
         const response = await api.post("/LevelCoinCounts/GetAll");
@@ -65,29 +92,8 @@ const UserPage = () => {
       }
     };
 
-    fetchUser();
-    fetchLevelCoinCountId();
     fetchTopUsers();
   }, []);
-
-  useEffect(() => {
-    if (levelCoinCountId) {
-      const fetchLevelCoinData = async () => {
-        try {
-          const response = await api.post("/LevelCoinCounts/GetById", {
-            levelCoinCountId,
-          });
-          if (response.data) {
-            setLevelCoinData(response.data);
-          }
-        } catch (error) {
-          console.error("Error fetching level coin data:", error);
-        }
-      };
-
-      fetchLevelCoinData();
-    }
-  }, [levelCoinCountId]);
 
   const copyToClipboard = () => {
     if (user.referralLink) {
@@ -131,28 +137,30 @@ const UserPage = () => {
         </button>
       </div>
 
-      {/* Main Content Section */}
-      <div className="container">
-        {/* Football Box */}
-        <div className="box" id="football-box">
-          <h2 className="glowing-text">Top 5 Users</h2>
-          <ul>
-            {topUsers.length > 0 ? (
-              topUsers.map((user, index) => (
-                <li key={index} className="glowing-text">
+      {/* Top Users Section */}
+      <div className="top-users-box">
+        <h2 className="glowing-text">🏆 Top 5 Users</h2>
+        <ul className="top-users-list">
+          {topUsers.length > 0 ? (
+            topUsers.map((user, index) => (
+              <li key={index} className="top-users-item">
+                <div className="user-info">
                   <img
                     src={`user${user.userId}.png`}
                     alt={`User ${user.userId}`}
+                    className="user-avatar"
                   />
-                  User {user.userId}: {user.points} points
-                </li>
-              ))
-            ) : (
-              <li>Loading...</li>
-            )}
-          </ul>
-          <div className="scroll-bar">[Scroll Bar]</div>
-        </div>
+                  <div className="user-details">
+                    <span className="user-name">User {user.userId}</span>
+                    <span className="user-points">{user.points} points</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="loading-item">Loading...</li>
+          )}
+        </ul>
       </div>
     </div>
   );
