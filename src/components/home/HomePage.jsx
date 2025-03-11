@@ -36,7 +36,7 @@ export default function Homepage() {
     <div className="container12">
       <p className="text-start mt-4  ">
         <CiUser size={24} />
-        usernems:
+        usernems:||
         {data[0]?.username}
         level
         <span className="mt-2">{data[0]?.level}</span>

@@ -5,6 +5,7 @@ import football from "../components/home/image/football.jpg";
 import CoinTransfer from "../components/home/image/coien_transfer.jpg";
 import topuser from "../components/home/image/topuser.jpg";
 import social from "../components/home/image/social.jpg";
+import game from "../assets/img/download.jfif";
 const Footer2 = () => {
   return (
     <div className={styles.bottomTabBar}>
@@ -21,8 +22,8 @@ const Footer2 = () => {
         <span>Coin Transfer</span>
       </Link>
       <Link to="/page4" className={styles.bottomTabItem}>
-        <img src="image/bottom-logo4.png" alt="Page 4" />
-        <span>Page 4</span>
+        <img src={game} alt="Page 4" />
+        <span>games</span>
       </Link>
       <Link to="bottompage/top" className={styles.bottomTabItem}>
         <img src={topuser} alt="Top User" />

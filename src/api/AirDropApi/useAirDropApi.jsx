@@ -4,7 +4,7 @@ const useAirDropApi = () => {
   const edit = async (points, id) => {
     try {
       const response = await axios.put(
-        `http://217.154.71.28/api/AirDrops/Edit`,
+        `https://asp-backend-proxy.chbk.app/api/api/AirDrops/Edit`,
         {
           airDropId: id,
           points: points,
@@ -25,7 +25,7 @@ const useAirDropApi = () => {
   const getdatabyid = async (id) => {
     try {
       const response = await axios.post(
-        "http://217.154.71.28/api/AirDrops/GetById",
+        "https://asp-backend-proxy.chbk.app/api/api/AirDrops/GetById",
         { airDropId: id },
         {
           headers: {

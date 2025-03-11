@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://217.154.71.28/api/DoozRequests"; // آدرس API
+const BASE_URL = "https://asp-backend-proxy.chbk.app/api/api/DoozRequests"; // آدرس API
 
 const useDoozeRequestApi = () => {
   const addDoozRequest = async (gameData) => {
@@ -113,5 +113,3 @@ const useDoozeRequestApi = () => {
 };
 
 export default useDoozeRequestApi;
-
-

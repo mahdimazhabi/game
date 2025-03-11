@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://217.154.71.28/api/Doozs"; // آدرس API
+const BASE_URL = "https://asp-backend-proxy.chbk.app/api/api/Doozs"; // آدرس API
 
 const useDoozApi = () => {
   const addDooz = async (gameData) => {
@@ -26,7 +26,7 @@ const useDoozApi = () => {
     try {
       const response = await axios.put(
         `${BASE_URL}/Edit`,
-         {gameId,gameData}, // ترکیب gameId و gameData به‌عنوان یک JSON
+        { gameId, gameData }, // ترکیب gameId و gameData به‌عنوان یک JSON
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +47,8 @@ const useDoozApi = () => {
     //حذف کاربر
     try {
       const response = await axios.delete(
-        `${BASE_URL}/Delete`,gameId, // آدرس API
+        `${BASE_URL}/Delete`,
+        gameId, // آدرس API
         {
           headers: {
             "Content-Type": "application/json",
@@ -76,7 +77,7 @@ const useDoozApi = () => {
         return response.data;
       }
     } catch (error) {
-      console.log("error geting all doozes:",error);
+      console.log("error geting all doozes:", error);
     } finally {
       console.log("Request completed");
     }
@@ -104,7 +105,8 @@ const useDoozApi = () => {
     }
   };
 
-  const getFiveByDateAndPoint = async (gameData) => {  //دریافت لیست بازی دوز براساس DoozId
+  const getFiveByDateAndPoint = async (gameData) => {
+    //دریافت لیست بازی دوز براساس DoozId
     try {
       const response = await axios.post(
         `${BASE_URL}/GetFiveByDateAndPoint`,
@@ -125,7 +127,8 @@ const useDoozApi = () => {
     }
   };
 
-  const getByUserId = async (Id) => {    //دریافت لیست بازی دوز براساسUserId
+  const getByUserId = async (Id) => {
+    //دریافت لیست بازی دوز براساسUserId
     try {
       const response = await axios.post(
         `${BASE_URL}/GetByUserId`,
@@ -158,4 +161,3 @@ const useDoozApi = () => {
 };
 
 export default useDoozApi;
-

@@ -2,6 +2,7 @@ import "./top.css"; // Separate CSS file
 import { useEffect, useState } from "react";
 import api from "../../api";
 import useUserId from "../../hook/useUserId ";
+import userimg from "../../assets/img/images.png";
 const UserPage = () => {
   const [user, setUser] = useState({});
   const [copied, setCopied] = useState(false);
@@ -83,7 +84,7 @@ const UserPage = () => {
           const sortedUsers = Object.entries(userPoints)
             .map(([id, points]) => ({ userId: Number(id), points }))
             .sort((a, b) => b.points - a.points)
-            .slice(0, 5);
+            .slice(0, 10);
 
           setTopUsers(sortedUsers);
         }
@@ -146,7 +147,7 @@ const UserPage = () => {
               <li key={index} className="top-users-item">
                 <div className="user-info">
                   <img
-                    src={`user${user.userId}.png`}
+                    src={userimg}
                     alt={`User ${user.userId}`}
                     className="user-avatar"
                   />
