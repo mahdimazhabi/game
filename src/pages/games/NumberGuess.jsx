@@ -168,7 +168,7 @@ const GuessNumber = () => {
         </div>
       </div>
 
-      <h1>Number Guessing Game</h1>
+      <h1 style={{ marginBottom: "10rem" }}>Number Guessing Game</h1>
 
       <div id="number-display">Entered Number: {inputValue}</div>
 

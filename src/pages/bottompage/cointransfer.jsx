@@ -30,26 +30,26 @@ const CoinTransfer = () => {
 
   return (
     <div className="container">
-      <h1>انتقال سکه</h1>
+      <h1>transfer of sec</h1>
       <form>
-        <label htmlFor="transferType">نوع انتقال</label>
+        <label htmlFor="transferType">Transfer type</label>
         <select
           id="transferType"
           value={transferType}
           onChange={handleTransferTypeChange}
         >
-          <option value="user">انتقال به کاربر</option>
-          <option value="admin">انتقال به مدیر</option>
+          <option value="user">Transfer to the user</option>
+          <option value="admin">Transfer to manager</option>
         </select>
 
         {transferType === "user" && (
           <div id="userFields">
-            <label htmlFor="receiverId">آیدی گیرنده</label>
+            <label htmlFor="receiverId">Receiver ID</label>
             <input
               type="text"
               id="receiverId"
               value={receiverId}
-              placeholder="آیدی گیرنده"
+              placeholder="Receiver ID"
               onChange={(e) => setReceiverId(e.target.value)}
               pattern="[A-Za-z0-9]+"
               required
@@ -72,31 +72,31 @@ const CoinTransfer = () => {
           </div>
         )}
 
-        <label htmlFor="coinType">نوع سکه</label>
+        <label htmlFor="coinType">type of coin</label>
         <select
           id="coinType"
           value={coinType}
           onChange={(e) => setCoinType(e.target.value)}
         >
-          <option value="Diamond">سکه الماس</option>
-          <option value="Gold">سکه طلا</option>
-          <option value="Silver">سکه نقره</option>
-          <option value="Bronze">سکه برنز</option>
+          <option value="Diamond">Diamond Coin</option>
+          <option value="Gold">Gold Coin</option>
+          <option value="Silver">Silver Coin</option>
+          <option value="Bronze">Bronze Coin</option>
         </select>
 
-        <label htmlFor="amount">تعداد سکه</label>
+        <label htmlFor="amount">Number of Coins</label>
         <input
           type="number"
           id="amount"
           value={amount}
-          placeholder="تعداد سکه"
+          placeholder="Enter number of coins"
           min="1"
           onChange={(e) => setAmount(e.target.value)}
           required
         />
 
         <button type="button" onClick={handleCoinTransfer}>
-          انتقال سکه
+          Transfer Coins
         </button>
       </form>
 
