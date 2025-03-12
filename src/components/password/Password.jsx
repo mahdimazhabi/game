@@ -58,7 +58,7 @@ const Password = () => {
   return (
     <div className="dial-pad">
       <div className="password-header">
-        {isPasswordSet ? "رمز ورود" : "ست کردن رمز"}{" "}
+        {isPasswordSet ? "Login Password" : "Please Set Login Password"}{" "}
         {/* نمایش متن بر اساس وضعیت پسورد */}
       </div>
       <div className="stars-display">{enteredPassword.replace(/./g, "•")}</div>
