@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./CoinTransfer.css";
-import Password from "../../components/password/Password";
+// import Password from "../../components/password/Password";
 
 const CoinTransfer = () => {
   const [transferType, setTransferType] = useState("user");
@@ -18,7 +18,7 @@ const CoinTransfer = () => {
     if (transferType === "user" && receiverId && amount) {
       setResult(
         `${amount} of ${coinType} coins were transferred to user id ${receiverId}.`
-1      );
+      );
     } else if (transferType === "admin" && walletAddress && amount) {
       setResult(
         `${amount} of ${coinType} coins were transferred to wallet address ${walletAddress}.`
