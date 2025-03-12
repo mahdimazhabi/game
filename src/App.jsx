@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Homepage from "./components/home/HomePage";
@@ -26,8 +26,10 @@ import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 import FirebaseConfiguration from "./pages/FirebaseConfiguration/FirebaseConfiguration.jsx";
 import DiceCardGame from "./components/caedgame/DiceCardGame.jsx";
 import McqQuiz from "./components/McqQuiz/McqQuiz.jsx";
-
+import VideoSplashScreen from "./components/VideoSplashScreen/VideoSplashScreen .jsx";
 const App = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
   useEffect(() => {
     if (window.Telegram?.WebApp) {
       const { WebApp } = window.Telegram;
@@ -43,6 +45,10 @@ const App = () => {
         });
     }
   }, []);
+
+  if (showSplash) {
+    return <VideoSplashScreen onFinish={() => setShowSplash(false)} />;
+  }
 
   return (
     <BrowserRouter>
@@ -75,7 +81,7 @@ const App = () => {
               <Route
                 path="FirebaseConfiguration"
                 element={<FirebaseConfiguration />}
-              />{" "}
+              />
               <Route path="McqQuiz" element={<McqQuiz />} />
               <Route path="/page4/DiceCardGame" element={<DiceCardGame />} />
               <Route
@@ -89,7 +95,6 @@ const App = () => {
             </Route>
           </Routes>
         </div>
-        {/* ✅ فوتر اینجا اضافه شد تا همیشه در تمام صفحات باشد */}
         <Footer2 />
       </div>
     </BrowserRouter>
