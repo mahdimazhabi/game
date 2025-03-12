@@ -17,20 +17,20 @@ const CoinTransfer = () => {
   const handleCoinTransfer = () => {
     if (transferType === "user" && receiverId && amount) {
       setResult(
-        `سکه ${coinType} با مقدار ${amount} به کاربر ${receiverId} منتقل شد.`
-      );
+        `${amount} of ${coinType} coins were transferred to user id ${receiverId}.`
+1      );
     } else if (transferType === "admin" && walletAddress && amount) {
       setResult(
-        `سکه ${coinType} با مقدار ${amount} به آدرس کیف پول ${walletAddress} منتقل شد.`
+        `${amount} of ${coinType} coins were transferred to wallet address ${walletAddress}.`
       );
     } else {
-      alert("لطفاً تمام فیلدها را به درستی پر کنید.");
+      alert("Error: Please fill all fields correctly.");
     }
   };
 
   return (
     <div className="container">
-      <h1>transfer of sec</h1>
+      <h1>Coin Transfer</h1>
       <form>
         <label htmlFor="transferType">Transfer type</label>
         <select
@@ -59,12 +59,12 @@ const CoinTransfer = () => {
 
         {transferType === "admin" && (
           <div id="adminFields">
-            <label htmlFor="walletAddress">آدرس کیف پول گیرنده</label>
+            <label htmlFor="walletAddress">Reciver Waller Address</label>
             <input
               type="text"
               id="walletAddress"
               value={walletAddress}
-              placeholder="آدرس کیف پول"
+              placeholder="wallet address"
               onChange={(e) => setWalletAddress(e.target.value)}
               pattern="[A-Za-z0-9]+"
               required
