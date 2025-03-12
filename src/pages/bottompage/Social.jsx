@@ -1,6 +1,6 @@
 import { useState } from "react";
 import tel from "../../assets/img/photo_2025-02-09_17-56-24.jpg";
-import to from "../../assets/img/photo_2025-02-09_17-56-31.jpg";
+import twitter from "../../assets/img/photo_2025-02-09_17-56-31.jpg";
 import yo from "../../assets/img/photo_2025-02-09_17-56-40.jpg";
 import tik from "../../assets//img/photo_2025-02-09_17-56-18.jpg";
 import ins from "../../assets/img/photo_2025-02-09_17-56-36.jpg";
@@ -20,7 +20,7 @@ const InvitePage = () => {
     {
       name: "Twitter",
       link: "https://twitter.com/sisil_org",
-      logo: to,
+      logo: twitter,
     },
     {
       name: "YouTube",
