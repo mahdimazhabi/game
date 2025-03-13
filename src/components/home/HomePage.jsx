@@ -36,13 +36,12 @@ export default function Homepage() {
     <div className="container12">
       <p className="text-start mt-4  ">
         <CiUser size={24}/>
+        <span className={styles.usernameBox}>{data[0]?.username}</span>
+        <span style={{paddingLeft: '0.5rem', paddingRight: '0.5rem'}}>|</span>
 
-        <span style={{paddingLeft: '1rem'}}>{data[0]?.username}</span>
-        <span style={{paddingLeft: '1rem', paddingRight: '1rem'}}>|</span>
-        level
-        <span className="mt-2">{data[0]?.level}</span>
+        <span className={styles.usernameBox}>level {data[0]?.level}</span>
+
       </p>
-
       {/* 🔹 Tab section */}
       <Container className="mt-4">
         <Row className="justify-content-center">
