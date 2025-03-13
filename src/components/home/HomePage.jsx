@@ -5,7 +5,7 @@ import styles from "./Homepage.module.css"; // استایل‌های سفارش�
 import tab1 from "./image/tab1.jpg";
 import tab2 from "./image/tab2.jpg";
 import tab3 from "./image/tab3.jpg";
-import { CiUser } from "react-icons/ci";
+import user from "../../assets/img/images.png";
 
 import Airdrop from "../Airdrop/Airdrop";
 import { useEffect, useState } from "react";
@@ -35,12 +35,13 @@ export default function Homepage() {
   return (
     <div className="container12">
       <p className="text-start mt-4  ">
-        <CiUser size={24} />
+        <img src={user} alt="" width={"35"} className="img" />
         usernems:||
         {data[0]?.username}
         level
         <span className="mt-2">{data[0]?.level}</span>
       </p>
+      <p>{data[0]?.userId * 345}</p>
 
       {/* 🔹 Tab section */}
       <Container className="mt-4">
