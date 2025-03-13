@@ -35,9 +35,10 @@ export default function Homepage() {
   return (
     <div className="container12">
       <p className="text-start mt-4  ">
-        <CiUser size={24} />
-        usernems:||
-        {data[0]?.username}
+        <CiUser size={24}/>
+
+        <span style={{paddingLeft: '1rem'}}>{data[0]?.username}</span>
+        <span style={{paddingLeft: '1rem', paddingRight: '1rem'}}>|</span>
         level
         <span className="mt-2">{data[0]?.level}</span>
       </p>
