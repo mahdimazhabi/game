@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import "./DiceCardGame.css";
-import { div } from "framer-motion/client";
 
 const DiceCardGame = () => {
   const [diceNumber, setDiceNumber] = useState(null);
   const [players, setPlayers] = useState([]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
-  const [playerNumbers, setPlayerNumbers] = useState({});
+  const [playerNumbers, setPlayerNumbers] = useState({
+    "کاربر آبی": new Set(),
+    "کاربر زرد": new Set(),
+  });
+
+  // 🔥 فقط یک طرف بچرخد (تنها این مقدار را تغییر دهید)
+  const flipSide = "left"; // تغییر به "right" برای چرخش سمت راست
 
   useEffect(() => {
     startGame();
@@ -14,8 +19,8 @@ const DiceCardGame = () => {
 
   const findOnlineUsers = () => {
     return [
-      { name: "کاربر آبی", color: "blue", numbers: new Set() },
-      { name: "کاربر زرد", color: "yellow", numbers: new Set() },
+      { name: "کاربر آبی", color: "blue" },
+      { name: "کاربر زرد", color: "yellow" },
     ];
   };
 
@@ -23,7 +28,10 @@ const DiceCardGame = () => {
     const users = findOnlineUsers();
     setPlayers(users);
     setCurrentPlayerIndex(0);
-    setPlayerNumbers({ "کاربر آبی": new Set(), "کاربر زرد": new Set() });
+    setPlayerNumbers({
+      "کاربر آبی": new Set(),
+      "کاربر زرد": new Set(),
+    });
   };
 
   const rollDice = () => {
@@ -33,16 +41,17 @@ const DiceCardGame = () => {
     setDiceNumber(randomNumber);
 
     setTimeout(() => {
-      const updatedNumbers = new Set(
-        playerNumbers[players[currentPlayerIndex].name]
-      );
-      updatedNumbers.add(randomNumber);
-      setPlayerNumbers((prev) => ({
-        ...prev,
-        [players[currentPlayerIndex].name]: updatedNumbers,
-      }));
+      setPlayerNumbers((prev) => {
+        const updatedNumbers = new Set(prev[players[currentPlayerIndex].name]);
+        updatedNumbers.add(randomNumber);
 
-      if (updatedNumbers.size === 6) {
+        return {
+          ...prev,
+          [players[currentPlayerIndex].name]: updatedNumbers,
+        };
+      });
+
+      if (playerNumbers[players[currentPlayerIndex].name]?.size === 6) {
         alert(`${players[currentPlayerIndex].name} برنده شد!`);
       } else {
         setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
@@ -53,13 +62,12 @@ const DiceCardGame = () => {
   return (
     <div>
       <div className="container15">
+        {/* کارت‌های سمت چپ */}
         <div className="cards left-cards">
           {[...Array(6)].map((_, index) => (
             <div
               className={`card ${
-                playerNumbers[players[currentPlayerIndex]?.name]?.has(index + 1)
-                  ? "flipped"
-                  : ""
+                flipSide === "left" && diceNumber === index + 1 ? "flipped" : ""
               }`}
               key={index}
               data-number={index + 1}
@@ -88,15 +96,12 @@ const DiceCardGame = () => {
           </div>
         </div>
 
-        {/* <div className="poster">
-        <img src="/poster.jpg" alt="Poster" />
-      </div> */}
-
+        {/* کارت‌های سمت راست */}
         <div className="cards right-cards">
           {[...Array(6)].map((_, index) => (
             <div
               className={`card ${
-                playerNumbers[players[currentPlayerIndex]?.name]?.has(index + 1)
+                flipSide === "right" && diceNumber === index + 1
                   ? "flipped"
                   : ""
               }`}
