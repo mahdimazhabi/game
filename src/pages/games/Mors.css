@@ -1,144 +1,138 @@
 .container1 {
-  padding: 80px 70px;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  position: relative;
-  z-index: 1; /* بالا بودن نسبت به انفجار */
-  width: 90%; /* درصد عرض برای موبایل */
-  max-width: 400px; /* حداکثر عرض برای طراحی */
-  margin-top: 4rem;
+	padding: 80px 70px;
+	margin: auto;
+	border-radius: 20px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+	text-align: center;
+	position: relative;
+	z-index: 1; /* بالا بودن نسبت به انفجار */
+	width: 90%; /* درصد عرض برای موبایل */
+	max-width: 400px; /* حداکثر عرض برای طراحی */
 }
-.header1 {
-  position: absolute;
-  top: 46px;
-  right: 5px; /* تغییر از left به right برای جابه‌جایی به سمت چپ */
-  color: #fff;
-  font-size: 18px;
-}
+
 .back-button1 {
-  position: absolute;
-  top: 115px;
-  left: 20px;
-  background-color: rgba(255, 0, 0, 0.7);
-  color: white;
-  border: none;
-  /* padding: 10px 20px; */
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 20%;
+	position: absolute;
+	top: 15px;
+	left: 0px;
+	background-color: rgba(255, 0, 0, 0.7);
+	color: white;
+	border: none;
+	/* padding: 10px 20px; */
+	border-radius: 100px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	width: 15%;
 }
 .back-button1:hover {
-  background-color: rgba(255, 0, 0, 1);
+	background-color: rgba(255, 0, 0, 1);
 }
 .timer1 {
-  font-size: 20px; /* کاهش اندازه فونت ساعت */
-  color: rgba(255, 255, 0, 0.9);
-  padding: 10px 15px;
-  border-radius: 5px;
-  background-color: rgba(0, 123, 255, 0.3);
-  margin: 20px 0;
-  transition: opacity 1s ease, color 1s ease, box-shadow 1s ease;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-  opacity: 1;
-  margin-top: 4.5rem;
+	font-size: 20px; /* کاهش اندازه فونت ساعت */
+	color: rgba(255, 255, 0, 0.9);
+	padding: 10px 100px;
+	border-radius: 5px;
+	background-color: rgba(0, 123, 255, 0.3);
+	margin: 50px 0;
+	transition: opacity 1s ease, color 1s ease, box-shadow 1s ease;
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+	opacity: 1;
+	font-family: monospace;
 }
 .circle1 {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: rgba(0, 123, 255, 0.9); /* شفافیت */
-  backdrop-filter: blur(10px); /* افکت شیشه‌ای */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px auto;
-  cursor: pointer;
-  transition: transform 0.2s;
-  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background-color: rgba(0, 123, 255, 0.9); /* شفافیت */
+	backdrop-filter: blur(10px); /* افکت شیشه‌ای */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px auto;
+	cursor: pointer;
+	transition: transform 0.2s;
+	box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
 }
 .circle1 img {
-  width: 70%;
-  height: 70%;
+	width: 70%;
+	height: 70%;
 }
 .circle1:active {
-  transform: scale(0.9);
-  background: linear-gradient(
-    145deg,
-    #333333,
-    #0f0f0f
-  ); /* گرادیان برای حالت سه‌بعدی */
-  box-shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #323232;
+	transform: scale(0.9);
+	background: linear-gradient(
+		145deg,
+		#333333,
+		#0f0f0f
+	); /* گرادیان برای حالت سه‌بعدی */
+	box-shadow: 4px 4px 8px #0a0a0a, -4px -4px 8px #323232;
 }
 
 .morse-code,
 .decoded-message {
-  margin-top: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #95a410;
+	margin-top: 50px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #95a410;
 }
 .tab-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 .tab {
-  flex: 1;
-  margin: 0 5px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #3c3c3c;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-align: center;
+	flex: 1;
+	margin: 0 5px;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #3c3c3c;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	text-align: center;
 }
 .tab:hover {
-  background-color: #575757;
+	background-color: #575757;
 }
 .explosion {
-  display: none;
-  position: fixed; /* قرار دادن در وسط صفحه */
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  animation: explosion-animation 1s forwards;
-  z-index: 0; /* زیر بودن نسبت به کانتینر */
+	display: none;
+	position: fixed; /* قرار دادن در وسط صفحه */
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 200px;
+	height: 200px;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 50%;
+	animation: explosion-animation 1s forwards;
+	z-index: 0; /* زیر بودن نسبت به کانتینر */
 }
 @keyframes explosion-animation {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 1;
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1.5);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(2.5);
-    opacity: 0;
-  }
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 1;
+	}
+	70% {
+		transform: translate(-50%, -50%) scale(1.5);
+		opacity: 0.7;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 0;
+	}
 }
 @keyframes shake {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-5px, 0);
-  }
-  50% {
-    transform: translate(5px, 0);
-  }
-  75% {
-    transform: translate(-5px, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+	0% {
+		transform: translate(0, 0);
+	}
+	25% {
+		transform: translate(-5px, 0);
+	}
+	50% {
+		transform: translate(5px, 0);
+	}
+	75% {
+		transform: translate(-5px, 0);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
 }
