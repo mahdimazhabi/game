@@ -13,14 +13,14 @@ body {
 	position: relative;
 	width: 80vw;
 	max-width: 500px;
-	height: 40vh;
+	height: 60vh;
 	max-height: 700px;
 	background-color: rgba(37, 162, 28, 0.704);
 	border: 5px solid rgb(255, 215, 0);
 	overflow: hidden;
 	backdrop-filter: blur(10px);
 	box-shadow: 0 0 20px rgb(255, 215, 0);
-	margin-top: 15rem;
+	margin-top: 7rem;
 }
 .goal-area,
 .center-circle {
@@ -113,8 +113,10 @@ body {
 	background-color: rgba(255, 255, 255, 0.1);
 	border-radius: 50%;
 	text-align: center;
-	line-height: 50px;
 	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	cursor: pointer;
 	border: 2px solid rgba(255, 215, 0, 0.27);
 	box-shadow: 0 0 5px rgba(255, 215, 0, 0.188);
