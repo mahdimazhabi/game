@@ -123,7 +123,7 @@ const UserPage = () => {
                   ))}
               </ul>
             ) : (
-              <li>Loading...</li>
+              <li>Total Points: {user.userId}</li>
             )}
           </span>
         </div>
@@ -143,7 +143,7 @@ const UserPage = () => {
         <h2 className="glowing-text">🏆 Top 5 Users</h2>
         <ul className="top-users-list">
           {topUsers.length > 0 ? (
-            topUsers.map((user, index) => (
+            topUsers.slice(0, 5).map((user, index) => (
               <li key={index} className="top-users-item">
                 <div className="user-info">
                   <img
@@ -160,6 +160,59 @@ const UserPage = () => {
             ))
           ) : (
             <li className="loading-item">Loading...</li>
+          )}
+        </ul>
+      </div>
+
+
+      {/* Top Horse Race Users Section */}
+      <div className="top-users-box">
+        <h2 className="glowing-text"> 🐴 Top 5 Horse Racing League Users</h2>
+        <ul className="top-users-list">
+          {topUsers.length > 0 ? (
+            topUsers.slice(0, 5).map((user, index) => (
+              <li key={index} className="top-users-item">
+                <div className="user-info">
+                  <img
+                    src={userimg}
+                    alt={`User ${user.userId}`}
+                    className="user-avatar"
+                  />
+                  <div className="user-details">
+                    <span className="user-name">User {user.userId}</span>
+                    <span className="user-points">{user.points}-points</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="loading-item">Loading...</li>
+          )}
+        </ul>
+      </div>
+
+      {/* Top Horse Race Users Section */}
+      <div className="top-users-box">
+        <h2 className="glowing-text"> ⚽ Top 5 Fotball League Users</h2>
+        <ul className="top-users-list">
+          {topUsers.length > 0 ? (
+            topUsers.slice(0, 5).map((user, index) => (
+              <li key={index} className="top-users-item">
+                <div className="user-info">
+                  <img
+                    src={userimg}
+                    alt={`User ${user.userId}`}
+                    className="user-avatar"
+                  />
+                  <div className="user-details">
+                    <span className="user-name">User {user.userId}</span>
+                    <span className="user-points">{user.points}-points</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="loading  -item">Loading...</li>
           )}
         </ul>
       </div>

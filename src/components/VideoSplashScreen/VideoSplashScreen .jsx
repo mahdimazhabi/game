@@ -14,6 +14,7 @@ const VideoSplashScreen = ({ onFinish }) => {
   }, [onFinish]);
 
   return (
+      <div>
     <video
       autoPlay
       playsInline
@@ -23,6 +24,8 @@ const VideoSplashScreen = ({ onFinish }) => {
     >
       <source src={sampleVideo} type="video/mp4" />
     </video>
+   <h5>The Best Game in the World!</h5>
+</div>
   );
 };
 

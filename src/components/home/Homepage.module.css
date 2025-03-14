@@ -121,3 +121,18 @@
   font-weight: bold;
   text-align: center;
 }
+.usernameBox {
+  font-size: 0.8rem;
+  color: #f5e8c7;
+  text-shadow: 2px 2px 4px #000000;
+  background: linear-gradient(145deg, #4b2e83, #6b3f99);
+  border: 2px solid #d4af37;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  text-align: center;
+  width: fit-content !important;
+  margin: 10px auto;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+}

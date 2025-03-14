@@ -13,7 +13,7 @@ import useUserApi from "../../api/UserApi/useUserApi";
 import useUserId from "../../hook/useUserId ";
 
 export default function Homepage() {
-  const [data, setdata] = useState([]);
+  const [data, setData] = useState([]);
   const { getDataUserById } = useUserApi();
   const userId = useUserId();
 
@@ -21,45 +21,42 @@ export default function Homepage() {
     const fetchData = async () => {
       try {
         const response = await getDataUserById(userId);
-        setdata(response);
+        setData(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchData();
-  }, [userId]); // اضافه کردن userId به لیست وابستگی‌ها
+  }, [userId]);
 
   console.log(data);
 
   return (
     <div className="container12">
-      <p className="text-start mt-4  ">
-        <img src={user} alt="" width={"35"} className="img" />
-        usernems:||
-        {data[0]?.username}
-        level
+      <p className="text-start mt-4">
+        <img src={user} alt="User" width="35" className="img" />
+        Username: {data[0]?.username} | Level:{" "}
         <span className="mt-2">{data[0]?.level}</span>
       </p>
-      <p>{data[0]?.userId * 345}</p>
+
+      <p>{data[0]?.userId ? data[0]?.userId * 345 : "No user ID"}</p>
+
+      <span className={styles.usernameBox}>Level {data[0]?.level}</span>
 
       {/* 🔹 Tab section */}
       <Container className="mt-4">
         <Row className="justify-content-center">
           <Col>
-            <Nav className=" flex-row justify-content-center gap-4">
+            <Nav className="flex-row justify-content-center gap-4">
               <Nav.Item>
-                <Link as={Link} to="/games/morc" className={styles.tabItem}>
+                <Link to="/games/morc" className={styles.tabItem}>
                   <img src={tab1} alt="Code Mors" className={styles.tabIcon} />
                   <div className={styles.tabText}>Code Mors</div>
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link
-                  as={Link}
-                  to="/games/number-guess"
-                  className={styles.tabItem}
-                >
+                <Link to="/games/number-guess" className={styles.tabItem}>
                   <img
                     src={tab2}
                     alt="Number Guess"
@@ -69,11 +66,7 @@ export default function Homepage() {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link
-                  as={Link}
-                  to="/games/kart-context"
-                  className={styles.tabItem}
-                >
+                <Link to="/games/kart-context" className={styles.tabItem}>
                   <img
                     src={tab3}
                     alt="Kart Context"
