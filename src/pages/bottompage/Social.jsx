@@ -20,7 +20,7 @@ const InvitePage = () => {
     {
       name: "Twitter",
       link: "https://twitter.com/sisil_org",
-      logo: twitter,
+      logo: "https://static-vu6b2m.chbk.app/twitter_social.jpg",
     },
     {
       name: "YouTube",
