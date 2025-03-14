@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import img from "../../assets/img/IMG_20250208_182414_366-removebg-preview.png";
 import "./Airdrop.css";
 const TOTAL_TIME = 120 * 60; // 2 ساعت به ثانیه
+const RESET_TIME = 24 * 60 * 60 * 1000; // 24 ساعت به میلی‌ثانیه
 import useAirDropApi from "../../api/AirDropApi/useAirDropApi";
 import useUserApi from "../../api/UserApi/useUserApi";
+
 const Airdrop = () => {
   const [clickCount, setClickCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
   const { edit, getdatabyid } = useAirDropApi();
   const userId = useUserApi();
   const response = getdatabyid(userId);
-
-  console.log(response);
   const [airdropEnded, setAirdropEnded] = useState(false);
 
   useEffect(() => {
@@ -19,19 +19,30 @@ const Airdrop = () => {
   }, [clickCount]);
 
   useEffect(() => {
-    // دریافت زمان شروع از localStorage
     const savedStartTime = localStorage.getItem("airdropStartTime");
     const savedTimeLeft = localStorage.getItem("airdropTimeLeft");
 
-    if (savedStartTime && savedTimeLeft) {
-      const elapsedTime = Math.floor(
-        (Date.now() - parseInt(savedStartTime)) / 1000
-      );
-      const newTimeLeft = Math.max(parseInt(savedTimeLeft) - elapsedTime, 0);
-      setTimeLeft(newTimeLeft);
+    const now = Date.now();
+
+    if (savedStartTime) {
+      const elapsedTime = now - parseInt(savedStartTime);
+
+      if (elapsedTime >= RESET_TIME) {
+        // اگر 24 ساعت گذشته باشد، ریست شود
+        localStorage.setItem("airdropStartTime", now.toString());
+        localStorage.setItem("airdropTimeLeft", TOTAL_TIME.toString());
+        setTimeLeft(TOTAL_TIME);
+      } else if (savedTimeLeft) {
+        // محاسبه زمان باقی‌مانده
+        const remainingTime = Math.max(
+          parseInt(savedTimeLeft) - Math.floor(elapsedTime / 1000),
+          0
+        );
+        setTimeLeft(remainingTime);
+      }
     } else {
-      // مقدار اولیه را تنظیم و در localStorage ذخیره می‌کنیم
-      localStorage.setItem("airdropStartTime", Date.now().toString());
+      // مقدار اولیه را تنظیم و ذخیره کنیم
+      localStorage.setItem("airdropStartTime", now.toString());
       localStorage.setItem("airdropTimeLeft", TOTAL_TIME.toString());
     }
 
