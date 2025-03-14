@@ -9,7 +9,6 @@ const InvitePage = () => {
   const socialMedia = [
     {
       name: "Instagram",
-      link: "https://www.instagram.com/sisil_org",
       logo: ins,
     },
     {
@@ -19,17 +18,14 @@ const InvitePage = () => {
     },
     {
       name: "Twitter",
-      link: "https://twitter.com/sisil_org",
       logo: twitter,
     },
     {
       name: "YouTube",
-      link: "https://www.youtube.com/@sisil_org",
       logo: yo,
     },
     {
       name: "TikTok",
-      link: "https://www.tiktok.com/@sisil_org",
       logo: tik,
     },
   ];
