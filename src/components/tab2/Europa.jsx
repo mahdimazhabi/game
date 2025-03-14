@@ -34,37 +34,37 @@ const Champions = () => {
 
   return (
     <div className="container3">
-      <h1>جدول درختی مسابقات فوتبال - رفت و برگشت</h1>
+      <h1>Football Tournament Bracket - Home & Away Matches</h1>
       <a href="index.html" className="back-btn">
-        بازگشت به صفحه اصلی
+        Back to Home Page
       </a>
       <div className="bracket">
         {/* Round 1 */}
         <div className="round">
           {["A", "B", "C", "D", "E", "F", "G", "H"].map((team, index) => (
             <div className="match" key={index}>
-              <label>{`تیم ${team} vs تیم ${String.fromCharCode(
+              <label>{`Team ${team} vs Team ${String.fromCharCode(
                 65 + index + 1
               )}`}</label>
-              <select id={`match${index + 1}-raft`} required>
-                <option value="">انتخاب کنید</option>
-                <option value="برنده تیم 1">برنده تیم 1</option>
-                <option value="مساوی">مساوی</option>
-                <option value="برنده تیم 2">برنده تیم 2</option>
+              <select id={`match${index + 1}-first-leg`} required>
+                <option value="">Select</option>
+                <option value="Team 1 Wins">Team 1 Wins</option>
+                <option value="Draw">Draw</option>
+                <option value="Team 2 Wins">Team 2 Wins</option>
               </select>
-              <select id={`match${index + 1}-bargasht`} required>
-                <option value="">انتخاب کنید</option>
-                <option value="برنده تیم 1">برنده تیم 1</option>
-                <option value="مساوی">مساوی</option>
-                <option value="برنده تیم 2">برنده تیم 2</option>
+              <select id={`match${index + 1}-second-leg`} required>
+                <option value="">Select</option>
+                <option value="Team 1 Wins">Team 1 Wins</option>
+                <option value="Draw">Draw</option>
+                <option value="Team 2 Wins">Team 2 Wins</option>
               </select>
-              <label>تیم صعود کننده:</label>
+              <label>Qualified Team:</label>
               <select id={`match${index + 1}-winner`} required>
-                <option value="">انتخاب کنید</option>
-                <option value={`تیم ${team}`}>{`تیم ${team}`}</option>
+                <option value="">Select</option>
+                <option value={`Team ${team}`}>{`Team ${team}`}</option>
                 <option
-                  value={`تیم ${String.fromCharCode(65 + index + 1)}`}
-                >{`تیم ${String.fromCharCode(65 + index + 1)}`}</option>
+                  value={`Team ${String.fromCharCode(65 + index + 1)}`}
+                >{`Team ${String.fromCharCode(65 + index + 1)}`}</option>
               </select>
             </div>
           ))}
@@ -74,37 +74,39 @@ const Champions = () => {
         <div className="round">
           {["I", "J", "K", "L", "M", "N", "O", "P"].map((team, index) => (
             <div className="match" key={index}>
-              <label>{`تیم ${team} vs تیم ${String.fromCharCode(
+              <label>{`Team ${team} vs Team ${String.fromCharCode(
                 73 + index + 1
               )}`}</label>
-              <select id={`match${index + 5}-raft`} required>
-                <option value="">انتخاب کنید</option>
-                <option value="برنده تیم 1">برنده تیم 1</option>
-                <option value="مساوی">مساوی</option>
-                <option value="برنده تیم 2">برنده تیم 2</option>
+              <select id={`match${index + 5}-first-leg`} required>
+                <option value="">Select</option>
+                <option value="Team 1 Wins">Team 1 Wins</option>
+                <option value="Draw">Draw</option>
+                <option value="Team 2 Wins">Team 2 Wins</option>
               </select>
-              <select id={`match${index + 5}-bargasht`} required>
-                <option value="">انتخاب کنید</option>
-                <option value="برنده تیم 1">برنده تیم 1</option>
-                <option value="مساوی">مساوی</option>
-                <option value="برنده تیم 2">برنده تیم 2</option>
+              <select id={`match${index + 5}-second-leg`} required>
+                <option value="">Select</option>
+                <option value="Team 1 Wins">Team 1 Wins</option>
+                <option value="Draw">Draw</option>
+                <option value="Team 2 Wins">Team 2 Wins</option>
               </select>
-              <label>تیم صعود کننده:</label>
+              <label>Qualified Team:</label>
               <select id={`match${index + 5}-winner`} required>
-                <option value="">انتخاب کنید</option>
-                <option value={`تیم ${team}`}>{`تیم ${team}`}</option>
+                <option value="">Select</option>
+                <option value={`Team ${team}`}>{`Team ${team}`}</option>
                 <option
-                  value={`تیم ${String.fromCharCode(73 + index + 1)}`}
-                >{`تیم ${String.fromCharCode(73 + index + 1)}`}</option>
+                  value={`Team ${String.fromCharCode(73 + index + 1)}`}
+                >{`Team ${String.fromCharCode(73 + index + 1)}`}</option>
               </select>
             </div>
           ))}
         </div>
       </div>
 
-      <button onClick={calculateResults}>محاسبه نتایج و تیم صعود کننده</button>
+      <button onClick={calculateResults}>
+        Calculate Results & Qualified Team
+      </button>
       <div id="result">
-        <h2>نتایج:</h2>
+        <h2>Results:</h2>
         <ul>
           {Object.entries(results).map(([match, winner]) => (
             <li key={match}>
@@ -114,7 +116,7 @@ const Champions = () => {
         </ul>
       </div>
 
-      <h2>صعود کننده نهایی</h2>
+      <h2>Final Qualified Team</h2>
       <div id="final-winner">{finalWinner}</div>
     </div>
   );
