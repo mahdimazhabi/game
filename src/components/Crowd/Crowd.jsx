@@ -79,14 +79,19 @@ const Crowd = () => {
 	};
 
 	return (
+
 		<div className="container">
+			<button
+				className="back-button"
+				onClick={goBack}>
+				X
+			</button>
+			<br/>
+			<br/>
 			{" "}
+
+
 			<div className="header">
-				<button
-					className="back-button"
-					onClick={goBack}>
-					X
-				</button>
 				<div className="container text-center">
 					<div className="row gx-2">
 						<div className="col-3">
