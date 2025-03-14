@@ -144,19 +144,25 @@ const Crowd = () => {
 						</tr>
 					</thead>
 					<tbody>
+		{[...Array(8)].map((_, index) => (
+
 						<tr>
-							<td>1</td>
-							{[...Array(8)].map((_, index) => (
+							<td>{index}</td>
+						{[...Array(8)].map((_, index2) => (
+
 								<td
-									key={index}
+									key={index2}
 									className="horse-cell"
 									onClick={(e) =>
-										toggleSelection(e.target, index + 1, 1)
+										toggleSelection(e.target, index+ 1, 1)
 									}>
-									Horse {index + 1}
+									Horse {1+index}
 								</td>
-							))}
+								))}
+
 						</tr>
+				))}
+
 					</tbody>
 				</table>
 			</div>
