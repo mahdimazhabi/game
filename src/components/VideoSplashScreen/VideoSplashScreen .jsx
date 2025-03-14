@@ -20,7 +20,7 @@ const VideoSplashScreen = ({ onFinish }) => {
       playsInline
       muted
       className="object-cover"
-      style={{ width: "100%", height: "100%", paddingTop: "15rem",paddingBottom: "5rem", objectFit: "cover" }}
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
     >
       <source src={sampleVideo} type="video/mp4" />
     </video>
