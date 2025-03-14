@@ -31,19 +31,6 @@ const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      const { WebApp } = window.Telegram;
-
-      WebApp.ready();
-
-      WebApp.MainButton.setText("Back to bot!")
-        .show()
-        .onClick(() => {
-          const data = JSON.stringify({});
-          WebApp.sendData(data);
-          WebApp.close();
-        });
-    }
   }, []);
 
   if (showSplash) {
