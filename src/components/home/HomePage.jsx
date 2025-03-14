@@ -20,7 +20,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getDataUserById(userId);
+        const response = await getDataUserById(13);
         setData(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -39,10 +39,6 @@ export default function Homepage() {
         Username: {data[0]?.username} | Level:{" "}
         <span className="mt-2">{data[0]?.level}</span>
       </p>
-
-      <p>{data[0]?.userId ? data[0]?.userId * 345 : "No user ID"}</p>
-
-      <span className={styles.usernameBox}>Level {data[0]?.level}</span>
 
       {/* 🔹 Tab section */}
       <Container className="mt-4">
