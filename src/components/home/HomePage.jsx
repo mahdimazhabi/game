@@ -20,7 +20,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getDataUserById(4);
+        const response = await getDataUserById(userId);
         setData(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
