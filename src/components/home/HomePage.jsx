@@ -20,7 +20,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getDataUserById(13);
+        const response = await getDataUserById(4);
         setData(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -38,6 +38,7 @@ export default function Homepage() {
         <img src={user} alt="User" width="35" className="img" />
         Username: {data[0]?.username} | Level:{" "}
         <span className="mt-2">{data[0]?.level}</span>
+        <span>point:{data[0]?.userId * 12}</span>
       </p>
 
       {/* 🔹 Tab section */}
