@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Crowd.css";
+import useCorsHorseApi from "../../api/CorsHorsApi";
 
 const Crowd = () => {
 	const [currentOption, setCurrentOption] = useState(null);
 	const [selectedHorses, setSelectedHorses] = useState({});
+	const [horses, setHorses] = useState([]);
+	const { getAllCorsHorses } = useCorsHorseApi();
+
+	useEffect(() => {
+		(async () => {
+			const horses = await getAllCorsHorses();
+			setHorses(horses);
+		})();
+	}, [getAllCorsHorses]);
 
 	const goBack = () => {
 		window.history.back();
@@ -79,20 +89,16 @@ const Crowd = () => {
 	};
 
 	return (
-
 		<div className="container">
 			<button
 				className="back-button"
 				onClick={goBack}>
 				X
 			</button>
-			<br/>
-			<br/>
-			{" "}
-
-
+			<br />
+			<br />
 			<div className="header">
-				<div className="container text-center">
+				<div className="container text-center pb-0">
 					<div className="row gx-2">
 						<div className="col-3">
 							<button
@@ -149,25 +155,21 @@ const Crowd = () => {
 						</tr>
 					</thead>
 					<tbody>
-		{[...Array(8)].map((_, index) => (
-
-						<tr>
-							<td>{index}</td>
-						{[...Array(8)].map((_, index2) => (
-
-								<td
-									key={index2}
-									className="horse-cell"
-									onClick={(e) =>
-										toggleSelection(e.target, index+ 1, 1)
-									}>
-									Horse {1+index}
-								</td>
+						{horses.map((_, index) => (
+							<tr key={index}>
+								<td>{index}</td>
+								{[...Array(8)].map((_, index2) => (
+									<td
+										key={index2}
+										className="horse-cell"
+										onClick={(e) =>
+											toggleSelection(e.target, index + 1, 1)
+										}>
+										Horse {1 + index}
+									</td>
 								))}
-
-						</tr>
-				))}
-
+							</tr>
+						))}
 					</tbody>
 				</table>
 			</div>
