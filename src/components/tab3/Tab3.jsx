@@ -1,305 +1,249 @@
-import { useCallback, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import "./Tab3.css";
+import useWorldCupApi from "../../api/WorldCupApi/useWorldCupApi.jsx";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 const Tab3 = () => {
-	const [groupStandings, setGroupStandings] = useState({
-		A: [
-			"Palmeiras (Brazil)",
-			"Porto (Portugal)",
-			"Al Ahly (Egypt)",
-			"Inter Miami (USA)",
-		],
-		B: [
-			"Paris Saint-Germain (France)",
-			"Atletico Madrid (Spain)",
-			"Botafogo (Brazil)",
-			"Seattle Sounders (USA)",
-		],
-		C: [
-			"Bayern Munich (Germany)",
-			"Benfica (Portugal)",
-			"Boca Juniors (Argentina)",
-			"Auckland City (New Zealand)",
-		],
-		D: [
-			"Flamengo (Brazil)",
-			"Chelsea (England)",
-			"Leon (Mexico)",
-			"Esperance Tunis (Tunisia)",
-		],
-		E: [
-			"River Plate (Argentina)",
-			"Inter Milan (Italy)",
-			"Monterrey (Mexico)",
-			"Urawa Reds (Japan)",
-		],
-		F: [
-			"Fluminense (Brazil)",
-			"Borussia Dortmund (Germany)",
-			"Ulsan Hyundai (South Korea)",
-			"Mamelodi Sundowns (South Africa)",
-		],
-		G: [
-			"Manchester City (England)",
-			"Juventus (Italy)",
-			"Wydad Casablanca (Morocco)",
-			"Al Ain (UAE)",
-		],
-		H: [
-			"Real Madrid (Spain)",
-			"Salzburg (Austria)",
-			"Al Hilal (Saudi Arabia)",
-			"Pachuca (Mexico)",
-		],
-	});
+    const userId = parseInt(localStorage.getItem("userId"));
+    const {getTeamsByLevel, getCorrectPredictions, getTeamsAlreadyPredicted, addPrediction, editPrediction} = useWorldCupApi()
+    const [status, setStatus] = useState("")
+    const [playingLevel, setPlayingLevel] = useState(-1)
+    const [userTeams, setUserTeams] = useState([])
+    const [allTeams, setAllTeams] = useState({})
+    const [updatedTeamsList, setUpdatedTeamsList] = useState([])
+    const [updatedTeamsObject, setUpdatedTeamsObject] = useState({})
 
-	const [roundOf16, setRoundOf16] = useState([]);
-	const [quarterFinals, setQuarterFinals] = useState([]);
-	const [semiFinals, setSemiFinals] = useState([]);
-	const [finalTeams, setFinalTeams] = useState([]);
-	const [isPredictionSubmitted, setIsPredictionSubmitted] =
-		useState(false);
+    const findNextLevel = (correctCounts) => {
+        if (correctCounts === 16) return 2
+        if (correctCounts === 24) return 3
+        if (correctCounts === 28) return 4
+        if (correctCounts === 30) return 5
+        if (correctCounts === 31) return 6  // Winner!
+        return -1
+    }
+    const findCurrentLevel = (correctCounts) => {
+        if (0 <= correctCounts <= 16) return 1
+        if (16 < correctCounts <= 24) return 2
+        if (24 < correctCounts <= 28) return 3
+        if (28 < correctCounts <= 30) return 4
+        if (correctCounts === 31) return 5  // Winner!
+    }
+    const checkLevelPassed = async (level) => {
+        const teams = await getTeamsByLevel(level)
+        return !(teams.worldCups && teams.worldCups.length > 0);
+    }
+    const fetchTeamsForLevel = async () => {
+        const correctPredictions = await getCorrectPredictions(userId);
+        let currentLevel, nextLevel
+        if (correctPredictions.message !== "Can not Play Next Level") {
+            currentLevel = findCurrentLevel(correctPredictions.userWorldCups.length);
+            nextLevel = findNextLevel(correctPredictions.userWorldCups.length);
+            setPlayingLevel(nextLevel);
+        } else {
+            currentLevel = 1
+            nextLevel = 2
+            setPlayingLevel(1);
+        }
+		if (currentLevel === 5) {
+            setStatus("All of your predictions were true. Congratulations!")
+        }
+        else {
+            if (await checkLevelPassed(currentLevel)) {
+                if (nextLevel === -1) {
+                    setStatus("You failed. Better luck next time!")
+                } else {
+                    const nextLevelTeams = await getTeamsByLevel(nextLevel)
+                    const groupedTeams = nextLevelTeams.reduce((acc, team) => {
+                        const groupKey = String.fromCharCode(64 + team.groupNumber);
+                        if (!acc[groupKey]) {
+                            acc[groupKey] = [];
+                        }
+                        acc[groupKey].push({
+                            worldCupId: team.worldCupId,
+                            teamName: team.teamName,
+                            groupNumber: team.groupNumber,
+                        });
+                        return acc;
+                    }, {});
+                    setAllTeams(groupedTeams);
 
-	// Handle Team Position Change
-	const setTeamPosition = useCallback(
-		(group, team, position) => {
-			if (position >= 1 && position <= 4) {
-				setGroupStandings((prevStandings) => {
-					let index;
-					const lastTeamInPosition = prevStandings[group][position - 1];
-					let newStandings = prevStandings[group].map((t, idx) => {
-						if (idx === position - 1) {
-							index = prevStandings[group].indexOf(team);
-							return team;
-						}
-						return t;
-					});
-					newStandings[index] = lastTeamInPosition;
-					return {
-						...prevStandings,
-						[group]: newStandings,
-					};
-				});
-			} else {
-				alert("Please enter a number between 1 and 4!");
-			}
-		},
-		[setGroupStandings, groupStandings],
-	);
+                    const userPredictedGames = await getTeamsAlreadyPredicted(userId)
+                    const predictedTeams = userPredictedGames.reduce((acc, team) => {
+                        const existing = acc.find((item) => item.worldCupId === team.worldCupId);
+                        if (!existing || team.userWorldCupId > existing.userWorldCupId) {
+                            return [...acc.filter((item) => item.worldCupId !== team.worldCupId), team];
+                        }
+                        return acc;
+                    }, []);
+                    setUserTeams(predictedTeams);
+                }
+            } else {
+                const nextLevelTeams = await getTeamsByLevel(currentLevel)
+                const groupedTeams = nextLevelTeams.worldCups.reduce((acc, team) => {
+                    const groupKey = String.fromCharCode(64 + team.groupNumber);
+                    if (!acc[groupKey]) {
+                        acc[groupKey] = [];
+                    }
+                    acc[groupKey].push({
+                        worldCupId: team.worldCupId,
+                        teamName: team.teamName,
+                        groupNumber: team.groupNumber,
+                    });
+                    return acc;
+                }, {});
+                setAllTeams(groupedTeams);
 
-	// Handle Group Display Updates
-	const displayGroups = () => {
-		return Object.keys(groupStandings).map((group) => (
-			<div
-				className="group"
-				key={group}>
-				<h3>Group {group}</h3>
-				{groupStandings[group].map((team) => (
-					<div
-						key={team}
-						className="team"
-						onClick={() => {
-							const position = prompt(
-								`Enter the position for ${team} (1 to 4):`,
-							);
-							setTeamPosition(group, team, parseInt(position, 10));
-						}}>
-						{team}
-					</div>
-				))}
-			</div>
-		));
-	};
+                const userPredictedGames = await getTeamsAlreadyPredicted(userId)
+                const predictedTeams = userPredictedGames.userWorldCups.reduce((acc, team) => {
+                    const existing = acc.find((item) => item.worldCupId === team.worldCupId);
+                    if (!existing || team.userWorldCupId > existing.userWorldCupId) {
+                        return [...acc.filter((item) => item.worldCupId !== team.worldCupId), team];
+                    }
+                    return acc;
+                }, []);
+                setUserTeams(predictedTeams);
+            }
+        }
+    };
 
-	// Handle Round of 16
-	const confirmGroups = () => {
-		const roundMatches = [
-			[groupStandings.A[0], groupStandings.B[1]], // 1A vs 2B
-			[groupStandings.C[0], groupStandings.D[1]], // 1C vs 2D
-			[groupStandings.E[0], groupStandings.F[1]], // 1E vs 2F
-			[groupStandings.G[0], groupStandings.H[1]], // 1G vs 2H
-			[groupStandings.B[0], groupStandings.A[1]], // 1B vs 2A
-			[groupStandings.D[0], groupStandings.C[1]], // 1D vs 2C
-			[groupStandings.F[0], groupStandings.E[1]], // 1F vs 2E
-			[groupStandings.H[0], groupStandings.G[1]], // 1H vs 2G
-		];
-		setRoundOf16(roundMatches);
-	};
+    const handleSubmit = async () => {
+        for (const updatedTeam of updatedTeamsList) {
+            const existingTeam = userTeams.find((team) => team.worldCupId === updatedTeam.worldCupId);
+            if (existingTeam) {
+                if (existingTeam.position !== updatedTeam.position) {
+                    await editPrediction(
+                        {
+                            userWorldCupId: updatedTeam.userWorldCupId,
+                            position: (playingLevel !== 1 && updatedTeam.position !== 1) ? 3 : updatedTeam.position
+                        }
+                    );
+                }
+            } else {
+                console.log({
+                    worldCupId: updatedTeam.worldCupId,
+                    position: (playingLevel !== 1 && updatedTeam.position !== 1) ? 3 : updatedTeam.position,
+                    userId: parseInt(localStorage.getItem("userId"), 10)
+                })
+                await addPrediction(
+                    {
+                        worldCupId: updatedTeam.worldCupId,
+                        position: (playingLevel !== 1 && updatedTeam.position !== 1) ? 3 : updatedTeam.position,
+                        userId: parseInt(localStorage.getItem("userId"), 10)
+                    }
+                );
+            }
+        }
+    };
+    useEffect(() => {
+        const allTeamsList = Object.values(allTeams).flat();
 
-	const selectWinner = (matchIndex, winner) => {
-		const updatedMatches = roundOf16.map((match, idx) =>
-			idx === matchIndex ? [winner, match[1]] : match,
-		);
-		setRoundOf16(updatedMatches);
-	};
+        const combinedList = allTeamsList.map((team) => {
+            const matchingUserTeam = userTeams.find((userTeam) => userTeam.worldCupId === team.worldCupId);
+            return {
+                worldCupId: team.worldCupId,
+                userWorldCupId: matchingUserTeam ? matchingUserTeam.userWorldCupId : null,
+                position: matchingUserTeam ? matchingUserTeam.position : null,
+            };
+        });
+        setUpdatedTeamsList(combinedList);
 
-	const continueToQuarterFinals = () => {
-		const winners = roundOf16.map((match) => match[0]);
-		setQuarterFinals([
-			[winners[0], winners[1]],
-			[winners[2], winners[3]],
-			[winners[4], winners[5]],
-			[winners[6], winners[7]],
-		]);
-	};
+        const teamsObject = Object.keys(allTeams).reduce((acc, groupKey) => {
+            acc[groupKey] = allTeams[groupKey].map((team) => {
+                const matchingUserTeam = userTeams.find((userTeam) => userTeam.worldCupId === team.worldCupId);
+                return {
+                    ...team,
+                    position: matchingUserTeam ? matchingUserTeam.position : null,
+                };
+            });
+            return acc;
+        }, {});
 
-	const continueToSemiFinals = () => {
-		const winners = quarterFinals.map((match) => match[0]);
-		setSemiFinals([
-			[winners[0], winners[1]],
-			[winners[2], winners[3]],
-		]);
-	};
+        setUpdatedTeamsObject(teamsObject);
+    }, [allTeams, userTeams]);
 
-	const continueToFinal = () => {
-		const winners = semiFinals.map((match) => match[0]);
-		setFinalTeams(winners);
-	};
+    useEffect(() => {
+        fetchTeamsForLevel().then()
+    }, []);
 
-	// const submitPrediction = async (winner) => {
-	//   const username = "user1"; // Replace with actual username
-	//   const predictions = groupStandings;
+    const setTeamPosition = (group, team, position) => {
+        if (position >= 1 && position <= 4) {
+            setUpdatedTeamsObject((prevTeams) => {
+                const updatedTeams = {...prevTeams};
 
-	//   try {
-	//     const response = await fetch("/api/survey/submitPrediction", {
-	//       method: "POST",
-	//       headers: {
-	//         "Content-Type": "application/json",
-	//       },
-	//       body: JSON.stringify({ Username: username, Predictions: predictions }),
-	//     });
+                updatedTeams[group] = updatedTeams[group].map((t) =>
+                    t.worldCupId === team.worldCupId ? {...t, position} : t
+                );
+                return updatedTeams;
+            });
 
-	//     if (response.ok) {
-	//       setIsPredictionSubmitted(true);
-	//     } else {
-	//       alert("Failed to submit prediction.");
-	//     }
-	//   } catch (error) {
-	//     console.error("Error submitting prediction:", error);
-	//   }
-	// };
+            setUpdatedTeamsList((prevAllTeams) => {
+                const updatedAllTeams = [...prevAllTeams];
+                let targetTeam = updatedTeamsList.filter((t) => t.worldCupId === team.worldCupId)[0];
+                console.log(targetTeam);
+                targetTeam.position = position;
+                let newTeamsList = updatedAllTeams.filter((t) => t.worldCupId !== team.worldCupId);
+                newTeamsList = [...newTeamsList, targetTeam];
+                return newTeamsList;
+            });
+        } else {
+            alert("Please enter a number between 1 and 4!");
+        }
+    };
 
-	return (
-		<div className="container5">
-			<h1>2025 FIFA Club World Cup Predictor</h1>
 
-			{/* Group Stage */}
-			<div id="group-stage">
-				<h2>Group Stage</h2>
-				<div id="groups-container">{displayGroups()}</div>
-				<button onClick={confirmGroups}>Confirm Groups</button>
-			</div>
+    const displayGroups = () => {
+        return Object.keys(updatedTeamsObject).map((group) => (
+            <div className="group" key={group}>
+                <h3>Group {group}</h3>
+                {updatedTeamsObject[group]
+                    .slice()
+                    .sort((a, b) => {
+                        const posA = a.position ?? Infinity;
+                        const posB = b.position ?? Infinity;
+                        return posA - posB;
+                    })
+                    .map((team) => (
+                        <div
+                            key={team.worldCupId}
+                            className="team"
+                            onClick={() => {
+                                const position = prompt(
+                                    `Enter the position for ${team.teamName} (1 to 4):`
+                                );
+                                setTeamPosition(group, team, parseInt(position, 10));
+                            }}>
+                            {team.teamName} - Position: {team.position !== null ? team.position : "N/A"}
+                        </div>
+                    ))}
+            </div>
+        ));
+    };
 
-			{/* Round of 16 */}
-			<div
-				id="round-of-16"
-				className={roundOf16.length > 0 ? "" : "hidden"}>
-				<h2>Round of 16</h2>
-				<div id="round-of-16-matches">
-					{roundOf16.map((match, index) => (
-						<div
-							className="match"
-							key={index}>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[0])}>
-								{match[0]}
-							</div>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[1])}>
-								{match[1]}
-							</div>
-						</div>
-					))}
-				</div>
-				<button
-					onClick={continueToQuarterFinals}
-					disabled={roundOf16.some((match) => !match[0] || !match[1])}>
-					Continue to Quarter Finals
-				</button>
-			</div>
+    return (
+        <div className="container5">
+            <h1>2025 FIFA Club World Cup Predictor</h1>
 
-			{/* Quarter Finals */}
-			<div
-				id="quarter-finals"
-				className={quarterFinals.length > 0 ? "" : "hidden"}>
-				<h2>Quarter Finals</h2>
-				<div id="quarter-final-matches">
-					{quarterFinals.map((match, index) => (
-						<div
-							className="match"
-							key={index}>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[0])}>
-								{match[0]}
-							</div>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[1])}>
-								{match[1]}
-							</div>
-						</div>
-					))}
-				</div>
-				<button
-					onClick={continueToSemiFinals}
-					disabled={quarterFinals.some(
-						(match) => !match[0] || !match[1],
-					)}>
-					Continue to Semi Finals
-				</button>
-			</div>
-
-			{/* Semi Finals */}
-			<div
-				id="semi-finals"
-				className={semiFinals.length > 0 ? "" : "hidden"}>
-				<h2>Semi Finals</h2>
-				<div id="semi-final-matches">
-					{semiFinals.map((match, index) => (
-						<div
-							className="match"
-							key={index}>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[0])}>
-								{match[0]}
-							</div>
-							<div
-								className="team"
-								onClick={() => selectWinner(index, match[1])}>
-								{match[1]}
-							</div>
-						</div>
-					))}
-				</div>
-				<button
-					onClick={continueToFinal}
-					disabled={semiFinals.some((match) => !match[0] || !match[1])}>
-					Continue to Final
-				</button>
-			</div>
-
-			{/* Final */}
-			<div
-				id="final"
-				className={finalTeams.length > 0 ? "" : "hidden"}>
-				<h2>Final</h2>
-				<div id="final-match">
-					<div className="team">{finalTeams[0]}</div>
-					<div className="team">{finalTeams[1]}</div>
-				</div>
-				<button>Submit Prediction</button>
-			</div>
-
-			{/* Prediction Submitted */}
-			{isPredictionSubmitted && (
-				<div>Prediction Submitted Successfully!</div>
-			)}
-		</div>
-	);
+            {
+                playingLevel !== -1 ?
+                <div id="group-stage">
+                    {
+                        playingLevel === 1 ?
+                            <h2>Group Matches</h2>
+                            : playingLevel === 2 ?
+                                <h2>Round of 16</h2>
+                                : playingLevel === 3 ?
+                                    <h2>Quarter Final</h2>
+                                    : playingLevel === 4 ?
+                                        <h2>Semi Final</h2>
+                                        : playingLevel === 5 ?
+                                            <h2>Final</h2> : null
+                    }
+                    <div id="groups-container">{displayGroups()}</div>
+                    <button onClick={handleSubmit}>Submit predictions</button>
+                </div> : <h2>{status}</h2>
+            }
+        </div>
+    );
 };
 
 export default Tab3;

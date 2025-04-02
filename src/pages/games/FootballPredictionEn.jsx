@@ -47,12 +47,17 @@ const FootballPredictionEn = () => {
         setSelectedResults(matches.map(() => []));
         setErrors(matches.map(() => false));
     };
-    const goBack = () => {
-        window.history.back(); // Navigate to the previous page
-    }
+
     return (
         <div dir="rtl" lang="en" className="match-table-container">
-            <button className="back-button" onClick={goBack}>{">"}</button>
+            <button
+                style={{
+                    userSelect: "none",
+                }}
+                className="back-button"
+                onClick={() => window.history.back()}>
+                {'>'}
+            </button>
             <h1 className='page-title'>Football Matches Table</h1>
             <table>
                 <thead>

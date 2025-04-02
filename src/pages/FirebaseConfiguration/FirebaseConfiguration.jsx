@@ -180,6 +180,14 @@ const FirebaseConfiguration = () => {
     }, []);
     return (
         <div>
+            <button
+                style={{
+                    userSelect: "none",
+                }}
+                className="back-button"
+                onClick={() => window.history.back()}>
+                {'<'}
+            </button>
             <h1>بازی آنلاین دوز</h1>
             <div id="status">{status}</div>
             <div id="game-board">

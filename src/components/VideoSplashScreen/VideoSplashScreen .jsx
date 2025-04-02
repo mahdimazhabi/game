@@ -8,7 +8,7 @@ const VideoSplashScreen = ({ onFinish }) => {
       if (typeof onFinish === "function") {
         onFinish(); // بعد از چند ثانیه وارد صفحه اصلی شود
       }
-    }, 15000); // تنظیم زمان نمایش ویدیو (۵ ثانیه)
+    }, 1); // تنظیم زمان نمایش ویدیو (۵ ثانیه)
 
     return () => clearTimeout(timer);
   }, [onFinish]);

@@ -15,10 +15,6 @@ const Crowd = () => {
 		})();
 	}, [getAllCorsHorses]);
 
-	const goBack = () => {
-		window.history.back();
-	};
-
 	const selectOption = (option) => {
 		setCurrentOption(option);
 		resetSelection();
@@ -91,12 +87,15 @@ const Crowd = () => {
 	return (
 		<div className="container">
 			<button
+				style={{
+					userSelect: "none",
+				}}
 				className="back-button"
-				onClick={goBack}>
-				X
+				onClick={() => window.history.back()}>
+				{'<'}
 			</button>
-			<br />
-			<br />
+			<br/>
+			<br/>
 			<div className="header">
 				<div className="container text-center pb-0">
 					<div className="row gx-2">
@@ -142,34 +141,34 @@ const Crowd = () => {
 			<div className="table-container">
 				<table className="race-table">
 					<thead>
-						<tr>
-							<th>Number</th>
-							<th>Round 1</th>
-							<th>Round 2</th>
-							<th>Round 3</th>
-							<th>Round 4</th>
-							<th>Round 5</th>
-							<th>Round 6</th>
-							<th>Round 7</th>
-							<th>Round 8</th>
-						</tr>
+					<tr>
+						<th>Number</th>
+						<th>Round 1</th>
+						<th>Round 2</th>
+						<th>Round 3</th>
+						<th>Round 4</th>
+						<th>Round 5</th>
+						<th>Round 6</th>
+						<th>Round 7</th>
+						<th>Round 8</th>
+					</tr>
 					</thead>
 					<tbody>
-						{horses.map((_, index) => (
-							<tr key={index}>
-								<td>{index}</td>
-								{[...Array(8)].map((_, index2) => (
-									<td
-										key={index2}
-										className="horse-cell"
-										onClick={(e) =>
-											toggleSelection(e.target, index + 1, 1)
-										}>
-										Horse {1 + index}
-									</td>
-								))}
-							</tr>
-						))}
+					{horses.map((_, index) => (
+						<tr key={index}>
+							<td>{index}</td>
+							{[...Array(8)].map((_, index2) => (
+								<td
+									key={index2}
+									className="horse-cell"
+									onClick={(e) =>
+										toggleSelection(e.target, index + 1, 1)
+									}>
+									Horse {1 + index}
+								</td>
+							))}
+						</tr>
+					))}
 					</tbody>
 				</table>
 			</div>

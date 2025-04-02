@@ -90,10 +90,13 @@ const Page4 = () => {
 			fontSize: "18px",
 			fontWeight: "bold",
 			transition: "background 0.3s ease",
+			margin: '10px',
+
 		},
 		page4ContentDivHover: {
 			backgroundColor: "#00ff00",
 			color: "black",
+
 		},
 		"@media (min-width: 768px)": {
 			page4Content: {
@@ -109,14 +112,6 @@ const Page4 = () => {
 
 	return (
 		<div style={styles.body}>
-			<button
-				className="back-button1"
-				style={{ left: "15px" }}
-				onClick={() => {
-					window.history.back();
-				}}>
-				<IoMdClose />
-			</button>
 			<div style={styles.userInfo}></div>
 			<div style={styles.page4Content}>
 				<Link

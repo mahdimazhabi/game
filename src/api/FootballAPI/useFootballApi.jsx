@@ -65,15 +65,50 @@ const useFootballApi = () => {
                     competitionTypeId: 2,
                 },
                 {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
             if (response) {
                 return response.data.competitionUsers;
             }
         } catch (error) {
-            console.log("error geting all doozes:", error);
+            console.log("error geting all games:", error);
+        }
+    };
+
+    const getAllBigGames = async () => {
+        try {
+            const response = await axios.post(`${ADMIN_BASE_URL}/GetAllBigGame`,
+                {},
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            if (response) {
+                return response.data.competitions;
+            }
+        } catch (error) {
+            console.log("error geting all big games:", error);
+        }
+    };
+    const getAllUsersCompetitionById = async (id) => {
+        try {
+            const response = await axios.post(`${BASE_URL}/GetByCompetitionId`,
+                {
+                    competitionId: id
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            if (response) {
+                return response.data.competitionUsers;
+            }
+        } catch (error) {
+            console.log("error geting all big games:", error);
         }
     };
 
@@ -82,6 +117,8 @@ const useFootballApi = () => {
         getAllFootballUser,
         addPrediction,
         editPrediction,
+        getAllBigGames,
+        getAllUsersCompetitionById,
     };
 };
 

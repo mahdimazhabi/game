@@ -42,9 +42,9 @@ export default function Homepage() {
 					width="35"
 					className="img"
 				/>
-				Username: {data[0]?.username} | Level:{" "}
+				{data[0]?.username} | {" "}
 				<span className="mt-2">{data[0]?.level}</span>
-				<span>| point:{data[0]?.userId * 12}</span>
+				<span>| {data[0]?.userId * 12} points</span>
 			</p>
 
 			{/* 🔹 Tab section */}
