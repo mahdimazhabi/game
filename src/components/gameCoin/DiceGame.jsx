@@ -137,9 +137,12 @@ const DiceGame = () => {
 	return (
 		<div className="container">
 			<button
+				style={{
+					userSelect: "none",
+				}}
 				className="back-button"
 				onClick={() => window.history.back()}>
-				&gt;
+				{'<'}
 			</button>
 			<h1>Dice Game</h1>
 			<div className="board">
