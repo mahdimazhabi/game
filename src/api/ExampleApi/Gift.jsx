@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://asp-backend-proxy.chbk.app/api/api/Gifts"; // آدرس API
+const BASE_URL = "http://217.154.71.28/api/api/Gifts"; // آدرس API
 const useGiftApi = () => {
   const addGifts = async (gameData) => {
     //اضافه کردن جایزه

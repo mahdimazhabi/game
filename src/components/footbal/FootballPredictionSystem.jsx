@@ -99,8 +99,8 @@ const FootballPredictionSystem = () => {
                 "competitionId": bigGame.competitionId,
                 "userId": parseInt(localStorage.getItem("userId")),
                 "winOne": selectedVote === "home",
-                "winTwo": selectedVote === "draw",
-                "equal": selectedVote === "away",
+                "winTwo": selectedVote === "away",
+                "equal": selectedVote === "equal",
                 "ascendantTeam": ""
             })
             setIsVoteSubmitted(true);

@@ -7,7 +7,7 @@ export default defineConfig({
     // added for ignoring cors policies
     proxy: {
       "/api": {
-        target: "https://asp-backend-proxy.chbk.app/api",
+        target: "http://217.154.71.28/api",
         changeOrigin: true,
         secure: false,
       },

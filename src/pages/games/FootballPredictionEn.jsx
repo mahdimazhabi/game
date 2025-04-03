@@ -1,12 +1,10 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './FootballPrediction.css';
 import testLogo from './../../assets/img/download.png';
+import useFootballApi from "../../api/FootballAPI/useFootballApi.jsx";
 const FootballPredictionEn = () => {
-    const [matches, ] = useState([
-        {id: 1, time: '17:55', logo: testLogo, guest: 'Saudi Arabia', host: 'Yemen'},
-        {id: 2, time: '21:00', logo: testLogo, guest: 'Iraq', host: 'Bahrain'}
-    ]);
-
+    const [matches, setMatches] = useState([]);
+    const {getSingleGame, addPrediction} = useFootballApi()
     const [selectedResults, setSelectedResults] = useState(matches.map(() => []));
     const [errors, setErrors] = useState(matches.map(() => false));
 
@@ -25,7 +23,7 @@ const FootballPredictionEn = () => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newErrors = selectedResults.map(results => results.length === 0);
         setErrors(newErrors);
 
@@ -36,17 +34,35 @@ const FootballPredictionEn = () => {
         }
 
         const results = matches.map((match, index) => ({
-            match: `${match.host} vs ${match.guest}`,
+            match: `${match.nameOne} vs ${match.nameTwo}`,
             results: selectedResults[index]
         }));
 
+        setSelectedResults(matches.map(() => []));
+        setErrors(matches.map(() => false));
+        for (const result of results) {
+            const index = results.indexOf(result);
+            await addPrediction({
+                "competitionId": matches[index].competitionId,
+                "userId": parseInt(localStorage.getItem("userId")),
+                "winOne": result.includes("Win"),
+                "winTwo": result.includes("Lose"),
+                "equal": result.includes("Draw"),
+                "ascendantTeam": ""
+            })
+        }
         alert("Submitted Results:\n" + results.map(result =>
             `${result.match}: ${result.results.join(', ')}`
         ).join('\n'));
 
-        setSelectedResults(matches.map(() => []));
-        setErrors(matches.map(() => false));
     };
+    const getGame = async () => {
+        const game = await getSingleGame();
+        setMatches(game);
+    }
+    useEffect(() => {
+        getGame().then();
+    })
 
     return (
         <div dir="rtl" lang="en" className="match-table-container">
@@ -71,12 +87,12 @@ const FootballPredictionEn = () => {
                 </thead>
                 <tbody>
                 {matches.map((match, index) => (
-                    <tr key={match.id} className={errors[index] ? 'error' : ''}>
-                        <td data-label="Time">{match.time}</td>
+                    <tr key={match.competitionId} className={errors[index] ? 'error' : ''}>
+                        <td data-label="Time">{match.deadline}</td>
                         <td data-label="League Logo">
-                            <img src={match.logo} alt={`${match.host} league`} className="league-logo"/>
+                            <img src={testLogo} alt={`${match.nameOne} league`} className="league-logo"/>
                         </td>
-                        <td data-label="Guest">{match.guest}</td>
+                        <td data-label="Guest">{match.nameTwo}</td>
                         <td data-label="Results">
                             <div className="checkboxes">
                                 {['Win', 'Draw', 'Lose'].map((result) => (
@@ -95,7 +111,7 @@ const FootballPredictionEn = () => {
                                 ))}
                             </div>
                         </td>
-                        <td data-label="Host">{match.host}</td>
+                        <td data-label="Host">{match.nameOne}</td>
                     </tr>
                 ))}
                 </tbody>

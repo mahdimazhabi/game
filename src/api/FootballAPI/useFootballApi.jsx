@@ -112,6 +112,27 @@ const useFootballApi = () => {
         }
     };
 
+    const getSingleGame = async () => {
+        try {
+            const response = await axios.post(`${ADMIN_BASE_URL}/GetByCompetitionTypeId`,
+                {
+                    competitionTypeId: 4,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            if (response) {
+                return response.data.competitions;
+            }
+        } catch (error) {
+            console.error("Error getting game:", error);
+            return []
+        }
+    };
+
+
     return {
         getAllFootball,
         getAllFootballUser,
@@ -119,6 +140,7 @@ const useFootballApi = () => {
         editPrediction,
         getAllBigGames,
         getAllUsersCompetitionById,
+        getSingleGame,
     };
 };
 

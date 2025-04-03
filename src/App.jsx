@@ -71,10 +71,10 @@ const App = () => {
               />
               <Route path="McqQuiz" element={<McqQuiz />} />
               <Route path="/page4/DiceCardGame" element={<DiceCardGame />} />
-              <Route
-                path={"football-prediction-game/fa"}
-                element={<FootballPrediction />}
-              />
+              {/*<Route*/}
+              {/*  path={"football-prediction-game/fa"}*/}
+              {/*  element={<FootballPrediction />}*/}
+              {/*/>*/}
               <Route
                 path={"football-prediction-game/en"}
                 element={<FootballPredictionEn />}

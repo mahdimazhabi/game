@@ -15,7 +15,7 @@ import useUserId from "../../hook/useUserId ";
 export default function Homepage() {
 	const [data, setData] = useState([]);
 	const { getDataUserById } = useUserApi();
-	const userId = "13";
+	const userId = "4";
 	// const userId = useUserId();
 
 	useEffect(() => {

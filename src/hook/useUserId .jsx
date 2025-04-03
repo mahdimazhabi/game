@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useSearchParams} from "react-router-dom";
 
 const useUserId = () => {
-  const [searchParams] = useSearchParams();
-  const userIdFromUrl = searchParams.get("user_id");
+    const [searchParams] = useSearchParams();
+    const userIdFromUrl = searchParams.get("userId");
 
-  const [userId, setUserId] = useState(() => localStorage.getItem("user_id"));
+    const [userId, setUserId] = useState(() => localStorage.getItem("userId"));
 
-  useEffect(() => {
-    if (userIdFromUrl) {
-      localStorage.setItem("user_id", userIdFromUrl);
-      setUserId(userIdFromUrl);
-    }
-  }, [userIdFromUrl]);
+    useEffect(() => {
+        if (userIdFromUrl) {
+            localStorage.setItem("userId", userIdFromUrl);
+            setUserId(userIdFromUrl);
+        }
+    }, [userIdFromUrl]);
 
-  return userId;
+    return userId;
 };
 
 export default useUserId;

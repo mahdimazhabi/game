@@ -4,11 +4,11 @@ import useUserId from "../../hook/useUserId ";
 import "./McqQuiz.css";
 
 const API_URL =
-    "https://asp-backend-proxy.chbk.app/api/RequestQuestionAnswers/Add";
+    "http://217.154.71.28/api/RequestQuestionAnswers/Add";
 const START_GAME_URL =
-    "https://asp-backend-proxy.chbk.app/api/UserQuestionAnswers/Add";
+    "http://217.154.71.28/api/UserQuestionAnswers/Add";
 const UPDATE_ANSWER_URL =
-    "https://asp-backend-proxy.chbk.app/api/UserQuestionAnswers/Edit";
+    "http://217.154.71.28/api/UserQuestionAnswers/Edit";
 
 const McqQuiz = () => {
     const [userId, setUserId] = useState(null);

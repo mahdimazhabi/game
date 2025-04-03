@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL =
-  import.meta.env.VITE_API_URL || "https://asp-backend-proxy.chbk.app/api"; // مقدار پیش‌فرض
+  import.meta.env.VITE_API_URL || "http://217.154.71.28/api"; // مقدار پیش‌فرض
 
 const useUserApi = () => {
   const getDataUserById = async (id) => {
