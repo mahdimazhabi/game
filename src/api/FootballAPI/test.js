@@ -259,15 +259,17 @@ const items = [
     }
 ]
 
-for (const item of items) {
-    await axios.put('http://217.154.71.28/api/WorldCups/Edit',
-        {
-            ...item,
-            deadline: "2025/03/21",
-        },
-        {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-}
+const res = await axios.get("http://gaia.cs.umass.edu/wireshark-labs/HTTP-wireshark-file1.html")
+console.log(res)
+// for (const item of items) {
+//     await axios.put('http://217.154.71.28/api/WorldCups/Edit',
+//         {
+//             ...item,
+//             deadline: "2025/03/21",
+//         },
+//         {
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         });
+// }

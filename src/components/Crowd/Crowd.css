@@ -5,11 +5,10 @@ body {
 }
 
 .container {
-	margin: 0 auto;
-	padding: 20px;
-	padding-bottom: 100px;
-	width: 100vw !important;
+	/*margin: 0 auto;*/
+	/*padding: 20px 20px 100px;*/
 	overflow-x: hidden;
+	width: 100vw !important;
 	border-radius: 10px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 }
@@ -69,12 +68,14 @@ body {
 
 .table-container {
 	width: min-content;
+	overflow-x: auto;
 }
 
 .race-table {
 	border-collapse: collapse;
 	white-space: nowrap;
 	margin: 0 !important;
+	width: 100%;
 }
 
 .race-table th,
@@ -147,7 +148,7 @@ body {
 
 @media (max-width: 768px) {
 	.container {
-		width: 100%;
+		width: 100vw !important;
 	}
 
 	.options-bar {
@@ -219,6 +220,7 @@ body {
 
 	.table-container {
 		width: 100%;
+		overflow-x: auto;
 	}
 }
 
@@ -268,4 +270,27 @@ body {
 
 .back-button:active {
 	transform: scale(0.95);
+}
+
+.horse-name {
+	cursor: pointer;
+	padding: 4px;
+	margin: 2px;
+	border-radius: 4px;
+	transition: background-color 0.2s;
+}
+
+.horse-name.selected {
+	color: #0a0a0a;
+	background-color: #b3d9ff;
+	outline: 2px solid #4d94ff;
+}
+
+.horse-name:hover {
+	background-color: #e6f2ff;
+}
+
+.empty-cell {
+	color: #999;
+	font-style: italic;
 }
