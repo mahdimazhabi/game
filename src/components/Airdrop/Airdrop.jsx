@@ -1,22 +1,42 @@
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import img from "../../assets/img/IMG_20250208_182414_366-removebg-preview.png";
 import "./Airdrop.css";
+import useAirDropApi from "../../api/AirDropApi/useAirDropApi";
 
 const TOTAL_TIME = 120 * 60; // 2 ساعت به ثانیه
 const RESET_TIME = 24 * 60 * 60 * 1000; // 24 ساعت به میلی‌ثانیه
-import useAirDropApi from "../../api/AirDropApi/useAirDropApi";
-import useUserApi from "../../api/UserApi/useUserApi";
 
 const Airdrop = () => {
+    const [airdrop, setAirdrop] = useState({})
     const [clickCount, setClickCount] = useState(0);
     const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
-    const {edit, getdatabyid} = useAirDropApi();
-    const userId = useUserApi();
-    const response = getdatabyid(userId);
+    const {edit, getdatabyid, add} = useAirDropApi();
     const [airdropEnded, setAirdropEnded] = useState(false);
-
+    async function fetchData() {
+        const response = await getdatabyid(parseInt(localStorage.getItem("userId")))
+        if (response.length) {
+            setAirdrop(response[response.length - 1]);
+            localStorage.setItem("airdropid", response[response.length - 1].airDropId)
+            localStorage.setItem("airdropclickcount", response[response.length - 1].points);
+            setClickCount(response[response.length - 1].points);
+        } else {
+            console.log("new airdrop added")
+            await add(parseInt(localStorage.getItem("userId")))
+            const response = await getdatabyid(parseInt(localStorage.getItem("userId")))
+            if (response.length) {
+                setAirdrop(response[response.length - 1]);
+                localStorage.setItem("airdropid", response[response.length - 1].airDropId)
+                localStorage.setItem("airdropclickcount", response[response.length - 1].points);
+                setClickCount(response[response.length - 1].points);
+            }
+        }
+        setAirdrop(response);
+    }
     useEffect(() => {
-        edit(clickCount, response);
+        fetchData().then();
+    }, []);
+    useEffect(() => {
+        edit(parseInt(localStorage.getItem("airdropclickcount")), localStorage.getItem("airdropid"));
     }, [clickCount]);
 
     useEffect(() => {
@@ -75,6 +95,9 @@ const Airdrop = () => {
     const handleClick = () => {
         if (timeLeft > 0) {
             setClickCount((prevClickCount) => prevClickCount + 1);
+            const clicks = parseInt(localStorage.getItem("airdropclickcount"));
+            localStorage.removeItem("airdropclickcount")
+            localStorage.setItem("airdropclickcount", clicks +1)
             const circle = document.getElementById("clickableCircle");
             circle?.classList.add("shake");
             navigator.vibrate(100);

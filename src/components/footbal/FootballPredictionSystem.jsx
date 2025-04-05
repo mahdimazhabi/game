@@ -9,7 +9,6 @@ const FootballPredictionSystem = () => {
         localStorage.getItem("userVote") || null
     );
     const [userGame, setUserGame] = useState({})
-    const [votes, setVotes] = useState({home: 0, draw: 0, away: 0});
     const [countdown, setCountdown] = useState("00:00:00");
     const [isVoteSubmitted, setIsVoteSubmitted] = useState();
     const [showResults, setShowResults] = useState(false);
@@ -29,8 +28,9 @@ const FootballPredictionSystem = () => {
             const deadlineDate = new Date(year, month - 1, day);
             return deadlineDate >= currentDate;
         });
-
+        console.log(filteredList);
         if (filteredList.length > 0) {
+            console.log(filteredList);
             setBigGame(filteredList[0]);
             const usersGames = await getAllUsersCompetitionById(filteredList[0].competitionId);
             const userData = usersGames.filter(item => parseInt(localStorage.getItem("userId")) === item.userId)
@@ -125,7 +125,7 @@ const FootballPredictionSystem = () => {
                     World Cup Predictor
                 </Link>
             </div>
-            {bigGame &&
+            {bigGame.competitionId &&
             <div className="container">
                 <div className="match-info">
                     <h1>Match Prediction</h1>

@@ -26,7 +26,7 @@ import FootballPredictionEn from "./pages/games/FootballPredictionEn.jsx";
 import FirebaseConfiguration from "./pages/FirebaseConfiguration/FirebaseConfiguration.jsx";
 import DiceCardGame from "./components/caedgame/DiceCardGame.jsx";
 import McqQuiz from "./components/McqQuiz/McqQuiz.jsx";
-import VideoSplashScreen from "./components/VideoSplashScreen/VideoSplashScreen .jsx";
+import VideoSplashScreen from "./components/VideoSplashScreen/VideoSplashScreen.jsx";
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 

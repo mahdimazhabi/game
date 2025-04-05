@@ -22,6 +22,24 @@ const useFootballFormationApi = () => {
             console.error("Error getting players by position:", error);
         }
     };
+    const getAdminPlayerById = async (id) => {
+        try {
+            const response = await axios.post(`${ADMIN_BASE_URL}/GetById`,
+                {
+                    adminPlayerId: id
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+            if (response) {
+                return response.data.adminPlayers[0];
+            }
+        } catch (error) {
+            console.error("Error adding prediction:", error);
+        }
+    };
 
     const getUserPlayersByFormation = async (formation) => {
         try {
@@ -79,7 +97,8 @@ const useFootballFormationApi = () => {
         getAllPlayersByPosition,
         getUserPlayersByFormation,
         addPlayer,
-        deletePlayer
+        deletePlayer,
+        getAdminPlayerById,
     };
 };
 

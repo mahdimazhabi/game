@@ -1,0 +1,24 @@
+.video-container {
+    position: fixed;
+    /*display: flex;*/
+
+    align-items: center;
+    justify-content: center;
+    top: 35%;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    z-index: 9999;
+    background: black;
+    translate(-50%, -50%);
+}
+
+.video-container h5 {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}

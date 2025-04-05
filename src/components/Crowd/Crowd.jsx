@@ -102,8 +102,8 @@ const Crowd = () => {
                 userId: parseInt(localStorage.getItem("userId")),
                 corsHorseId: horseId,
                 horseSelect: 0,
-                date: date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate(),
-                buyDate: date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate(),
+                date: date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate() + 1),
+                buyDate: date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate() + 1),
             })
             if (res === "Not Enough Bronze Coin") {
                 alert(res);

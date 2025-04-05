@@ -190,6 +190,7 @@ body {
 
 .MuiInputBase-root  {
 	width: 10em;
+	background-color: white;
 }
 .MuiFormLabel-root {
 	margin: 0 0 0 0;
@@ -207,4 +208,20 @@ body {
 }
 .star.active {
 	color: #ffd700; /* Yellow color */
+}
+.ReactModal__Content {
+	background-color: #121200 !important;
+	box-shadow: #ffd500 0 0 5px 5px !important;
+}
+
+.player {
+	position: absolute;
+	transform: translate(-50%, -50%); /* Centers the player element */
+	cursor: pointer;
+	/* Add other player styles */
+}
+
+.goal-area, .center-circle {
+	position: absolute;
+	/* Add your goal and circle positioning styles */
 }

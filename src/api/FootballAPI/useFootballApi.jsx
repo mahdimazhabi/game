@@ -11,10 +11,10 @@ const useFootballApi = () => {
                     competitionTypeId: 2,
                 },
                 {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
             if (response) {
                 return response.data.competitions;
             }
@@ -22,7 +22,6 @@ const useFootballApi = () => {
             console.error("Error adding prediction:", error);
         }
     };
-
     const addPrediction = async (data) => {
         try {
             const response = await axios.post(`${BASE_URL}/Add`, data, {

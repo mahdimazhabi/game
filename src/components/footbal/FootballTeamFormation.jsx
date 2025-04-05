@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import html2canvas from "html2canvas"; // نیاز به نصب html2canvas دارید
 import "./FootballTeamFormation.css";
 import Modal from 'react-modal';
@@ -6,7 +6,7 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import useFootballFormationApi from "../../api/FootbballFormationApi/useFootballFormationApi.jsx";
 
 const FootballTeamFormation = () => {
-    const {getAllPlayersByPosition, getUserPlayersByFormation, addPlayer, deletePlayer} = useFootballFormationApi()
+    const {getAllPlayersByPosition, getUserPlayersByFormation, addPlayer, deletePlayer, getAdminPlayerById} = useFootballFormationApi()
     const [formation, setFormation] = useState("4-4-2");
     const [rating, setRating] = useState(0)
     const [formationPlayers, setFormationPlayers] = useState({
@@ -644,7 +644,6 @@ const FootballTeamFormation = () => {
     const [targetPositionPlayers, setTargetPositionPlayers] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [targetPosition, setTargetPosition] = useState("")
-    const [userPlayers, setUserPlayers] = useState([])
     const [selectedPlayer, setSelectedPlayer] = useState({
         adminPlayerId: null,
         adminPlayerName: "",
@@ -652,26 +651,36 @@ const FootballTeamFormation = () => {
     })
 
     const handleSubmitSelection = async () => {
+        const userPlayers = await getUserPlayersByFormation(formation);
         const tempPlayer = formationPlayers[formation].filter((player) => player.position === targetPosition)
         const alreadyExistedPlayerWithSameName = userPlayers.filter((userPlayer) => (userPlayer.adminPlayerName === selectedPlayer.adminPlayerName && userPlayer.formation === formation))
         if (tempPlayer[0].userPlayerId) {
             if (tempPlayer[0].adminPlayerId !== selectedPlayer.adminPlayerId) {
                 await deletePlayer(tempPlayer[0].userPlayerId)
+                const date = new Date();
                 await addPlayer({
                     adminPlayerId: selectedPlayer.adminPlayerId,
                     userId: parseInt(localStorage.getItem("userId")),
-                    formation: formation
+                    formation: formation,
+                    date: date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate() + 1),
                 })
             }
+        } else {
+            const date = new Date();
+            await addPlayer({
+                adminPlayerId: selectedPlayer.adminPlayerId,
+                userId: parseInt(localStorage.getItem("userId")),
+                formation: formation,
+                date: date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate() + 1),
+            })
         }
         if (alreadyExistedPlayerWithSameName.length !== 0) {
             for (const p of alreadyExistedPlayerWithSameName) {
                 await deletePlayer(p.userPlayerId)
             }
         }
-        updateFormationPlayers()
+        updateFormationPlayers().then()
         setIsModalOpen(false)
-
     }
     const handleChangePositionPlayer = (event) => {
         const targetPlayer = targetPositionPlayers.filter(player => player.adminPlayerId === event.target.value)
@@ -710,36 +719,66 @@ const FootballTeamFormation = () => {
             transform: 'translate(-50%, -50%)',
         },
     };
-    const getUserPlayers = async () => {
-        const players = await getUserPlayersByFormation(formation)
-        setUserPlayers(players)
-    }
-    const updateFormationPlayers = () => {
-        getUserPlayers().then()
-        let rawPlayers = formationPlayers[formation]
-        let editedPlayers = []
-        rawPlayers.forEach(player => {
-            const targetPlayer = userPlayers?.find(p => p.position === player.position)
-            if (targetPlayer) {
-                editedPlayers.push({
-                    ...player,
-                    adminPlayerId: targetPlayer[0].adminPlayerId,
-                    userPlayerId: targetPlayer[0].adminPlayerId,
-                    adminPlayerName: targetPlayer[0].adminPlayerName,
-                })
-            } else {
-                editedPlayers.push({...player})
+
+    const updateFormationPlayers = async () => {
+        const newUserPlayers = await getUserPlayersByFormation(formation);
+
+        // Pre-fetch admin data for all user players
+        const newUserPlayersWithAdmin = await Promise.all(
+            newUserPlayers.map(async (userPlayer) => {
+                const adminPlayer = await getAdminPlayerById(userPlayer.adminPlayerId);
+                return { ...userPlayer, adminPlayer };
+            })
+        );
+
+        // Create a map of positions to user players with admin data
+        const positionMap = {};
+        newUserPlayersWithAdmin.forEach((userPlayer) => {
+            const position = userPlayer.adminPlayer?.position;
+            if (position) {
+                positionMap[position] = userPlayer;
             }
-        })
-        let editedFormationPlayers = formationPlayers
-        editedFormationPlayers[formation] = editedPlayers
-        setFormationPlayers(editedFormationPlayers)
-    }
-    useEffect(() => {
-        updateFormationPlayers()
-    }, [formation]);
+        });
+
+        const rawPlayers = formationPlayers[formation];
+        const editedPlayers = [];
+
+        for (const rawPlayer of rawPlayers) {
+            const userPlayer = positionMap[rawPlayer.position];
+            if (userPlayer) {
+                // Use the user's player data if available for this position
+                editedPlayers.push({
+                    position: rawPlayer.position,
+                    top: rawPlayer.top,
+                    left: rawPlayer.left,
+                    adminPlayerId: userPlayer.adminPlayerId,
+                    userPlayerId: userPlayer.userPlayerId,
+                    adminPlayerName: userPlayer.adminPlayer.adminPlayerName,
+                });
+            } else {
+                // Keep the placeholder if no user player exists for this position
+                editedPlayers.push({ ...rawPlayer });
+            }
+        }
+
+        // Update the state with the new formation players
+        setFormationPlayers(prev => ({
+            ...prev,
+            [formation]: editedPlayers
+        }));
+        // drawPlayer()
+    };
 
     useEffect(() => {
+        updateFormationPlayers().then()
+        // drawPlayer()
+    }, [formation, formationPlayers]);
+    useEffect(() => {
+        updateFormationPlayers().then()
+        // drawPlayer()
+    }, []);
+
+    const drawPlayer = () => {
         const field = document.getElementById("player-area");
         if (field) {
             field.innerHTML = ""; // Clear previous players
@@ -759,7 +798,7 @@ const FootballTeamFormation = () => {
                 field.appendChild(playerDiv);
             });
         }
-    }, [formation]);
+    }
 
     const rate = (newRate) => {
         setRating(newRate);
@@ -796,7 +835,23 @@ const FootballTeamFormation = () => {
                 <div className="advertise right-ad">
                     <span>Right Ad - This is an advertisement!</span>
                 </div>
-                <div className={"player-area"} id={"player-area"}></div>
+                <div className="player-area" id="player-area">
+                    <div className="goal-area"></div>
+                    <div className="center-circle"></div>
+                    {formationPlayers[formation]?.map((player) => (
+                        <div
+                            key={player.position}
+                            className="player"
+                            style={{
+                                top: player.top,
+                                left: player.left,
+                            }}
+                            onClick={() => handleOpenSelection(player.position)}
+                        >
+                            {player.adminPlayerName || player.position}
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <Modal
@@ -805,7 +860,7 @@ const FootballTeamFormation = () => {
                 style={customStyles}
                 contentLabel="Select Player"
             >
-                <h2 style={{marginBottom: '2rem'}}>Select Player ({targetPosition})</h2>
+                <h2 style={{marginBottom: '2rem', color: "#ffd700"}}>Select Player ({targetPosition})</h2>
                 <div className="modal-input-container">
                     <div style={{
                         display: 'flex',

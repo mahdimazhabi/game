@@ -1,55 +1,40 @@
 .card-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 ستون */
-  gap: 20px; /* فاصله بین کارت‌ها */
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 ستون */
+    gap: 20px; /* فاصله بین کارت‌ها */
+    padding: 20px;
 }
 
 .card {
-  background-color: black;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 40px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease-in-out;
-  cursor: pointer;
+    width: 15vw !important;
+    height: 20vw !important;
+    background-color: black;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px rgba(87, 48, 177, 2); /* سایه هنگام هاور */
+    box-shadow: 0 8px 16px rgba(87, 48, 177, 2); /* سایه هنگام هاور */
 }
 
 .prize-box {
-  background-color: #f0f8ff;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* ریسپانسیو برای صفحه‌های کوچکتر */
-@media (max-width: 1200px) {
-  .card-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 ستون برای صفحه‌های کوچکتر */
-  }
-}
-
-@media (max-width: 900px) {
-  .card-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 ستون برای صفحه‌های کوچکتر */
-  }
+    background-color: #f0f8ff;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 600px) {
-  .card-container {
-    grid-template-columns: 1fr; /* 1 ستون برای صفحه‌های خیلی کوچک */
-  }
-
-  .card {
-    padding: px; /* کاهش padding برای موبایل */
-  }
+    h3 {
+        font-size: 0.8rem;
+    }
 }

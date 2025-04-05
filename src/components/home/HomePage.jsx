@@ -5,7 +5,7 @@ import styles from "./Homepage.module.css"; // استایل‌های سفارش�
 import tab1 from "./image/tab1.jpg";
 import tab2 from "./image/tab2.jpg";
 import tab3 from "./image/tab3.jpg";
-import user from "../../assets/img/images.png";
+import user from "../../assets/img/profile default avatar.jpg";
 
 import Airdrop from "../Airdrop/Airdrop";
 import { useEffect, useState } from "react";
@@ -43,8 +43,8 @@ export default function Homepage() {
 					className="img"
 				/>
 				{data[0]?.username} | {" "}
-				<span className="mt-2">{data[0]?.level}</span>
-				<span>| {data[0]?.userId * 12} points</span>
+				<span className="mt-2">level {data[0]?.level}</span>
+				<span> | {data[0]?.userId * 12} points</span>
 			</p>
 
 			{/* 🔹 Tab section */}

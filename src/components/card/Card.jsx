@@ -1,30 +1,86 @@
 import "./Card.css";
+import { useEffect, useState } from "react";
+import useGiftApi from "./../../api/GiftAPI/useGiftAPI.jsx"; // Adjust import path
 
 const Card = () => {
-  const prizes = [
-    "یک تخفیف 10%!",
-    "یک قهوه رایگان!",
-    "یک هدیه ویژه!",
-    "پاداش 5000 تومانی!",
-  ]; // جوایز رندوم
+    const { getAllGifts, getAllUsersCoins, addCoin, editCoin } = useGiftApi();
+    const [gifts, setGifts] = useState([]);
 
-  const handleClick = () => {
-    const randomPrize = prizes[Math.floor(Math.random() * prizes.length)]; // انتخاب جایزه رندوم
-    alert(`تبریک! شما جایزه زیر را بردید: ${randomPrize}`); // نمایش جایزه در alert
-    window.history.back(); // بازگشت به صفحه قبلی
-  };
+    useEffect(() => {
+        const loadGifts = async () => {
+            const giftsData = await getAllGifts();
+            if (giftsData) setGifts(giftsData);
+        };
+        loadGifts();
+    }, []);
 
-  const cards = Array(100).fill(null); // ایجاد آرایه با 100 کارت
+    const getCoinName = (levelCoin) => {
+        switch (levelCoin) {
+            case 1: return "Diamond";
+            case 2: return "Gold";
+            case 3: return "Silver";
+            case 4: return "Bronze";
+            default: return "";
+        }
+    };
 
-  return (
-    <div className="card-container">
-      {cards.map((_, index) => (
-        <div key={index} className="card" onClick={handleClick}>
-          <h3>Card {index + 1}</h3>
+    const handleCardClick = async (gift) => {
+        const userId = parseInt(localStorage.getItem("userId"));
+        if (!userId) {
+            alert("User not authenticated!");
+            return;
+        }
+
+        try {
+            if (gift.isCoin === 1) {
+                const userCoins = await getAllUsersCoins();
+                const existingCoin = userCoins.find(
+                    coin => coin.levelCoinId === gift.levelCoin
+                );
+
+                const requestBody = {
+                    levelCoinId: gift.levelCoin,
+                    count: gift.coinCount
+                };
+                let res
+                if (existingCoin) {
+                    res = await editCoin({
+                        ...requestBody,
+                        levelCoinCountId: existingCoin.levelCoinCountId,
+                        count: existingCoin.count + gift.coinCount
+                    });
+                } else {
+                    res = await addCoin({
+                        ...requestBody,
+                        userId: userId
+                    });
+                }
+                if (res) alert(`Congratulations! You win ${gift.coinCount} ${getCoinName(gift.levelCoin)} Coins`);
+            } else {
+                alert(`Congratulations! You win ${gift.name}`);
+            }
+        } catch (error) {
+            console.error("Operation failed:", error);
+            alert("An error occurred!");
+            return;
+        }
+
+        window.history.back();
+    };
+
+    return (
+        <div className="card-container" style={{ marginBottom: "10rem" }}>
+            {gifts.map((gift) => (
+                <div
+                    key={gift.giftId}
+                    className="card"
+                    onClick={() => handleCardClick(gift)}
+                >
+                    <h3>{gift.name}</h3>
+                </div>
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default Card;
