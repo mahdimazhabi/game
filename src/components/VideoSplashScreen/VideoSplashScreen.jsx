@@ -25,7 +25,7 @@ const VideoSplashScreen = ({ onFinish }) => {
         // Fallback timer in case video doesn't fire ended event
         const timer = setTimeout(() => {
             handleVideoEnd();
-        }, 1);
+        }, 15000);
 
         // Start playing explicitly
         const playPromise = videoElement?.play();
